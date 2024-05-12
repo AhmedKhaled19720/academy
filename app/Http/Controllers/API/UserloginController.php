@@ -5,10 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserloginResource;
 use App\Model\userlogin;
-use Dotenv\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserloginController extends Controller
 {

@@ -32,7 +32,7 @@
     <div class="container bg-white p-5">
         <div class="row">
             <div class="col-md-10 m-auto">
-                <form action={{ route('user.store') }} method="post" enctype="multipart/form-data">
+                <form action={{ route('users.store') }} method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group">

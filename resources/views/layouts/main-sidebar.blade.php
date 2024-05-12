@@ -68,7 +68,7 @@
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i class="side-menu__icon fa-solid fa-code-pull-request"></i><span class="side-menu__label">requests</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'profile')) }}">instructors requests </a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a></li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">users requests</a></li>
             </ul>
 
@@ -78,8 +78,8 @@
                 <span class="side-menu__label">users</span>
                 <i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'alluser')) }}">all users </a></li>
-                <li><a class="slide-item" href={{ route('user.create') }}>create users</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'allusers')) }}">all users </a></li>
+                <li><a class="slide-item" href={{ route('users.create') }}>create users</a></li>
             </ul>
 
             </ul>

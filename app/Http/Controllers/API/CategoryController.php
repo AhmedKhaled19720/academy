@@ -22,7 +22,7 @@ class CategoryController extends Controller
         return response()->json($data);
     }
 
-    public function show($id)
+    public function show_category($id)
     {
         $categories = category::find($id);
         if ($categories) {
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         }
     }
 
-    function delete(Request $requset)
+    function delete_category(Request $requset)
     {
         $id = $requset->id;
         $categories = category::find($id);
@@ -67,7 +67,7 @@ class CategoryController extends Controller
         }
     }
 
-    function create(Request $request)
+    function create_category(Request $request)
     {
 
         $validateData = Validator($request->all(), [
@@ -109,7 +109,7 @@ class CategoryController extends Controller
         return response($data);
     }
 
-    public function update(Request $request)
+    public function update_category(Request $request)
     {
 
         $old_id = $request->old_id;

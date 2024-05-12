@@ -39,8 +39,8 @@
                             <thead>
                                 <tr>
                                     <th class="text-primary">id</th>
-                                    <th class="text-primary">name</th>
                                     <th class="text-primary">image</th>
+                                    <th class="text-primary">name</th>
                                     <th class="text-primary">title</th>
                                     <th class="text-primary">description</th>
                                     <th class="text-primary">Created At</th>
@@ -50,11 +50,11 @@
                             <tbody>
                                 <tr>
                                     <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
                                     <td>
                                         <img style="width: 50px; height: 50px;"
                                             src={{ asset('categories/img/' . $category->cate_image) }} alt="category image">
                                     </td>
+                                    <td>{{ $category->name }}</td>
                                     <td>{{ $category->title }}</td>
                                     <td>{{ $category->description }}</td>
                                     <td>{{ $category->created_at }}</td>

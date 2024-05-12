@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    kian-users dashboard
+    kian - instructors requests
 @stop
 
 @section('css')
@@ -21,14 +21,10 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all users dashboard</h4><span
-                    class="text-muted tx-13 mr-2 mt-1">/users</span>
+                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all requests dashboard</h4><span
+                    class="text-muted tx-13 mr-2 mt-1">/instructors requests</span>
             </div>
         </div>
-
-        <a class="btn btn-outline-primary" href={{ route('user.create') }}>
-            add new user</a>
-
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -49,16 +45,16 @@
                         </div>
                     @endif
 
-                    @if (session()->has('delete_user'))
+                    @if (session()->has('delete_request'))
                         <script>
-                            window.onload = function(){
+                            window.onload = function() {
                                 notif({
-                                    msg:"deleted successfully",
-                                    type:"primary"
+                                    msg: "deleted successfully",
+                                    type: "success"
                                 })
                             }
                         </script>
-						<!-- div -->
+                        <!-- div -->
                     @endif
 
                     @if ($errors->any())
@@ -75,40 +71,34 @@
                     @endif
 
                     <div class="table-responsive table-center">
-                        <table class="table text-md-nowrap" id="example">
+                        <table class="table text-md-nowrap" id="example1">
                             <thead>
                                 <tr>
                                     <th class="text-primary">Id</th>
-                                    <th class="text-primary">username</th>
+                                    <th class="text-primary">name</th>
                                     <th class="text-primary">email</th>
-                                    <th class="text-primary">created by</th>
-                                    <th class="text-primary">Created_at</th>
-                                    <th class="text-primary">Updated_at</th>
+                                    <th class="text-primary">phone</th>
+                                    <th class="text-primary">cv</th>
+                                    <th class="text-primary">job title</th>
+                                    <th class="text-primary">created at</th>
                                     <th class="text-primary">Operation</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($user as $item)
+                                @foreach ($instructor as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->username }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ $item->created_by }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->cv }}</td>
+                                        <td>{{ $item->job }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
-                                        <td class="d-flex">
-                                            <a class="text-primary tx-20" href={{ route('user.show', $item->id) }}>
-                                                <i class="fas fa-eye"></i></a>
-
-                                            <a class="text-primary mx-4 tx-20" href={{ route('user.edit', $item->id) }}>
-                                                <i class="fas fa-pen-to-square"></i></a>
-
+                                        <td>
                                             <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
-                                                data-user-id="{{ $item->id }}" href="#"><i
+                                                data-request-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
-
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -120,15 +110,17 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content modal-content-demo">
                                     <div class="modal-header">
-                                        <h6 class="modal-title">delete user</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                        <h6 class="modal-title">delete request</h6><button aria-label="Close" class="close"
+                                            data-dismiss="modal" type="button"><span
+                                                aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <h6>Are you sure to delete?</h6>
                                     </div>
-                                    <form id="deleteUserForm" method="post" enctype="multipart/form-data">
+                                    <form id="deleteRequestForm" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         @method('DELETE')
-                                        <input type="hidden" name="user_id" id="user_id">
+                                        <input type="hidden" name="request_id" id="request_id">
 
                                         <div class="modal-footer">
                                             <button class="btn btn-danger tx-18" type="submit">Delete</button>
@@ -173,10 +165,10 @@
             <script>
                 $('#modaldemo1').on('show.bs.modal', function(event) {
                     var button = $(event.relatedTarget);
-                    var userId = button.data('user-id');
+                    var requestId = button.data('request-id');
                     var modal = $(this);
-                    modal.find('.modal-body #user_id').val(userId);
-                    modal.find('#deleteUserForm').attr('action', '/user/delete/' + userId);
+                    modal.find('.modal-body #request_id').val(requestId);
+                    modal.find('#deleteRequestForm').attr('action', '/request/delete/' + requestId);
                 });
             </script>
             <!--Internal  Notify js -->

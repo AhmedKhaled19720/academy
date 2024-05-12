@@ -17,11 +17,11 @@ Route::get('/allcategoriesdata', 'CategoryController@index')->name('alldata');
 
 
 // start userlogin
-Route::get('/alluser', 'UserloginController@index')->name('alluser');
-Route::post('/user/save', 'UserloginController@save')->name('user.save');
-Route::get('/user/crud/create', 'UserloginController@create')->name('user.create');
+Route::get('/allusers', 'UserloginController@index')->name('allusers');
+Route::post('/users/save', 'UserloginController@save')->name('users.save');
+Route::get('/users/crud/create', 'UserloginController@create')->name('users.create');
 Route::delete('/user/delete/{id}', 'UserloginController@delete')->name('user.delete');
-Route::resource('user', 'userloginController');
+Route::resource('users', 'userloginController');
 // end user login
 
 // start categories
@@ -31,8 +31,14 @@ Route::post('/categories/save', 'CategoryController@save')->name('categories.sav
 Route::post('/categories/saveupdate', 'CategoryController@saveupdate')->name('categories.saveupdate');
 Route::delete('/categories/delete/{id}', 'CategoryController@delete')->name('categories.delete');
 Route::resource('categories', 'CategoryController');
-
-
 // end categories
+
+// start instructors 
+Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
+Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
+// End instructors 
+
+
+
 
 Route::get('/{page}', 'AdminController@index');

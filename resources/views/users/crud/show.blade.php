@@ -54,7 +54,7 @@
                                     <td>{{ $user->created_by }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
-                                        <a class="text-primary tx-30" href={{ route('alluser') }}><i
+                                        <a class="text-primary tx-30" href={{ route('allusers') }}><i
                                                 class="fas fa-house-user"></i></a>
                                     </td>
                                 </tr>

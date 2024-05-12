@@ -31,7 +31,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 m-auto">
-            <form action={{ route('user.save') }} method="post" enctype="multipart/form-data">
+            <form action={{ route('users.save') }} method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" class="form-control" name="old_id" value="{{ $user->id }}">
 
