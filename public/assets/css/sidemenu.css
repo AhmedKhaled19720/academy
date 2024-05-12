@@ -651,7 +651,7 @@ slide is-expanded side-menu__item {
 }
 
 .side-menu .side-menu__icon {
-  font-size: 23px;
+  font-size: 18px;
   line-height: 0;
   margin-right: 14px;
   width: 22px;
@@ -659,6 +659,7 @@ slide is-expanded side-menu__item {
   line-height: 34px;
   border-radius: 3px;
   text-align: center;
+  margin-top: -10px;
   color: #a8b1c7;
   fill: #5b6e88;
 }

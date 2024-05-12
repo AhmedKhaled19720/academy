@@ -1,7 +1,7 @@
 @extends('layouts.master2')
 
 @section('title')
-تسجيل الدخول - مورا سوفت للادارة القانونية
+login kian academy
 @stop
 
 
@@ -21,15 +21,14 @@
 							<div class="row">
 								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
 									<div class="card-sigin">
-										<div class="mb-5 d-flex"> <a href="{{ url('/' . $page='Home') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Mora<span>So</span>ft</h1></div>
 										<div class="card-sigin">
 											<div class="main-signup-header">
-												<h2>مرحبا بك</h2>
-												<h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
+												<h2>welcome</h2>
+												<h5 class="font-weight-semibold mb-4">login</h5>
                                                 <form method="POST" action="{{ route('login') }}">
                                                  @csrf
 													<div class="form-group">
-													<label>البريد الالكتروني</label>
+													<label>email</label>
                                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                      @error('email')
                                                      <span class="invalid-feedback" role="alert">
@@ -39,7 +38,7 @@
 													</div>
 
 												 <div class="form-group">
-											 	 <label>كلمة المرور</label>
+											 	 <label>password</label>
 
                                                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -54,14 +53,14 @@
                                                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <label class="form-check-label" for="remember">
-                                                                       {{ __('تذكرني') }}
+                                                                       {{ __('remember me') }}
                                                                 </label>
                                                            </div>
                                                        </div>
                                                    </div>
 												  </div>
                                                     <button type="submit" class="btn btn-main-primary btn-block">
-                                                    {{ __('تسجيل الدخول') }}
+                                                    {{ __('login') }}
                                                     </button>
 												</form>
 											</div>

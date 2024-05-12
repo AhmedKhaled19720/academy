@@ -1,0 +1,57 @@
+/* start global  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+body {}
+
+a {
+    text-decoration: none;
+}
+
+.tr {
+    height: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+:root {
+    --main-color: #fff;
+    --bg-color: #342871;
+    --hover-color: #c7cbfe;
+    --second-color: #677a84;
+    --transition: all .3s ease;
+}
+
+.text-primary {
+    color: var(--bg-color) !important;
+}
+
+.btn-primary,
+.badge-primary {
+    background-color: var(--bg-color) !important;
+    color: var(--main-color) !important;
+    text-transform: capitalize !important;
+    font-size: 18px;
+    border: none !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color) !important;
+    color: #000 !important;
+}
+
+/* end global */
+/* start users dashboard */
+@media(max-width:768px) {
+    .create-box-btn {
+        flex-direction: column;
+    }
+}
+/* End users dashboard */
