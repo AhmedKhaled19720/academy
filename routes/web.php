@@ -13,7 +13,7 @@ Auth::routes();
 // Auth::routes(['register' => false]);
 
 // our routes
-Route::get('/allcategoriesdata', 'CategoryController@index')->name('alldata');
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 // start userlogin
@@ -33,10 +33,30 @@ Route::delete('/categories/delete/{id}', 'CategoryController@delete')->name('cat
 Route::resource('categories', 'CategoryController');
 // end categories
 
-// start instructors 
+// start instructors requests
 Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
 Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
-// End instructors 
+// End instructors requests
+
+// start instructors
+Route::get('/view-instructors', 'InstructorController@index')->name('instructors');
+Route::get('/instructors/crud/create', 'InstructorController@create')->name('instructors.create');
+Route::get('/instructors/crud/show/{id}', 'InstructorController@show')->name('instructors.show');
+Route::get('/instructors/crud/edit/{id}', 'InstructorController@edit')->name('instructors.edit');
+Route::post('/instructors/save', 'InstructorController@save')->name('instructors.save');
+Route::post('/instructors/saveupdate', 'InstructorController@saveupdate')->name('instructors.saveupdate');
+Route::delete('/instructors/delete/{id}', 'InstructorController@delete')->name('instructors.delete');
+// end categories
+
+
+
+
+Route::options('/api/create', function () {
+    return response()->json([], 200)
+        ->header('Access-Control-Allow-Origin', 'http://localhost:3000')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Content-Type');
+});
 
 
 

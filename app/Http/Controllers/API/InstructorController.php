@@ -45,7 +45,7 @@ class InstructorController extends Controller
         if ($request->hasFile('cv')) {
             $cv = $request->cv;
             $cvname = rand(1, 1000) . time() . "." . $cv->extension();
-            $cv->move(public_path('instructors/cv/'), $cvname);
+            $cv->move(public_path('instructorsRequests/cv/'), $cvname);
         }
 
         $instructors = InstructorRequest::create([
@@ -69,8 +69,8 @@ class InstructorController extends Controller
         $id = $requset->id;
         $instructors = InstructorRequest::find($id);
         if ($instructors) {
-            if (File::exists(public_path('instructors/cv/' . $instructors->cv))) {
-                File::delete(public_path('instructors/cv/' . $instructors->cv));
+            if (File::exists(public_path('instructorsRequests/cv/' . $instructors->cv))) {
+                File::delete(public_path('instructorsRequests/cv/' . $instructors->cv));
             }
             $instructors->delete();
             $data = [

@@ -9,7 +9,7 @@ class InstructorRequestController extends Controller
     public function index()
     {
         $instructors = InstructorRequest::all();
-        return view('instructors.allinstructors', ['instructor' => $instructors]);
+        return view('instructorsRequests.allinstructors', ['instructor' => $instructors]);
     }
 
     public function delete($id)

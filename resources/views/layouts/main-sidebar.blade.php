@@ -32,22 +32,26 @@
         <ul class="side-menu">
             <li class="side-item side-item-category">dashboard</li>
             <li class="slide">
-                <a class="side-menu__item" href="{{ url('/' . ($page = 'home')) }}"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">home</span></a>
+                <a class="side-menu__item" href="{{ url('/' . ($page = 'home')) }}"><i
+                        class="side-menu__icon fa fa-home"></i><span class="side-menu__label">home</span></a>
             </li>
 
             <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i class="side-menu__icon fa fa-list-alt"></i><span class="side-menu__label">courses categories</span><i
-                        class="angle fe fe-chevron-down"></i></a>
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                        class="side-menu__icon fa fa-list-alt"></i><span class="side-menu__label">courses
+                        categories</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'allcategories')) }}">all courses
                             categories</a>
-                    <li><a class="slide-item" href={{route('categories.create')}}>create new category</a>
+                    <li><a class="slide-item" href={{ route('categories.create') }}>create new category</a>
                     </li>
             </li>
         </ul>
 
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i class="side-menu__icon fa-solid fa-book-open"></i><span class="side-menu__label">courses</span><i class="angle fe fe-chevron-down"></i></a>
+            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                    class="side-menu__icon fa-solid fa-book-open"></i><span class="side-menu__label">courses</span><i
+                    class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'cards')) }}">all courses</a></li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'darggablecards')) }}">create new course</a>
@@ -56,19 +60,23 @@
             </ul>
 
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i class="side-menu__icon fas fa-chalkboard-teacher"></i>
+            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                    class="side-menu__icon fas fa-chalkboard-teacher"></i>
                 <span class="side-menu__label">instructors</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'mail')) }}">all instructors</a></li>
+                <li><a class="slide-item" href={{ route('instructors') }}>all instructors</a></li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'mail-compose')) }}">add new instructor</a>
                 </li>
 
             </ul>
 
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i class="side-menu__icon fa-solid fa-code-pull-request"></i><span class="side-menu__label">requests</span><i class="angle fe fe-chevron-down"></i></a>
+            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                    class="side-menu__icon fa-solid fa-code-pull-request"></i><span
+                    class="side-menu__label">requests</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a>
+                </li>
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">users requests</a></li>
             </ul>
 

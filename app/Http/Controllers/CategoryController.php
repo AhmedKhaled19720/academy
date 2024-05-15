@@ -73,6 +73,9 @@ class CategoryController extends Controller
         $categories = Category::findOrFail($old_id);
 
         if ($request->hasFile('cate_image')) {
+            if (File::exists(public_path('categories/img/' . $categories->cate_image))) {
+                File::delete(public_path('categories/img/' . $categories->cate_image));
+            }
             $img = $request->cate_image;
             $imgname = rand(1, 1000) . time() . "." . $img->extension();
             $img->move(public_path('categories/img/'), $imgname);

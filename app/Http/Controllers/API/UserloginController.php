@@ -7,19 +7,25 @@ use App\Http\Resources\UserloginResource;
 use App\Model\userlogin;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class UserloginController extends Controller
 {
     public function index()
     {
-        $users = UserloginResource::collection(userlogin::all());
+        $users = userlogin::all()->first(); 
+        $token = JWTAuth::fromUser($users);
+
         $data = [
             "msg" => "Return All Data",
             "status" => 200,
-            "data" => $users,
+            "data" => UserloginResource::collection(userlogin::all()),
+            "token" => $token
         ];
         return response()->json($data);
     }
+
     public function show($id)
     {
         $users = userlogin::find($id);
@@ -67,9 +73,9 @@ class UserloginController extends Controller
     {
 
         $validateData = Validator($request->all(), [
-            'id' => 'required|unique:userlogins|max:255',
+            'id' => 'unique:userlogins|max:255',
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:userlogins|max:255',
             'password' => 'required',
         ]);
 
@@ -88,13 +94,14 @@ class UserloginController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => $request->password,
-            'created_by' => $request->created_by,
         ]);
 
+        $token = JWTAuth::fromUser($users);
         $data = [
             "msg" => "Created Successfully",
             "status" => "200",
             "data" => new UserloginResource($users),
+            "token" => $token
         ];
         return response($data);
     }

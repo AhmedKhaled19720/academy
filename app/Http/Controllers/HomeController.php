@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Categories;
-use Illuminate\Http\Request;
+use App\Model\category;
+use App\Model\InstructorRequest;
+use App\Model\userlogin;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    { {
-            return view('home');
-        }
+    {
+        $categories = Category::all();
+        $users = UserLogin::all();
+        $instructors = InstructorRequest::all();
+
+        return view('home', [
+            'category' => $categories,
+            'user' => $users,
+            'instructor' => $instructors
+        ]);
     }
 }

@@ -50,7 +50,7 @@ li {
 /* end global */
 /* start users dashboard */
 @media(max-width:768px) {
-    .create-box-btn {
+    .create-box-btn ,.social_links {
         flex-direction: column;
     }
 }

@@ -18,7 +18,7 @@ class CreateUserloginsTable extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->string('created_by');
+            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }
