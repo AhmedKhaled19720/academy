@@ -49,6 +49,28 @@
                         </div>
                     @endif
 
+                    @if (session()->has('created'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "created successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                    @endif
+
+                    @if (session()->has('updated'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "updated successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                    @endif
+
                     @if (session()->has('delete_category'))
                         <script>
                             window.onload = function() {
@@ -58,7 +80,6 @@
                                 })
                             }
                         </script>
-                        <!-- div -->
                     @endif
 
                     @if ($errors->any())

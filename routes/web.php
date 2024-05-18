@@ -24,6 +24,7 @@ Route::delete('/user/delete/{id}', 'UserloginController@delete')->name('user.del
 Route::resource('users', 'userloginController');
 // end user login
 
+
 // start categories
 Route::get('/allcategories', 'CategoryController@index')->name('allcategories');
 Route::get('/categories/crud/create', 'CategoryController@create')->name('categories.create');
@@ -33,10 +34,12 @@ Route::delete('/categories/delete/{id}', 'CategoryController@delete')->name('cat
 Route::resource('categories', 'CategoryController');
 // end categories
 
+
 // start instructors requests
 Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
 Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
 // End instructors requests
+
 
 // start instructors
 Route::get('/view-instructors', 'InstructorController@index')->name('instructors');
@@ -49,21 +52,33 @@ Route::delete('/instructors/delete/{id}', 'InstructorController@delete')->name('
 // end categories
 
 
-
 // start setting
 Route::get('/home-setting', 'SettingController@index')->name('home-setting');
 Route::get('/setting/crud/edit/{id}', 'SettingController@edit')->name('setting.edit');
 Route::post('/setting/saveupdate', 'SettingController@saveupdate')->name('setting.saveupdate');
-
 // End setting
+
+
+// start profile
+Route::get('/profile-user', 'ProfileController@index')->name('profile-user');
+Route::get('/user-profile/crud/edit', 'ProfileController@edit')->name('profile.edit');
+Route::post('/user-profile/save', 'ProfileController@save')->name('user-profile.save');
+// End profile
+
+
+
+
+
+
+
+
+
+
+
 Route::options('/api/create', function () {
     return response()->json([], 200)
         ->header('Access-Control-Allow-Origin', 'http://localhost:3000')
         ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         ->header('Access-Control-Allow-Headers', 'Content-Type');
 });
-
-
-
-
 Route::get('/{page}', 'AdminController@index');

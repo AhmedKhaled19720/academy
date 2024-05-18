@@ -39,8 +39,8 @@ class CategoryController extends Controller
             'title' => $user->title,
             'description' => $user->description,
         ]);
-
-        return redirect()->route('allcategories')->with("message", "created successfully");
+        session()->flash('created');
+        return redirect()->route('allcategories');
     }
 
     public function show($id)
@@ -90,6 +90,8 @@ class CategoryController extends Controller
             'title' => $request->title,
             'description' => $request->description,
         ]);
-        return redirect()->route('allcategories')->with("message", "updated successfully");
+        session()->flash('updated');
+
+        return redirect()->route('allcategories');
     }
 }

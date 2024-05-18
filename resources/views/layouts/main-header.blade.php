@@ -23,7 +23,7 @@
             <div class="nav nav-item  navbar-nav-right ml-auto">
 
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user d-flex" href="">                                    <i class="fa fa-user text-white tx-20"></i>
+                    <a class="profile-user d-flex" href="">
                         <i class="fa fa-user tx-30"></i>
                     </a>
                     <div class="dropdown-menu">
@@ -37,8 +37,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
+                        <a class="dropdown-item" href={{route('profile-user')}}><i class="bx bx-user-circle"></i>Profile</a>
+                        <a class="dropdown-item" href={{route('profile.edit')}}><i class="bx bx-cog"></i> Edit Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                 class="bx bx-log-out"></i>logout</a>
