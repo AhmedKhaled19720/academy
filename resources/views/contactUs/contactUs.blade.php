@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    kian-Contact Us
+    kian - Contact Us
 @stop
 
 @section('css')
@@ -25,8 +25,6 @@
                     class="text-muted tx-13 mr-2 mt-1">/Coutact US </span>
             </div>
         </div>
-
-
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -47,7 +45,7 @@
                         </div>
                     @endif
 
-                    @if (session()->has('delete_category'))
+                    @if (session()->has('delete_contact'))
                         <script>
                             window.onload = function() {
                                 notif({
@@ -59,13 +57,10 @@
                         <!-- div -->
                     @endif
 
-                    
-
                     <div class="table-responsive table-center">
                         <table class="table text-md-nowrap" id="example">
                             <thead>
                                 <tr>
-                                    
                                     <th class="text-primary">name</th>
                                     <th class="text-primary">E-mail</th>
                                     <th class="text-primary">phone</th>
@@ -79,21 +74,14 @@
                                 @foreach ($alldata as $item)
                                     <tr>
                                         <td>{{ $item->full_name }}</td>
-                                        
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->description }}</td>
                                         <td>{{ $item->message }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td class="d-flex">
-                                           
-
-                                           
-
+                                        <td>
                                             <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
-                                                data-category-id="{{ $item->id }}" href="#"><i
+                                                data-contact-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -113,10 +101,10 @@
                                     <div class="modal-body">
                                         <h6>Are you sure you want to delete this Massage?</h6>
                                     </div>
-                                    <form id="deleteUserForm" method="post" enctype="multipart/form-data">
+                                    <form id="deleteContactForm" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         @method('DELETE')
-                                        <input type="hidden" name="category_id" id="category_id">
+                                        <input type="hidden" name="contact_id" id="contact_id">
 
                                         <div class="modal-footer">
                                             <button class="btn btn-danger tx-18" type="submit">Delete</button>
@@ -132,8 +120,8 @@
                 </div><!-- bd -->
             </div><!-- bd -->
             <!--/div-->
-@endsection
-@section('js')
+        @endsection
+        @section('js')
             <!-- Internal Data tables -->
             <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
@@ -159,11 +147,11 @@
             <script>
                 $('#modaldemo1').on('show.bs.modal', function(event) {
                     var button = $(event.relatedTarget);
-                    var categoryId = button.data('category-id');
+                    var contactId = button.data('contact-id');
                     var modal = $(this);
-                    modal.find('.modal-body #category_id').val(categoryId);
-                    modal.find('#deleteUserForm').attr('action', '{{ route('categories.delete', ':id') }}'.replace(':id',
-                        categoryId));
+                    modal.find('.modal-body #contact_id').val(contactId);
+                    modal.find('#deleteContactForm').attr('action', '{{ route('contactUs.delete', ':id') }}'.replace(':id',
+                        contactId));
                 });
             </script>
 

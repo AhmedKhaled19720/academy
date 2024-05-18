@@ -74,15 +74,20 @@ Route::put('courses/{id}', 'CourseController@update')->name('courses.update');
 Route::get('/courses/crud/show{id}', 'CourseController@show')->name('courses.show');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store');
 Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destroy');
-
-
-
 // end courses
+
 
 // start contact us
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
+Route::delete('/contactUs/delete/{id}', 'ContactUsController@delete')->name('contactUs.delete');
+// end contact us
 
-// end contact
+
+
+
+
+
+
 
 Route::options('/api/create', function () {
     return response()->json([], 200)
