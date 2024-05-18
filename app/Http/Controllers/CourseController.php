@@ -35,15 +35,22 @@ class CourseController extends Controller
         $validatedData = $request->validated();
 
         if ($request->hasFile("course_img")) {
-            $image = $request->file("course_img");
+            $image = $request->course_img;
             $imageName = rand(1, 1000) . time() . "." . $image->extension();
-            $image->storeAs("public/courses/img/", $imageName);
+            $image->move(public_path('courses/img/'), $imageName);
 
             $validatedData['course_img'] = $imageName;
         } else {
             $imageName = "defult-img.jpg";
             $validatedData['course_img'] = $imageName;
         }
+
+        // if ($request->hasFile('cate_image')) {
+        //     if (File::exists(public_path('categories/img/' . $categories->cate_image))) {
+        //         File::delete(public_path('categories/img/' . $categories->cate_image));
+        //     }
+
+
 
         $course = new Course();
         $course->fill($validatedData);
@@ -81,30 +88,30 @@ class CourseController extends Controller
 
         $imageName = $course->course_img ?? 'default-img.jpg';
 
-    if ($request->hasFile("course_img")) {
-        // Check if there is an existing image and delete it
-        if ($course->course_img && $course->course_img !== 'default-img.jpg') {
-            $existingImagePath = "storage/courses/img/" . $course->course_img;
-            if (Storage::exists($existingImagePath)) {
-                Storage::delete($existingImagePath);
+        if ($request->hasFile("course_img")) {
+            // Check if there is an existing image and delete it
+            if ($course->course_img && $course->course_img !== 'default-img.jpg') {
+                $existingImagePath = "storage/courses/img/" . $course->course_img;
+                if (Storage::exists($existingImagePath)) {
+                    Storage::delete($existingImagePath);
+                }
             }
+
+            // Store the new image file
+            $image = $request->file("course_img");
+            $imageName = rand(1, 1000) . time() . "." . $image->extension();
+            $image->storeAs("storage/courses/img/", $imageName);
+
+            // Update the validated data with the new image filename
+            $validatedData['course_img'] = $imageName;
+        } else {
+            // Ensure the validated data contains the existing or default image name
+            $validatedData['course_img'] = $imageName;
         }
 
-        // Store the new image file
-        $image = $request->file("course_img");
-        $imageName = rand(1, 1000) . time() . "." . $image->extension();
-        $image->storeAs("storage/courses/img/", $imageName);
 
-        // Update the validated data with the new image filename
-        $validatedData['course_img'] = $imageName;
-    } else {
-        // Ensure the validated data contains the existing or default image name
-        $validatedData['course_img'] = $imageName;
-    }
-
-    
         // Update the course with the new information from the request
-        $course->update(array_merge($validatedData,[
+        $course->update(array_merge($validatedData, [
             "id" => $request->id,
             "course_title" => $request->course_title,
             "category_id" => $request->category_id,
@@ -123,18 +130,15 @@ class CourseController extends Controller
 
         return redirect()->route('courses');
     }
-    
+
 
     public function destroy($id)
     {
 
         $course = Course::findOrFail($id);
         if ($course->course_img != "defult-img.jpg") {
-            $imagePath = asset('storage/courses/img/' . $course->course_img);
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            } else {
-                // Log an error or display a message indicating that the image file doesn't exist
+            if (File::exists(public_path('courses/img/' . $course->course_img))) {
+                File::delete(public_path('courses/img/' . $course->course_img));
             }
         }
         $course->delete();
@@ -142,4 +146,3 @@ class CourseController extends Controller
         return redirect()->route('courses');
     }
 }
-

@@ -66,13 +66,6 @@ Route::post('/user-profile/save', 'ProfileController@save')->name('user-profile.
 // End profile
 
 
-
-
-
-
-
-
-
 // start courses
 Route::get('/view-courses', 'CourseController@index')->name('courses');
 Route::get('/courses/create', 'CourseController@create')->name('courses.create');
@@ -84,9 +77,9 @@ Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destro
 
 
 
-// end courses 
+// end courses
 
-// start contact us 
+// start contact us
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
 
 // end contact

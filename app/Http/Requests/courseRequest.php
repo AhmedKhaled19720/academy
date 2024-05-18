@@ -6,13 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class courseRequest extends FormRequest
 {
-  
+
     public function authorize()
     {
         return true;
     }
 
-   
+
     public function rules()
     {
         return [
@@ -22,7 +22,7 @@ class courseRequest extends FormRequest
             'instructor_id' => 'required|exists:instructors,id',
             'course_description' => 'required|string',
             'lecture_no' => 'required|integer',
-            'hours_no' => 'required|integer', 
+            'hours_no' => 'required|integer',
             'start_date' => 'required|date',
             'duration' => 'required|integer',
             'level' => 'required|string|in:beginner,intermediate,advanced',
