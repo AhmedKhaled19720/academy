@@ -50,13 +50,13 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-20 text-white">courses categories</h6>
+                        <h6 class="mb-3 tx-20 text-white">courses</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <p class=" tx-12 text-white op-7">number of courses categories</p>
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">لسه هنعملها</h4>
+                                <p class=" tx-12 text-white op-7">number of courses </p>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{$course->count()}}</h4>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,47 @@
         </div>
 
     </div>
+    
     <!-- row closed -->
+
+<div class="row row-sm">
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+        <div class="card overflow-hidden sales-card bg-primary-gradient">
+            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+                <div class="">
+                    <h6 class="mb-3 tx-20 text-white">instructor  Requests</h6>
+                </div>
+                <div class="pb-0 mt-0">
+                    <div class="d-flex">
+                        <div class="">
+                            <p class=" tx-12 text-white op-7">number of instructor Requests</p>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $insrtuctorRequest->count() }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <span id="compositeline1" class="pt-1">5,9,5,6,4,12,18,14,10,15,12,5,8,5,12,5,12,10,16,12</span> --}}
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+        <div class="card overflow-hidden sales-card bg-primary-gradient">
+            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+                <div class="">
+                    <h6 class="mb-3 tx-20 text-white">User Requests</h6>
+                </div>
+                <div class="pb-0 mt-0">
+                    <div class="d-flex">
+                        <div class="">
+                            <p class=" tx-12 text-white op-7">number of User Requests</p>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $contactUs->count() }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <span id="compositeline" class="pt-1">5,9,5,6,4,12,18,14,10,15,12,5,8,5,12,5,12,10,16,12</span> --}}
+        </div>
+    </div>
+</div>
 
     <!-- row opened -->
     <div class="row row-sm">

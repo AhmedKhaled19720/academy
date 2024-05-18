@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\instructorRequest as RequestsInstructorRequest;
 use App\Model\category;
+use App\Model\contactUs;
+use App\Model\course;
+use App\Model\instructor;
 use App\Model\InstructorRequest;
 use App\Model\userlogin;
 
@@ -27,12 +31,18 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $users = UserLogin::all();
-        $instructors = InstructorRequest::all();
+        $instructors = instructor::all();
+        $courses=course::all();
+        $contactUs=contactUs::all();
+     $instructorRequests=InstructorRequest::all();    
 
         return view('home', [
             'category' => $categories,
             'user' => $users,
-            'instructor' => $instructors
+            'instructor' => $instructors,
+            'course' => $courses,
+            'contactUs'=>$contactUs,
+            'insrtuctorRequest'=>$instructorRequests
         ]);
     }
 }

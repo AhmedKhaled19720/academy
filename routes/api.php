@@ -31,3 +31,17 @@ Route::get('/allinstructors', 'API\InstructorController@index');
 Route::post('/create_request', 'API\InstructorController@create_request');
 Route::post('/delete_request', 'API\InstructorController@delete_request');
 // End instructors routes
+
+
+// start Courses routes
+Route::get('/allcourses', 'Api\CourseController@index');
+Route::get('/show_course/{id}', 'API\CourseController@show_course');
+Route::post('/create_course', 'API\CourseController@create_course');
+Route::post('/update_course', 'API\CourseController@update_course');
+Route::post('/delete_course', 'API\CourseController@delete_course');
+// End categories routes
+
+
+
+// start Courses routes
+Route::get('/contactUs', 'Api\ContactUsController@index');

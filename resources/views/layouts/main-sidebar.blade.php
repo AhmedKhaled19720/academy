@@ -53,8 +53,8 @@
                     class="side-menu__icon fa-solid fa-book-open"></i><span class="side-menu__label">courses</span><i
                     class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'cards')) }}">all courses</a></li>
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'darggablecards')) }}">create new course</a>
+                <li><a class="slide-item" href="{{ route('courses') }}">all courses</a></li>
+                <li><a class="slide-item" href="{{ route("courses.create") }}">create new course</a>
                 </li>
 
             </ul>
@@ -77,7 +77,7 @@
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a>
                 </li>
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">users requests</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'contactUs')) }}">users requests</a></li>
             </ul>
 
         <li class="slide">
@@ -89,6 +89,7 @@
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'allusers')) }}">all users </a></li>
                 <li><a class="slide-item" href={{ route('users.create') }}>create users</a></li>
             </ul>
+        
 
             </ul>
     </div>

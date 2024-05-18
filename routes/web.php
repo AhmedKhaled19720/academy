@@ -49,7 +49,23 @@ Route::delete('/instructors/delete/{id}', 'InstructorController@delete')->name('
 // end categories
 
 
+// start courses
+Route::get('/view-courses', 'CourseController@index')->name('courses');
+Route::get('/courses/create', 'CourseController@create')->name('courses.create');
+Route::get('courses/{id}/edit', 'CourseController@edit')->name('courses.edit');
+Route::put('courses/{id}', 'CourseController@update')->name('courses.update');
+Route::get('/courses/crud/show{id}', 'CourseController@show')->name('courses.show');
+Route::post('/courses/store', 'CourseController@store')->name('courses.store');
+Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destroy');
 
+
+
+// end courses 
+
+// start contact us 
+Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
+
+// end contact
 
 Route::options('/api/create', function () {
     return response()->json([], 200)
