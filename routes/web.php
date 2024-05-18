@@ -81,10 +81,22 @@ Route::put('courses/{id}', 'CourseController@update')->name('courses.update');
 Route::get('/courses/crud/show{id}', 'CourseController@show')->name('courses.show');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store');
 Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destroy');
-
-
-
 // end courses 
+
+//start assignments 
+
+
+
+Route::get('/view-assignments', 'AssignmentController@index')->name('assignments');
+Route::get('/assignments/create', 'AssignmentController@create')->name('assignments.create');
+Route::get('assignments/{id}/edit', 'AssignmentController@edit')->name('assignments.edit');
+Route::put('assignments/{id}', 'AssignmentController@update')->name('assignments.update');
+Route::get('/assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
+Route::post('/assignments/store', 'AssignmentController@store')->name('assignments.store');
+Route::delete('/assignments/{id}', 'AssignmentController@destroy')->name('assignments.destroy');
+
+
+//end assignments
 
 // start contact us 
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
