@@ -46,12 +46,23 @@ li {
     background-color: var(--hover-color) !important;
     color: #000 !important;
 }
-
+.setting p  {
+    margin-bottom: 0 !important;
+}
 /* end global */
 /* start users dashboard */
 @media(max-width:768px) {
     .create-box-btn ,.social_links {
         flex-direction: column;
+    }
+    .setting p {
+        font-size: 14px !important;
+    }
+    .setting .main-setting {
+        flex-direction: column !important;
+    }
+    .setting .main-setting p {
+        margin-bottom: 10px !important;
     }
 }
 /* End users dashboard */

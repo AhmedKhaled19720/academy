@@ -21,7 +21,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all categories dashboard</h4><span
+                <h4 class="content-title tx-16 mb-0 mr-1 my-auto">all categories dashboard</h4><span
                     class="text-muted tx-13 mr-2 mt-1">/categories</span>
             </div>
         </div>
@@ -49,6 +49,28 @@
                         </div>
                     @endif
 
+                    @if (session()->has('created'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "created successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                    @endif
+
+                    @if (session()->has('updated'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "updated successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                    @endif
+
                     @if (session()->has('delete_category'))
                         <script>
                             window.onload = function() {
@@ -58,7 +80,6 @@
                                 })
                             }
                         </script>
-                        <!-- div -->
                     @endif
 
                     @if ($errors->any())
@@ -103,14 +124,14 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td class="d-flex">
-                                            <a class="text-primary tx-20" href={{ route('categories.show', $item->id) }}>
+                                            <a class="text-primary tx-16" href={{ route('categories.show', $item->id) }}>
                                                 <i class="fas fa-eye"></i></a>
 
-                                            <a class="text-primary mx-4 tx-20"
+                                            <a class="text-primary mx-4 tx-16"
                                                 href={{ route('categories.edit', $item->id) }}>
                                                 <i class="fas fa-pen-to-square"></i></a>
 
-                                            <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
+                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
                                                 data-category-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
 

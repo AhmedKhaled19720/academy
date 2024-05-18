@@ -23,7 +23,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all instructors dashboard</h4><span
+                <h4 class="content-title tx-16 mb-0 mr-1 my-auto">all instructors dashboard</h4><span
                     class="text-muted tx-13 mr-2 mt-1">/instructors</span>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    
+
                     @if (session()->has('create'))
                         <script>
                             window.onload = function() {
@@ -119,7 +119,7 @@
 
                                             @if ($item->instructor_facebook === null)
                                             @else
-                                                <a class="text-primary tx-20 mr-1"
+                                                <a class="text-primary tx-16 mr-1"
                                                     href="{{ Str::startsWith($item->instructor_facebook, 'http') ? $item->instructor_facebook : 'http://' . $item->instructor_facebook }}"
                                                     target="_blank">
                                                     <i class="fab fa-facebook"></i>
@@ -128,7 +128,7 @@
 
                                             @if ($item->instructor_linkedin === null)
                                             @else
-                                                <a class="text-primary tx-20 mr-1"target="_blank"
+                                                <a class="text-primary tx-16 mr-1"target="_blank"
                                                     href="{{ Str::startsWith($item->instructor_linkedin, 'http') ? $item->instructor_linkedin : 'http://' . $item->instructor_linkedin }}">
                                                     <i class="fab fa-linkedin"></i>
                                                 </a>
@@ -136,7 +136,7 @@
 
                                             @if ($item->instructor_insta === null)
                                             @else
-                                                <a class="text-primary tx-20 mr-1" target="_blank"
+                                                <a class="text-primary tx-16 mr-1" target="_blank"
                                                     href="{{ Str::startsWith($item->instructor_insta, 'http') ? $item->instructor_insta : 'http://' . $item->instructor_insta }}">
                                                     <i class="fab fa-instagram"></i>
                                                 </a>
@@ -144,7 +144,7 @@
 
                                             @if ($item->instructor_twitter === null)
                                             @else
-                                                <a class="text-primary tx-20"target="_blank"
+                                                <a class="text-primary tx-16"target="_blank"
                                                     href="{{ Str::startsWith($item->instructor_twitter, 'http') ? $item->instructor_twitter : 'http://' . $item->instructor_twitter }}">
                                                     <i class="fab fa-twitter"></i>
                                                 </a>
@@ -154,14 +154,14 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td class="d-flex">
-                                            <a class="text-primary tx-20" href={{ route('instructors.show', $item->id) }}>
+                                            <a class="text-primary tx-16" href={{ route('instructors.show', $item->id) }}>
                                                 <i class="fas fa-eye"></i></a>
 
-                                            <a class="text-primary mx-4 tx-20"
+                                            <a class="text-primary mx-4 tx-16"
                                                 href={{ route('instructors.edit', $item->id) }}>
                                                 <i class="fas fa-pen-to-square"></i></a>
 
-                                            <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
+                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
                                                 data-instructor-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
 

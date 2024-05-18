@@ -106,7 +106,7 @@
                     </div>
 
 
-                    <input class="btn btn-primary btn-block" type="submit" value="Create New category">
+                    <input class="btn btn-primary btn-block" type="submit" value="Create New instructor">
                 </form>
             </div>
         </div>

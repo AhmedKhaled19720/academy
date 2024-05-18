@@ -8,6 +8,7 @@ use App\Model\userlogin;
 use App\Notifications\sendemail;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 class UserloginController extends Controller
@@ -30,11 +31,11 @@ class UserloginController extends Controller
             'id' => $user->id,
             'username' => $user->username,
             'email' => $user->email,
-            'password' => $user->password,
+            'password' => Hash::make($user['password']),
             'created_by' => (Auth::user()->name),
         ]);
-
-        return redirect()->route('allusers')->with('message', 'created successfully');
+        session()->flash('created');
+        return redirect()->route('allusers');
     }
 
     public function show($id)
@@ -62,8 +63,8 @@ class UserloginController extends Controller
             'password' => $user->password,
             'confirm_pass' => $user->confirm_pass,
         ]);
-
-        return redirect()->route('allusers')->with('message', 'updated successfully');
+        session()->flash('updated');
+        return redirect()->route('allusers');
     }
 
     public function delete($id)

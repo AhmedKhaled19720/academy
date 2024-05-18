@@ -16,7 +16,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
+                <h2 class="main-content-title tx-16 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
                 <p class="mg-b-0">kian academy dashboard </p>
             </div>
         </div>
@@ -31,13 +31,13 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-20 text-white">all categories</h6>
+                        <h6 class="mb-3 tx-16 text-white">all categories</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
                                 <p class=" tx-12 text-white op-7">number of categories</p>
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $category->count() }}</h4>
+                                <h4 class="tx-16 font-weight-bold mb-1 text-white">{{ $category->count() }}</h4>
                             </div>
                         </div>
                     </div>
@@ -69,13 +69,13 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-20 text-white">instructors</h6>
+                        <h6 class="mb-3 tx-16 text-white">instructors</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
                                 <p class=" tx-12 text-white op-7">number of instructors</p>
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $instructor->count() }}</h4>
+                                <h4 class="tx-16 font-weight-bold mb-1 text-white">{{ $allinstructors->count() }}</h4>
                             </div>
                         </div>
                     </div>
@@ -88,13 +88,13 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-20 text-white">users</h6>
+                        <h6 class="mb-3 tx-16 text-white">users</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
                                 <p class=" tx-12 text-white op-7">number of users</p>
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $user->count() }}</h4>
+                                <h4 class="tx-16 font-weight-bold mb-1 text-white">{{ $user->count() }}</h4>
                             </div>
                         </div>
                     </div>
