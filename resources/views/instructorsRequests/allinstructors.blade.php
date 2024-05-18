@@ -21,7 +21,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all requests dashboard</h4><span
+                <h4 class="content-title tx-16 mb-0 mr-1 my-auto">all requests dashboard</h4><span
                     class="text-muted tx-13 mr-2 mt-1">/instructors requests</span>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                         <td>{{ $item->job }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
-                                            <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
+                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
                                                 data-request-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
                                         </td>

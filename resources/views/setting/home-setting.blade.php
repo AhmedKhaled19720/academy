@@ -21,7 +21,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all categories dashboard</h4><span
+                <h4 class="content-title tx-16 mb-0 mr-1 my-auto">all categories dashboard</h4><span
                     class="text-muted tx-13 mr-2 mt-1">/create new category</span>
             </div>
         </div>
