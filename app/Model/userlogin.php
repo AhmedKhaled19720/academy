@@ -20,6 +20,9 @@ class userlogin extends Authenticatable implements JWTSubject
         'username',
         'email',
         'password',
+        'phone',
+        'city',
+        'role',
         'created_by',
     ];
 
@@ -42,4 +45,5 @@ class userlogin extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
 }

@@ -77,7 +77,7 @@
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a>
                 </li>
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'contactUs')) }}">users requests</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'contactUs')) }}">contact requests</a></li>
             </ul>
 
         <li class="slide">

@@ -29,6 +29,9 @@ class UserloginRequest extends FormRequest
             'email' => 'required|unique:userlogins',
             'username' => 'required',
             'password' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'role' => 'required',
 
         ];
     }
@@ -41,7 +44,10 @@ class UserloginRequest extends FormRequest
             'email.required' => 'please enter your email.',
             'email.unique' => 'this email is used before',
             'username.required' => 'please enter username.',
+            'phone.required' => 'please enter phone.',
+            'city.required' => 'please enter city.',
             'password.required' => 'please enter password.',
+            'role.required' => 'please enter role.',
 
         ];
     }

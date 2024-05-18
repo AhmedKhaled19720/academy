@@ -41,6 +41,7 @@
                                     <th class="text-primary">id</th>
                                     <th class="text-primary">image</th>
                                     <th class="text-primary">name</th>
+                                    <th class="text-primary">email</th>
                                     <th class="text-primary">job</th>
                                     <th class="text-primary">description</th>
                                     <th class="text-primary">social links</th>
@@ -56,6 +57,7 @@
                                             src={{ asset('instructors/img/' . $instructor->instructor_img) }} alt="instructor image">
                                     </td>
                                     <td>{{ $instructor->name }}</td>
+                                    <td>{{ $instructor->email }}</td>
                                     <td>{{ $instructor->job }}</td>
                                     <td>{{ $instructor->description }}</td>
                                     <td class="d-flex">

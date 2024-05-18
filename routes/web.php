@@ -66,13 +66,6 @@ Route::post('/user-profile/save', 'ProfileController@save')->name('user-profile.
 // End profile
 
 
-
-
-
-
-
-
-
 // start courses
 Route::get('/view-courses', 'CourseController@index')->name('courses');
 Route::get('/courses/create', 'CourseController@create')->name('courses.create');
@@ -98,10 +91,17 @@ Route::delete('/assignments/{id}', 'AssignmentController@destroy')->name('assign
 
 //end assignments
 
-// start contact us 
+// start contact us
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
+Route::delete('/contactUs/delete/{id}', 'ContactUsController@delete')->name('contactUs.delete');
+// end contact us
 
-// end contact
+
+
+
+
+
+
 
 Route::options('/api/create', function () {
     return response()->json([], 200)

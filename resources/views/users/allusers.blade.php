@@ -105,6 +105,9 @@
                                     <th class="text-primary">Id</th>
                                     <th class="text-primary">username</th>
                                     <th class="text-primary">email</th>
+                                    <th class="text-primary">phone</th>
+                                    <th class="text-primary">city</th>
+                                    <th class="text-primary">role</th>
                                     <th class="text-primary">created by</th>
                                     <th class="text-primary">Created_at</th>
                                     <th class="text-primary">Updated_at</th>
@@ -118,6 +121,9 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->city }}</td>
+                                        <td>{{ $item->role }}</td>
                                         <td>{{ $item->created_by }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>

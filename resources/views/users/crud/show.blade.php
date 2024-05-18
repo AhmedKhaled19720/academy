@@ -41,6 +41,9 @@
                                     <th class="text-primary">id</th>
                                     <th class="text-primary">username</th>
                                     <th class="text-primary">email</th>
+                                    <th class="text-primary">phone</th>
+                                    <th class="text-primary">city</th>
+                                    <th class="text-primary">role</th>
                                     <th class="text-primary">Created by</th>
                                     <th class="text-primary">Created At</th>
                                     <th class="text-primary">Operation</th>
@@ -51,6 +54,9 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>{{ $user->city }}</td>
+                                    <td>{{ $user->role }}</td>
                                     <td>{{ $user->created_by }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>

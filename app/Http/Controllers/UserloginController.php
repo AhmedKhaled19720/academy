@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UserloginController extends Controller
 {
@@ -31,6 +33,8 @@ class UserloginController extends Controller
             'id' => $user->id,
             'username' => $user->username,
             'email' => $user->email,
+            'phone' => $user->phone,
+            'city' => $user->city,
             'password' => Hash::make($user['password']),
             'created_by' => (Auth::user()->name),
         ]);
@@ -51,19 +55,25 @@ class UserloginController extends Controller
         return view('users.crud.edit', ['user' => $users]);
     }
 
-    public function save(UserloginUpdateRequest $user)
+    public function save(UserloginUpdateRequest $request)
     {
-        $old_id = $user->old_id;
-        $users = userlogin::findOrFail($old_id);
+        $old_id = $request->old_id;
+        $user = Userlogin::findOrFail($old_id);
 
-        $users->update([
-            'id' => $user->id,
-            'username' => $user->username,
-            'email' => $user->email,
-            'password' => $user->password,
-            'confirm_pass' => $user->confirm_pass,
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'role' => $request->role,
+            'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
         ]);
-        session()->flash('updated');
+
+        Session()->flash('updated', 'User updated successfully!');
         return redirect()->route('allusers');
     }
 

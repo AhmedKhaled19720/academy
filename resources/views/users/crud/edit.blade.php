@@ -60,12 +60,31 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">password</label>
-                    <input type="text" class="form-control" name="password" value="{{ $user->password }}">
-                    @error('password')
+                    <label for="">phone</label>
+                    <input type="tel" class="form-control" name="phone" value="{{ $user->phone }}">
+                    @error('phone')
                         <div class="alert alert-primary mt-2">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="">city</label>
+                    <input type="text" class="form-control" name="city" value="{{ $user->city }}">
+                    @error('city')
+                        <div class="alert alert-primary mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control">
+                        <option value="active" {{ old('role', $user->role) == 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="disactive" {{ old('role', $user->role) == 'disactive' ? 'selected' : '' }}>Disactive</option>
+                    </select>
+                    @error('role')
+                        <div class="alert alert-primary mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
 
                 <input class="btn btn-primary mb-5" type="submit" value="Update">
             </form>

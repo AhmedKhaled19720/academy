@@ -26,16 +26,16 @@
             <div class="pr-1 mb-3 mb-xl-0">
                 <a type="button" class="btn btn-dark btn-icon ml-2" href="{{route('home')}}"><i class="mdi mdi-home-outline"></i></a>
             </div>
-            
+
         </div>
     </div>
-    
+
     <!-- breadcrumb -->
 @endsection
 @section('content')
     <!-- row -->
     <div class="row">
-        <div class="card col-md-12"> 
+        <div class="card col-md-12">
             <div class="card-header ">
                 <div>
                     <h5 class="text-gray"> {{ 'created at'." ".$course->created_at}} </h5>
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class=" col-md-6">
                             <div class="d-flex">
-    
+
                                 <div class="form-group col-md-6 ">
                                     <label for="id" class="font-weight-bold">Course ID</label>
                                     <input type="text" class="form-control " id="id" value="{{ $course->id }}" readonly>
@@ -90,26 +90,26 @@
                                     <label for="price" class="font-weight-bold">Price (LE)</label>
                                     <input type="text" class="form-control" id="price" value="{{ $course->price }}" readonly>
                                 </div>
-                               
+
                                 <div class="form-group col-md-3">
                                     <label for="level" class="font-weight-bold">Level</label>
                                     <input type="text" class="form-control" id="level" value="{{ $course->level }}" readonly>
                                 </div>
-                               
+
                             </div>
-                           
-                            
+
+
                         </div>
                         <div class="col-md-6 m-auto">
                             <div class="form-group m-auto">
                                 <label for="course_img" class="font-weight-bold">Course Image</label>
-                                <img src="{{ asset('storage/courses/img/' . $course->course_img)}}" height="340" class="card m-auto" alt="Course Image" class="img-fluid">
+                                <img src="{{ asset('courses/img/' . $course->course_img)}}" height="340" class="card m-auto" alt="Course Image" class="img-fluid">
                             </div>
-                        
+
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>
