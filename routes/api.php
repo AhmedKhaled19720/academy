@@ -26,8 +26,23 @@ Route::post('/delete_category', 'API\CategoryController@delete_category');
 // End categories routes
 
 
+// start instructors request routes
+Route::get('/allinstructors', 'API\InstructorRequestController@index');
+Route::post('/create_request', 'API\InstructorRequestController@create_request');
+Route::post('/delete_request', 'API\InstructorRequestController@delete_request');
+// End instructors request routes
+
+
 // start instructors routes
-Route::get('/allinstructors', 'API\InstructorController@index');
-Route::post('/create_request', 'API\InstructorController@create_request');
-Route::post('/delete_request', 'API\InstructorController@delete_request');
+Route::get('/view-instructors', 'API\InstructorController@index');
+Route::get('/show_instructor/{id}', 'API\InstructorController@show_instructor');
+Route::post('/create_instructor', 'API\InstructorController@create_instructor');
+Route::post('/update_instructor', 'API\InstructorController@update_instructor');
+Route::post('/delete_instructor', 'API\InstructorController@delete_instructor');
 // End instructors routes
+
+
+// start setting routes
+Route::get('/home-setting', 'API\SettingController@index');
+Route::post('/update_setting', 'API\SettingController@update_setting');
+// End setting routes

@@ -9,7 +9,7 @@ class CreateInstructorRequestsTable extends Migration
     public function up()
     {
         Schema::create('instructor_requests', function (Blueprint $table) {
-            $table->id();
+            $table->id()->nullable();
             $table->string('name');
             $table->string('job');
             $table->string('cv');

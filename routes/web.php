@@ -50,7 +50,12 @@ Route::delete('/instructors/delete/{id}', 'InstructorController@delete')->name('
 
 
 
+// start setting
+Route::get('/home-setting', 'SettingController@index')->name('home-setting');
+Route::get('/setting/crud/edit/{id}', 'SettingController@edit')->name('setting.edit');
+Route::post('/setting/saveupdate', 'SettingController@saveupdate')->name('setting.saveupdate');
 
+// End setting
 Route::options('/api/create', function () {
     return response()->json([], 200)
         ->header('Access-Control-Allow-Origin', 'http://localhost:3000')

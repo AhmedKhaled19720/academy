@@ -65,7 +65,7 @@
                 <span class="side-menu__label">instructors</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href={{ route('instructors') }}>all instructors</a></li>
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'mail-compose')) }}">add new instructor</a>
+                <li><a class="slide-item" href={{ route('instructors.create') }}>add new instructor</a>
                 </li>
 
             </ul>
@@ -77,7 +77,7 @@
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'allinstructors')) }}">instructors requests </a>
                 </li>
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">users requests</a></li>
+                <li><a class="slide-item" href="{{ url('/' . ($page = 'editprofile')) }}">contact requests</a></li>
             </ul>
 
         <li class="slide">
@@ -89,6 +89,15 @@
                 <li><a class="slide-item" href="{{ url('/' . ($page = 'allusers')) }}">all users </a></li>
                 <li><a class="slide-item" href={{ route('users.create') }}>create users</a></li>
             </ul>
+
+            <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                        class="side-menu__icon fa-solid fa-code-pull-request"></i><span
+                        class="side-menu__label">setting</span><i class="angle fe fe-chevron-down"></i></a>
+                <ul class="slide-menu">
+                    <li><a class="slide-item" href={{route('home-setting')}}>home setting </a>
+                    </li>
+                </ul>
 
             </ul>
     </div>
