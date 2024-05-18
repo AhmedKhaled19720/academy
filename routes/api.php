@@ -42,7 +42,6 @@ Route::post('/delete_instructor', 'API\InstructorController@delete_instructor');
 // End instructors routes
 
 
-<<<<<<< HEAD
 // start Courses routes
 Route::get('/allcourses', 'Api\CourseController@index');
 Route::get('/show_course/{id}', 'API\CourseController@show_course');
@@ -55,9 +54,7 @@ Route::post('/delete_course', 'API\CourseController@delete_course');
 
 // start Courses routes
 Route::get('/contactUs', 'Api\ContactUsController@index');
-=======
 // start setting routes
 Route::get('/home-setting', 'API\SettingController@index');
 Route::post('/update_setting', 'API\SettingController@update_setting');
 // End setting routes
->>>>>>> eefb08dca339db40aa22d759373fa59218a1a65a

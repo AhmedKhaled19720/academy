@@ -75,7 +75,7 @@
                         <div class="d-flex">
                             <div class="">
                                 <p class=" tx-12 text-white op-7">number of instructors</p>
-                                <h4 class="tx-16 font-weight-bold mb-1 text-white">{{ $allinstructors->count() }}</h4>
+                                <h4 class="tx-16 font-weight-bold mb-1 text-white">{{ $instructor->count() }}</h4>
                             </div>
                         </div>
                     </div>
