@@ -17,7 +17,10 @@ class CreateUserloginsTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('email');
+            $table->string('phone');
+            $table->string('city');
             $table->string('password');
+            $table->enum('role', ['active', 'disactive'])->default('disactive');
             $table->string('created_by')->nullable();
             $table->timestamps();
         });

@@ -94,6 +94,7 @@
                                     <th class="text-primary">Id</th>
                                     <th class="text-primary">image</th>
                                     <th class="text-primary">name</th>
+                                    <th class="text-primary">email</th>
                                     <th class="text-primary">job</th>
                                     <th class="text-primary">description</th>
                                     <th class="text-primary">social links</th>
@@ -113,6 +114,7 @@
                                                 alt="instructors">
                                         </td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->email }}</td>
                                         <td>{{ $item->job }}</td>
                                         <td>{{ $item->description }}</td>
                                         <td>

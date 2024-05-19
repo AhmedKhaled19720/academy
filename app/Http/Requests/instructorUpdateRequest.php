@@ -33,6 +33,7 @@ class instructorUpdateRequest extends FormRequest
             'job' => 'required',
             'description' => 'required',
             'instructor_img' => 'image',
+            'email' => 'required',
         ];
     }
 
@@ -41,9 +42,10 @@ class instructorUpdateRequest extends FormRequest
         return [
             'id.required' => 'please enter id.',
             'name.required' => 'please enter instructor name.',
-            'instructor_img.image' => 'must be image.',
+            'instructor_img.image' => 'must be an image.',
             'job.required' => 'please enter instructor job.',
             'description.required' => 'please enter instructor description.',
+            'email.required' => 'please enter instructor email.',
         ];
     }
 }

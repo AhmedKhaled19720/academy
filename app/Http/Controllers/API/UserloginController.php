@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserloginResource;
 use App\Model\userlogin;
+use Illuminate\Support\Facades\Validator; // Import Validator facade
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -14,7 +15,7 @@ class UserloginController extends Controller
 {
     public function index()
     {
-        $users = userlogin::all()->first(); 
+        $users = userlogin::all()->first();
         $token = JWTAuth::fromUser($users);
 
         $data = [
@@ -71,16 +72,16 @@ class UserloginController extends Controller
 
     function create(Request $request)
     {
-
-        $validateData = Validator($request->all(), [
+        $validateData = Validator::make($request->all(), [
             'id' => 'unique:userlogins|max:255',
             'username' => 'required',
             'email' => 'required|unique:userlogins|max:255',
             'password' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
         ]);
 
         if ($validateData->fails()) {
-
             $data = [
                 "msg" => "No Valid Data",
                 "status" => 203,
@@ -94,6 +95,9 @@ class UserloginController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => $request->password,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'role' => 'disactive', // Set a default value for the role
         ]);
 
         $token = JWTAuth::fromUser($users);
@@ -106,53 +110,59 @@ class UserloginController extends Controller
         return response($data);
     }
 
+
     public function update(Request $request)
-    {
+{
+    $old_id = $request->old_id;
+    $users = userlogin::find($old_id);
 
-        $old_id = $request->old_id;
-        $users = userlogin::find($old_id);
+    $validateData = Validator::make($request->all(), [
+        'id' =>  [
+            'required',
+            Rule::unique('userlogins')->ignore($old_id),
+        ],
+        'username' => 'required',
+        'email' => 'required',
+        'phone' => 'required',
+        'city' => 'required',
+        'password' => 'required',
+        'role' => 'required|in:active,disactive', // Ensure the role is either active or disactive
+    ]);
 
-        $validateData = Validator($request->all(), [
-            'id' =>  [
-                'required',
-                Rule::unique('userlogins')->ignore($old_id),
-            ],
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+    if ($validateData->fails()) {
+        $data = [
+            "msg" => "No Valid Data",
+            "status" => 203,
+            "data" => $validateData->errors()
+        ];
+        return response()->json($data);
+    }
+
+    if ($users) {
+        $users->update([
+            'id' => $request->id,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => $request->password,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'role' => $request->role, // Update the role based on request data
         ]);
 
-        if ($validateData->fails()) {
-
-            $data = [
-                "msg" => "No Valid Data",
-                "status" => 203,
-                "data" => $validateData->errors()
-            ];
-            return response()->json($data);
-        }
-
-        if ($users) {
-            $users->update([
-                'id' => $request->id,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => $request->password,
-            ]);
-
-            $data = [
-                "msg" => "updated successfully",
-                "status" => 200,
-                "data" => $users
-            ];
-            return response($data);
-        } else {
-            $data = [
-                "msg" => "No Such Id",
-                "status" => 203,
-                "data" => $users
-            ];
-            return response($data);
-        }
+        $data = [
+            "msg" => "updated successfully",
+            "status" => 200,
+            "data" => $users
+        ];
+        return response($data);
+    } else {
+        $data = [
+            "msg" => "No Such Id",
+            "status" => 203,
+            "data" => $users
+        ];
+        return response($data);
     }
+}
+
 }

@@ -10,6 +10,8 @@ class instructor extends Model
         'id',
         'name',
         'job',
+        'email',
+        'password',
         "instructor_img",
         "description",
         'instructor_facebook',

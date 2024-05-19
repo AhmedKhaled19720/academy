@@ -69,17 +69,16 @@ class InstructorController extends Controller
 
     function create_instructor(Request $request)
     {
-
         $validateData = Validator($request->all(), [
             'id' => 'required|unique:instructors|max:255',
             'name' => 'required',
             'instructor_img' => 'required|image',
             'description' => 'required',
             'job' => 'required',
+            'email' => 'required',
         ]);
 
         if ($validateData->fails()) {
-
             $data = [
                 "msg" => "No Valid Data",
                 "status" => 203,
@@ -98,6 +97,8 @@ class InstructorController extends Controller
             'name' => $request->name,
             'instructor_img' => $imgname,
             'job' => $request->job,
+            'email' => $request->email,
+            'password' => $request->password ?? '123', // Set a default password if not provided
             'description' => $request->description,
             'instructor_facebook' => $request->instructor_facebook,
             'instructor_linkedin' => $request->instructor_linkedin,
@@ -112,9 +113,9 @@ class InstructorController extends Controller
         return response($data);
     }
 
+
     public function update_instructor(Request $request)
     {
-
         $old_id = $request->old_id;
         $instructors = instructor::find($old_id);
 
@@ -127,10 +128,14 @@ class InstructorController extends Controller
             'instructor_img' => 'image',
             'job' => 'required',
             'description' => 'required',
+            'password' => 'required',
+            'email' =>  [
+                'required',
+                Rule::unique('instructors')->ignore($old_id),
+            ],
         ]);
 
         if ($validateData->fails()) {
-
             $data = [
                 "msg" => "No Valid Data",
                 "status" => 203,
@@ -138,9 +143,7 @@ class InstructorController extends Controller
             ];
             return response()->json($data);
         }
-        if (File::exists(public_path('instructors/img/' . $instructors->instructor_img))) {
-            File::delete(public_path('instructors/img/' . $instructors->instructor_img));
-        }
+
         if ($instructors) {
             if ($request->hasFile('instructor_img')) {
                 $img = $request->instructor_img;
@@ -154,7 +157,9 @@ class InstructorController extends Controller
                 'name' => $request->name,
                 'instructor_img' => $imgname,
                 'job' => $request->job,
+                'email' => $request->email,
                 'description' => $request->description,
+                'password' => $request->password,
             ]);
 
             $data = [
@@ -172,4 +177,5 @@ class InstructorController extends Controller
             return response($data);
         }
     }
+
 }

@@ -60,6 +60,22 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="email">email</label>
+                        <input type="email" class="form-control" name="email">
+                        @error('email')
+                            <div class="alert alert-primary mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">password</label>
+                        <input type="password" class="form-control" name="password">
+                        @error('password')
+                            <div class="alert alert-primary mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="">job</label>
                         <input type="text" class="form-control" name="job">
                         @error('job')

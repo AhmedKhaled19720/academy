@@ -16,6 +16,9 @@ class CreateInstructorsTable extends Migration
         Schema::create('instructors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('password')->default('123');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('description');
             $table->string('job');
             $table->string('instructor_img');

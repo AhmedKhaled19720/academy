@@ -35,6 +35,8 @@ class InstructorController extends Controller
             'id' => $request->id,
             "instructor_img" => $imageName,
             'name' => $request->name,
+            'password' => $request->password,
+            'email' => $request->email,
             'job' => $request->job,
             'description' => $request->description,
             'instructor_facebook' => $request->instructor_facebook,
@@ -74,23 +76,27 @@ class InstructorController extends Controller
     public function saveupdate(instructorUpdateRequest $request)
     {
         $old_id = $request->old_id;
-        $instructors = instructor::findOrFail($old_id);
+        $instructor = instructor::findOrFail($old_id);
 
+        // Handle image upload
+        $imageName = $instructor->instructor_img;
         if ($request->hasFile('instructor_img')) {
-            if (File::exists(public_path('instructors/img/' . $instructors->instructor_img))) {
-                File::delete(public_path('instructors/img/' . $instructors->instructor_img));
+            $image = $request->file('instructor_img');
+            $imageName = rand(1, 1000) . time() . '.' . $image->extension();
+            $image->move(public_path('instructors/img/'), $imageName);
+
+            // Delete old image if it exists
+            if (File::exists(public_path('instructors/img/' . $instructor->instructor_img))) {
+                File::delete(public_path('instructors/img/' . $instructor->instructor_img));
             }
-            $img = $request->instructor_img;
-            $imgname = rand(1, 1000) . time() . "." . $img->extension();
-            $img->move(public_path('instructors/img/'), $imgname);
-        } else {
-            $imgname = $instructors->instructor_img;
         }
 
-        $instructors->update([
+        // Update instructor details
+        $instructor->update([
             'id' => $request->id,
-            "instructor_img" => $imgname,
+            'instructor_img' => $imageName,
             'name' => $request->name,
+            'email' => $request->email,
             'job' => $request->job,
             'description' => $request->description,
             'instructor_facebook' => $request->instructor_facebook,
@@ -99,7 +105,7 @@ class InstructorController extends Controller
             'instructor_twitter' => $request->instructor_twitter,
         ]);
 
-        session()->flash('update');
+        session()->flash('update', 'Instructor updated successfully!');
         return redirect()->route('instructors');
     }
 }

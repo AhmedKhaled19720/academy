@@ -52,6 +52,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">email</label>
+                    <input type="email" class="form-control" name="email" value="{{ $instructor->email }}">
+                    @error('email')
+                        <div class="alert alert-primary mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="">image</label>
                     <input type="file" class="form-control" name="instructor_img">
                     @error('instructor_img')
