@@ -19,7 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->text('ass_description')->nullable;
             $table->string('ass_file')->nullable();
             $table->date('deadline');
-            $table->foreignId('course_id')->constrained('courses','id');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->text('notes')->nullable;
             $table->integer('degree')->default('0');
             $table->timestamps();

@@ -19,4 +19,8 @@ class instructor extends Model
         'instructor_insta',
         'instructor_twitter',
     ];
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

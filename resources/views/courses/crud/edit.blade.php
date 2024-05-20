@@ -106,7 +106,7 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" class="form-control-file" id="course_img" name="course_img"
-                                accept="image/*">
+                                >
                             <label class="custom-file-label font-weight-bold" for="course_img">Choose file</label>
                         </div>
                     </div>
