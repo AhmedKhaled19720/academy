@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\UserloginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -51,9 +54,13 @@ Route::post('/delete_course', 'API\CourseController@delete_course');
 // End categories routes
 
 
-
-// start Courses routes
+// start contact us routes
 Route::get('/contactUs', 'Api\ContactUsController@index');
+Route::post('/create_contact', 'API\ContactUsController@create_contact');
+Route::post('/delete_contact', 'API\ContactUsController@delete_contact');
+// End contact us routes
+
+
 // start setting routes
 Route::get('/home-setting', 'API\SettingController@index');
 Route::post('/update_setting', 'API\SettingController@update_setting');

@@ -35,6 +35,7 @@ class UserloginController extends Controller
             'email' => $user->email,
             'phone' => $user->phone,
             'city' => $user->city,
+            'role' => 'disactive',
             'password' => Hash::make($user['password']),
             'created_by' => (Auth::user()->name),
         ]);

@@ -92,7 +92,10 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->cv }}</td>
+                                        <td>
+                                            <a href="{{ asset('instructorsRequests/cv/' . $item->cv) }}" target="_blank">View PDF</a>
+                                        </td>
+
                                         <td>{{ $item->job }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>

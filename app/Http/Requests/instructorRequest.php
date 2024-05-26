@@ -31,7 +31,7 @@ class instructorRequest extends FormRequest
             'job' => 'required',
             'description' => 'required',
             'password' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:instructors',
         ];
     }
     public function messages()
@@ -39,6 +39,7 @@ class instructorRequest extends FormRequest
         return [
             'id.required' => 'please enter id.',
             'id.unique' => 'this id must be unique',
+            'email.unique' => 'this email must be unique',
             'name.required' => 'please enter instructor name.',
             'instructor_img.required' => 'image field is required.',
             'job.required' => 'please enter job title.',

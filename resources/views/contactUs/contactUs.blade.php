@@ -61,6 +61,7 @@
                         <table class="table text-md-nowrap" id="example">
                             <thead>
                                 <tr>
+                                    <th class="text-primary">id</th>
                                     <th class="text-primary">name</th>
                                     <th class="text-primary">E-mail</th>
                                     <th class="text-primary">phone</th>
@@ -73,6 +74,7 @@
                             <tbody>
                                 @foreach ($alldata as $item)
                                     <tr>
+                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->full_name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>

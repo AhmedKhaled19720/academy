@@ -108,7 +108,6 @@
                                     <th class="text-primary">phone</th>
                                     <th class="text-primary">city</th>
                                     <th class="text-primary">role</th>
-                                    <th class="text-primary">created by</th>
                                     <th class="text-primary">Created_at</th>
                                     <th class="text-primary">Updated_at</th>
                                     <th class="text-primary">Operation</th>
@@ -124,7 +123,6 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->city }}</td>
                                         <td>{{ $item->role }}</td>
-                                        <td>{{ $item->created_by }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td class="d-flex">

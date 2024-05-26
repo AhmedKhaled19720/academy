@@ -13,8 +13,8 @@ class CreateInstructorRequestsTable extends Migration
             $table->string('name');
             $table->string('job');
             $table->string('cv');
-            $table->string('email')->unique();
-            $table->integer('phone')->unique();
+            $table->string('email');
+            $table->string('phone');
             $table->timestamps();
         });
     }

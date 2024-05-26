@@ -8,8 +8,10 @@ use App\Model\userlogin;
 use Illuminate\Support\Facades\Validator; // Import Validator facade
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserloginController extends Controller
 {
@@ -69,46 +71,45 @@ class UserloginController extends Controller
         }
     }
 
+    public function create(Request $request)
+{
+    $validateData = Validator::make($request->all(), [
+        'id' => 'unique:userlogins|max:255',
+        'username' => 'required',
+        'email' => 'required|unique:userlogins|max:255|email',
+        'password' => 'required|min:6',
+        'phone' => 'required',
+        'city' => 'required',
+    ]);
 
-    function create(Request $request)
-    {
-        $validateData = Validator::make($request->all(), [
-            'id' => 'unique:userlogins|max:255',
-            'username' => 'required',
-            'email' => 'required|unique:userlogins|max:255',
-            'password' => 'required',
-            'phone' => 'required',
-            'city' => 'required',
-        ]);
-
-        if ($validateData->fails()) {
-            $data = [
-                "msg" => "No Valid Data",
-                "status" => 203,
-                "data" => $validateData->errors()
-            ];
-            return response()->json($data);
-        }
-
-        $users = userlogin::create([
-            'id' => $request->id,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => $request->password,
-            'phone' => $request->phone,
-            'city' => $request->city,
-            'role' => 'disactive', // Set a default value for the role
-        ]);
-
-        $token = JWTAuth::fromUser($users);
-        $data = [
-            "msg" => "Created Successfully",
-            "status" => "200",
-            "data" => new UserloginResource($users),
-            "token" => $token
-        ];
-        return response($data);
+    if ($validateData->fails()) {
+        return response()->json([
+            "msg" => "No Valid Data",
+            "status" => 422,
+            "data" => $validateData->errors()
+        ], 422);
     }
+
+    $user = userlogin::create([
+        'id' => $request->id,
+        'username' => $request->username,
+        'email' => $request->email,
+        'password' => Hash::make($request->password), // Hash the password
+        'phone' => $request->phone,
+        'city' => $request->city,
+        'role' => 'disactive', // Set a default value for the role
+    ]);
+
+    // Generate a token for the newly created user
+    $token = JWTAuth::fromUser($user);
+
+    return response()->json([
+        "msg" => "Created Successfully",
+        "status" => 201,
+        "data" => new UserloginResource($user),
+        "token" => $token
+    ], 201);
+}
 
 
     public function update(Request $request)

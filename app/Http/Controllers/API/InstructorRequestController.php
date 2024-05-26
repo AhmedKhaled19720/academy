@@ -25,45 +25,57 @@ class InstructorRequestController extends Controller
     {
 
         $validateData = Validator($request->all(), [
-            'id' => 'required|unique:instructor_requests|max:255',
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'cv' => 'required',
+            'email' => 'required|',
+            'phone' => 'required|',
+            'cv' => 'required|file|mimes:pdf',
             'job' => 'required',
         ]);
 
         if ($validateData->fails()) {
-            $data = [
-                "msg" => "No Valid Data",
-                "status" => 203,
-                "data" => $validateData->errors()
-            ];
-            return response()->json($data);
+            return response()->json([
+                "msg" => "Invalid data",
+                "status" => 400,
+                "errors" => $validateData->errors()
+            ], 400);
         }
 
         if ($request->hasFile('cv')) {
-            $cv = $request->cv;
-            $cvname = rand(1, 1000) . time() . "." . $cv->extension();
+            $cv = $request->file('cv');
+            $cvname = rand(1, 1000) . time() . "." . $cv->getClientOriginalExtension();
             $cv->move(public_path('instructorsRequests/cv/'), $cvname);
+        } else {
+            // return response()->json([
+            //     "msg" => "CV file is required",
+            //     "status" => 400,
+            //     "errors" => ["cv" => ["The CV file field is required."]]
+            // ], 400);
+
+            $cvname = $request->cv;
         }
 
-        $instructors = InstructorRequest::create([
-            'id' => $request->id,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'cv' => $cvname,
-            'job' => $request->job,
-        ]);
-        $data = [
-            'msg' => 'Create Successfully',
-            'status' => '200',
-            'data' => new InstructorRequestResource($instructors),
-        ];
-        return response($data);
-    }
+        try {
+            $instructor = InstructorRequest::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'cv' => $cvname,
+                'job' => $request->job,
+            ]);
 
+            return response()->json([
+                'msg' => 'Instructor request created successfully',
+                'status' => 201,
+                'data' => new InstructorRequestResource($instructor),
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                "msg" => "Failed to create instructor request",
+                "status" => 500,
+                "errors" => $e->getMessage()
+            ], 500);
+        }
+    }
     function delete_request(Request $requset)
     {
         $id = $requset->id;

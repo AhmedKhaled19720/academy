@@ -31,7 +31,6 @@ class UserloginRequest extends FormRequest
             'password' => 'required',
             'phone' => 'required',
             'city' => 'required',
-            'role' => 'required',
 
         ];
     }
@@ -47,7 +46,6 @@ class UserloginRequest extends FormRequest
             'phone.required' => 'please enter phone.',
             'city.required' => 'please enter city.',
             'password.required' => 'please enter password.',
-            'role.required' => 'please enter role.',
 
         ];
     }
