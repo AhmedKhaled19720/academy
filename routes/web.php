@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\UserloginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -78,15 +79,20 @@ Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destro
 
 //start assignments 
 
+Route::group(['prefix' => 'courses/{course_id}'], function () {
+    Route::get('assignments', [AssignmentController::class, 'index'])->name('assignments.index');
+    Route::get('assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
+    Route::post('assignments', [AssignmentController::class, 'store'])->name('assignments.store');
+});
 
-
-Route::get('/view-assignments', 'AssignmentController@index')->name('assignments');
-Route::get('/assignments/create', 'AssignmentController@create')->name('assignments.create');
-Route::get('assignments/{id}/edit', 'AssignmentController@edit')->name('assignments.edit');
-Route::put('assignments/{id}', 'AssignmentController@update')->name('assignments.update');
-Route::get('/assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
-Route::post('/assignments/store', 'AssignmentController@store')->name('assignments.store');
-Route::delete('/assignments/{id}', 'AssignmentController@destroy')->name('assignments.destroy');
+Route::get('/view-Assignments', 'AssignmentController@index')->name('assignments');
+Route::get('/Assignments/create/{id}', 'AssignmentController@create')->name('assignments.create');
+// Route::post('/Assignments', 'AssignmentController@store')->name('assignments.store');
+// Route::get('Assignments/{id}/edit', 'AssignmentController@edit')->name('assignments.edit');
+// Route::put('Assignments/{id}', 'AssignmentController@update')->name('assignments.update');
+Route::get('/Assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
+Route::get('/Assignments/crud/show_one{id}', 'AssignmentController@show_one')->name('assignments.show_one');
+Route::delete('/Assignments/{id}', 'AssignmentController@destroy')->name('assignments.destroy');
 
 
 //end assignments
