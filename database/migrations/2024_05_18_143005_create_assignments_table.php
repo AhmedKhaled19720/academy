@@ -14,12 +14,12 @@ class CreateAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('assignments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('ass_title');
             $table->text('ass_description')->nullable;
             $table->string('ass_file')->nullable();
             $table->date('deadline');
-            $table->foreignId('course_id')->constrained('courses','id');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->text('notes')->nullable;
             $table->integer('degree')->default('0');
             $table->timestamps();

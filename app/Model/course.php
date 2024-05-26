@@ -30,7 +30,16 @@ class course extends Model
         return $this->belongsTo(instructor::class);
     }
 
+    public function assignments()
+    {
+        return $this->hasMany(assignment::class);
+    }
+  
 
+    public function students()
+    {
+        return $this->belongsToMany(UserLogin::class, 'course_user');
+    }
 
 
 }

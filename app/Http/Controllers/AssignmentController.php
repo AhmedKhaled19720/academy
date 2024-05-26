@@ -9,82 +9,93 @@ use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $courses = course::all();
-        $alldata = assignment::all();
-    
-        return view('assignments.view-assignments', compact('alldata', 'courses'));
+        $courses = assignment::all();
+        $assignments = assignment::all();
+
+        return view('assignments.view-assignments', compact('assignments', 'courses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    public function create($course_id)
     {
-        //
+        $course = Course::findOrFail($course_id);
+
+        return view('assignments.crud.create', compact('course'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request, $course_id)
     {
-        //
+        $course = Course::findOrFail($course_id);
+
+        $request->validate([
+            'ass_title' => 'required|string|max:255',
+            'ass_description' => 'required|string',
+            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,image',
+            'deadline' => 'required|date',
+            'notes' => 'nullable|string',
+            'degree' => 'required|numeric|min:0',
+        ]);
+
+        if ($request->hasFile('ass_file')) {
+            $file = $request->file('ass_file');
+            $fileName = $request->ass_title . "_" . time() . "." . $file->extension();
+            $file->storeAs('assignments', $fileName, 'public');
+        } else {
+            $fileName = null;
+        }
+
+        $assignment = new Assignment([
+            'ass_title' => $request->input('ass_title'),
+            'ass_description' => $request->input('ass_description'),
+            'ass_file' => $fileName,
+            'deadline' => $request->input('deadline'),
+            'notes' => $request->input('notes'),
+            'degree' => $request->input('degree'),
+            'course_id' => $course->id,
+        ]);
+
+        $assignment->save();
+
+        return redirect()->route('courses', ['course_id' => $course->id])->with('success', 'Assignment created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(assignment $assignment)
+
+    public function show($course_id)
     {
-        //
+        $assignments = Assignment::where('course_id', $course_id)->get();
+        return view('assignments.crud.show', compact('assignments'));
+    }
+    public function show_one($id)
+    {
+
+        $assignment = assignment::findOrFail($id);
+
+        return view('assignments.crud.view_one', compact('assignment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(assignment $assignment)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, assignment $assignment)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(assignment $assignment)
+
+    public function destroy($id)
     {
-        //
+        $assignment = assignment::findOrFail($id);
+
+        $assignment->delete();
+        session()->flash('delete_assignment');
+        return redirect()->route('courses');
     }
 }

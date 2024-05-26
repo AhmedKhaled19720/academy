@@ -98,6 +98,7 @@
                                     <th>Instructor</th>
                                     <th>Created at</th>
                                     <th>operation</th>
+                                    <th>Assignment</th>
                                 </tr>
                             </thead>
 
@@ -157,9 +158,14 @@
                                                 data-target="#deleteCourseModal{{ $course->id }}">
                                                 <i class="fa-regular fa-trash-can  tx-16 text-danger"></i>
                                             </a>
-
-
-
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('assignments.create', ['id' => $course->id]) }}">
+                                                <i class="fas fa-notes-medical tx-20 text-info"></i>
+                                            </a>
+                                            <a href="{{ route('assignments.show', ['id' => $course->id]) }}">
+                                                <i class="fa-solid fa-eye tx-16 text-info"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -199,8 +205,8 @@
             <!-- Internal Modal js-->
 
 
-            <script>
-                < script >
+            
+            < script >
                     $(document).ready(function() {
                         $('.delete-course-btn').on('click', function(event) {
                             var courseId = $(this).data('course-id');
@@ -209,9 +215,9 @@
                             window.location.href = deleteUrl;
                         });
                     });
-            </script>
+            </scrip>
 
-            </script>
+            
 
             <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>

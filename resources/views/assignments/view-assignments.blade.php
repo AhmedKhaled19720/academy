@@ -108,7 +108,7 @@
 
                             <tbody>
 
-                                @foreach ($alldata as $assigment)
+                                @foreach ($assignments as $assigment)
                                     <tr>
                                         <td>{{ $assigment->id }}</td>
                                         <td>{{ $assigment->ass_title }}</td>
