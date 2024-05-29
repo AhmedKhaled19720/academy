@@ -34,12 +34,10 @@ class course extends Model
     {
         return $this->hasMany(assignment::class);
     }
-  
 
     public function students()
     {
-        return $this->belongsToMany(UserLogin::class, 'course_user');
+        return $this->belongsToMany(Userlogin::class, 'enrollcourses', 'course_id', 'user_id')
+                    ->withPivot('registration_date', 'subscription_status');
     }
-
-
 }

@@ -96,9 +96,10 @@
                                     <th>Start Date</th>
                                     <th>Category</th>
                                     <th>Instructor</th>
-                                    <th>Created at</th>
                                     <th>operation</th>
                                     <th>Assignment</th>
+                                    <th>Students</th>
+
                                 </tr>
                             </thead>
 
@@ -111,7 +112,6 @@
                                         <td>{{ $course->start_date }}</td>
                                         <td>{{ $course->category->name }}</td>
                                         <td>{{ $course->instructor->name }}</td>
-                                        <td>{{ $course->created_at }}</td>
                                         <td>
                                             <!-- Modal -->
                                             <div class="modal fade" id="deleteCourseModal{{ $course->id }}"
@@ -167,6 +167,12 @@
                                                 <i class="fa-solid fa-eye tx-16 text-info"></i>
                                             </a>
                                         </td>
+                                        <td>
+
+                                            <a href="{{ route('courses.students', ['id' => $course->id]) }}"
+                                                class="fas fa-users-rectangle tx-20 text-warning"></a>
+
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -205,20 +211,20 @@
             <!-- Internal Modal js-->
 
 
-            
-            < script >
-                    $(document).ready(function() {
-                        $('.delete-course-btn').on('click', function(event) {
-                            var courseId = $(this).data('course-id');
-                            var deleteUrl = "{{ route('courses.destroy', ':id') }}";
-                            deleteUrl = deleteUrl.replace(':id', courseId);
-                            window.location.href = deleteUrl;
-                        });
-                    });
-            </scrip>
 
-            
+            <script>
+                $(document).ready(function() {
+                $('.delete-course-btn').on('click', function(event) {
+                var courseId = $(this).data('course-id');
+                var deleteUrl = "{{ route('courses.destroy', ':id') }}";
+                deleteUrl = deleteUrl.replace(':id', courseId);
+                window.location.href = deleteUrl;
+                });
+                });
+             </script>
 
-            <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-        @endsection
+
+
+                <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+                <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+            @endsection

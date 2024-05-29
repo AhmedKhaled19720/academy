@@ -55,6 +55,7 @@
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ route('courses') }}">all courses</a></li>
                 <li><a class="slide-item" href="{{ route('courses.create') }}">create new course</a>
+                <li><a class="slide-item" href="{{ route('enroll.index') }}">Enroll Course</a>
                 </li>
 
             </ul>
