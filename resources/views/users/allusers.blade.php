@@ -14,6 +14,49 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <style>
+        @media only screen and (max-width: 599px) and (min-width: 0px) {
+            .form-check-input[type="checkbox"] {
+                transform: scale(1) !important;
+            }
+        }
+
+        .form-check-input[type="checkbox"] {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            -webkit-appearance: none;
+            background: #c6c6c6;
+            outline: none;
+            border-radius: 20px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+            transition: .5s;
+            transform: scale(.6);
+            cursor: pointer;
+        }
+
+        .form-check-input:checked[type="checkbox"] {
+            background: #03a9f4;
+        }
+
+        .form-check-input[type="checkbox"]:before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            top: 0;
+            left: 0;
+            background: #fff;
+            transform: scale(0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+            transition: .5s;
+        }
+
+        .form-check-input:checked[type="checkbox"]:before {
+            left: 40px;
+        }
+    </style>
 @endsection
 
 @section('page-header')
@@ -122,7 +165,12 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->city }}</td>
-                                        <td>{{ $item->role }}</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input toggleStatusSwitch" type="checkbox" id="toggleStatusSwitch_{{ $item->id }}" {{ $item->role == 'active' ? 'checked' : '' }}>
+                                                
+                                            </div>
+                                        </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td class="d-flex">
@@ -214,4 +262,34 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.toggleStatusSwitch').change(function() {
+                var isChecked = $(this).prop('checked');
+                var userId = $(this).attr('id').split('_')[1];
+                var newRole = isChecked ? 'active' : 'disactive';
+                
+                $.ajax({
+                    url: '/toggle-status/' + userId,
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        role: newRole
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            var switchLabel = isChecked ? 'On' : 'Off';
+                            $('#toggleStatusSwitch_' + userId).siblings('.form-check-label').text(switchLabel);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

@@ -85,4 +85,14 @@ class UserloginController extends Controller
         session()->flash('delete_user');
         return redirect()->route('allusers');
     }
+
+    public function toggleStatus($id, Request $request)
+    {
+        $user = userlogin::findOrFail($id);
+        $user->role = $request->input('role');
+        $user->save();
+
+        // قم بإرجاع الرول المحدث للعرض
+        return response()->json(['status' => 'success', 'newRole' => $user->role]);
+    }
 }
