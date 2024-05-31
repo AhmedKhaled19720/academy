@@ -94,7 +94,7 @@ class UserloginController extends Controller
         'id' => $request->id,
         'username' => $request->username,
         'email' => $request->email,
-        'password' => Hash::make($request->password), // Hash the password
+        'password' => password_hash($request->password, PASSWORD_DEFAULT),
         'phone' => $request->phone,
         'city' => $request->city,
         'role' => 'disactive', // Set a default value for the role

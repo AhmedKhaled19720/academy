@@ -131,8 +131,14 @@
 
                 <div
                     class="main-setting d-flex justify-content-between align-items-center bg-light text-primary p-2 mb-1 fw-bold tx-18 rounded-5">
-                    <p>footer_address</p>
-                    <p>{{ $item->footer_address }}</p>
+                    <p>footer_address_link</p>
+                    <p>{{ $item->footer_address_link }}</p>
+                </div>
+
+                <div
+                    class="main-setting d-flex justify-content-between align-items-center bg-light text-primary p-2 mb-1 fw-bold tx-18 rounded-5">
+                    <p>footer_address_iframe</p>
+                    <p>{{ $item->footer_address_iframe }}</p>
                 </div>
 
                 <div

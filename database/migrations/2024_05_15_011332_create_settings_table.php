@@ -28,7 +28,8 @@ class CreateSettingsTable extends Migration
             $table->string('discount_caption');
             $table->string('discount_img');
             $table->string('discount_percent');
-            $table->string('footer_address');
+            $table->string('footer_address_link');
+            $table->text('footer_address_iframe');
             $table->string('footer_mail');
             $table->string('footer_phone_1');
             $table->string('footer_phone_2');

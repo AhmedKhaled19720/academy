@@ -48,6 +48,9 @@ li {
 }
 .setting p  {
     margin-bottom: 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 99%;
 }
 /* end global */
 /* start users dashboard */

@@ -153,10 +153,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">footer_address</label>
-                    <input type="text" class="form-control" name="footer_address"
-                        value="{{ $setting->footer_address }}">
-                    @error('footer_address')
+                    <label for="">footer_address_link</label>
+                    <input type="text" class="form-control" name="footer_address_link"
+                        value="{{ $setting->footer_address_link }}">
+                    @error('footer_address_link')
+                        <div class="alert alert-primary mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="">footer_address_iframe</label>
+                    <input type="text" class="form-control" name="footer_address_iframe"
+                        value="{{ $setting->footer_address_iframe }}">
+                    @error('footer_address_iframe')
                         <div class="alert alert-primary mt-2">{{ $message }}</div>
                     @enderror
                 </div>
