@@ -98,7 +98,7 @@
         @endif
         <div class="card col-md-12">
             <div class="card-header bg-dark text-white mb-2">
-                <h5 class="text-center">Course "{{ $course->course_title }}"  Assignments
+                <h5 class="text-center">Course "{{ $course->course_title }}" Assignments
                 </h5>
             </div>
             <div class="row">
@@ -127,8 +127,8 @@
                     @endphp
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            <div class="card-header pb-0 {{ $cardClass }} ">
-                                <h5 class="card-title mb-0 pb-0 text-white  pb-3">{{ $assignment->ass_title }}</h5>
+                            <div class="card-header bg-danger pb-0 {{ $cardClass }} ">
+                                <h5 class="card-title mb-0 pb-0 text-white pb-3">{{ $assignment->ass_title }}</h5>
                             </div>
                             <div class="card-body text-primary">
 
@@ -154,31 +154,32 @@
 
                             </div>
 
-                            <div class="card-footer d-flex justify-content-around">
-                                <a href="#" class="btn btn-outline-info" data-toggle="modal"
-                                    data-target="#showAssignment{{ $assignment->id }}">
-                                    Show
-                                </a>
+                            <div class="card-footer d-flex m-auto">
                                 <a href="#" class="btn btn-outline-primary" data-toggle="modal"
+                                    data-target="#showAssignment{{ $assignment->id }}">
+                                    <i class="fas fa-eye"></i></a>
+                                </a>
+                                <a href="#" class="btn btn-outline-info mx-3" data-toggle="modal"
                                     data-target="#editAssignment{{ $assignment->id }}">
-                                    Edit
+                                    <i class="fas fa-pen-to-square"></i></a>
                                 </a>
 
                                 <button type="button" class="btn btn-outline-danger delete-assignment-btn"
                                     data-assignment-id="{{ $assignment->id }}" data-toggle="modal"
-                                    data-target="#deleteModal">Delete
+                                    data-target="#deleteModal">
+                                    <i class="fas fa-trash-can"></i></a>
                                 </button>
 
 
                             </div>
-                            <div class="card-footer d-flex justify-content-around">
+                            <div class="card-footer d-flex flex-column align-items-center">
 
                                 <a href="{{ route('assignments.students', ['assignment' => $assignment->id]) }}"
-                                    class="btn btn-outline-info">
-                                    add-Stu-Degree
+                                    class="btn btn-outline-info tx-12 mb-2">
+                                    add Students Degree
                                 </a>
                                 <a href="{{ route('assignments.all_students', ['assignment' => $assignment->id]) }}"
-                                    class="btn btn-outline-info">
+                                    class="btn btn-outline-info tx-12">
                                     Show All Students Grades
                                 </a>
 

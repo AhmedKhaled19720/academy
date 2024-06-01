@@ -1,6 +1,8 @@
 <?php
 
+// use App\Http\Controllers\Api\AssignmentController;
 use App\Http\Controllers\API\UserloginController;
+use App\Http\Controllers\API\AssignmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -65,3 +67,12 @@ Route::post('/delete_contact', 'API\ContactUsController@delete_contact');
 Route::get('/home-setting', 'API\SettingController@index');
 Route::post('/update_setting', 'API\SettingController@update_setting');
 // End setting routes
+
+
+// start assignments routes
+Route::get('/assignments', 'API\AssignmentController@index');
+Route::get('/show_assignment/{id}', 'Api\AssignmentController@show_assignment');
+Route::post('/create_assignment/{course_id}', [AssignmentController::class, 'create_assignment']);
+Route::post('/update_assignments/{course_id}', [AssignmentController::class, 'update_assignments']);
+Route::post('/delete_assignment', 'Api\AssignmentController@delete_assignment');
+// End assignments routes

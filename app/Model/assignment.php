@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use App\Grade;
 use Illuminate\Database\Eloquent\Model;
 
 class assignment extends Model

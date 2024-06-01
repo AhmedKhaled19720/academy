@@ -27,7 +27,7 @@ Route::post('/users/save', 'UserloginController@save')->name('users.save');
 Route::get('/users/crud/create', 'UserloginController@create')->name('users.create');
 Route::delete('/user/delete/{id}', 'UserloginController@delete')->name('user.delete');
 Route::resource('users', 'userloginController');
-//view assignments of specific user and specific course 
+//view assignments of specific user and specific course
 Route::get('/courses/{courseId}/students/{studentId}/assignments','UserloginController@showStudentAssignments')
     ->name('student.assignments');
 
@@ -88,10 +88,10 @@ Route::get('courses/{id}/students', 'CourseController@showStudents')->name('cour
 
 
 
-// end courses 
+// end courses
 
 
-//start assignments 
+//start assignments
 
 Route::group(['prefix' => 'courses/{course_id}'], function () {
     Route::get('assignments', [AssignmentController::class, 'index'])->name('assignments.index');
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'courses/{course_id}'], function () {
     Route::post('assignments', [AssignmentController::class, 'store'])->name('assignments.store');
 });
 
-Route::get('/view-Assignments', 'AssignmentController@index')->name('assignments');
+Route::get('/view-Assignments', 'AssignmentController@index')->name('view-Assignments');
 Route::get('/Assignments/create/{id}', 'AssignmentController@create')->name('assignments.create');
 Route::get('/Assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
 Route::get('/Assignments/crud/show_one{id}', 'AssignmentController@show_one')->name('assignments.show_one');
@@ -122,7 +122,7 @@ Route::get('/users/{userId}/grades', 'GradeController@showOneStudentGrades')->na
 
 
 
-//Start Enroll Course 
+//Start Enroll Course
 
 
 Route::get('enrollCourse', [EnrollcourseController::class, 'index'])->name('enroll.index');
@@ -130,7 +130,7 @@ Route::post('enrollCourse/enroll', [EnrollCourseController::class, 'store'])->na
 Route::delete('/enrollCourse/{id}', 'EnrollCourseController@destroy')->name('enrollCourse.destroy');
 Route::post('/toggle-subscription/{id}', 'EnrollcourseController@toggleSubscription')->name('toggle-subscription');
 
-//End Enroll Course 
+//End Enroll Course
 
 
 

@@ -120,56 +120,6 @@
                                         <td>{{ $assigment->degree }}</td>
                                         <td>{{ $assigment->created_at }}</td>
                                         <td>{{ $assigment->updated_at }}</td>
-                                        {{-- <td>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="deleteCourseModal{{ $course->id }}"
-                                                tabindex="-1" role="dialog"
-                                                aria-labelledby="deleteCourseModalLabel{{ $course->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="deleteCourseModalLabel{{ $course->id }}">Confirm
-                                                                Deletion</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure you want to delete this course?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Cancel</button>
-                                                            <!-- Delete Course Form -->
-                                                            <form action="{{ route('courses.destroy', $course->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="{{ route('courses.show', ['id' => $course->id]) }}">
-                                                <i class="fa-solid fa-binoculars fa-xl" style="color: #74C0FC;"></i>
-                                            </a>
-
-                                            <a href="{{ route('courses.edit', $course->id) }}"><i
-                                                    class="fa-regular fa-pen-to-square fa-lg mx-2"
-                                                    style="color: #74C0FC;"></i></a>
-                                            <a class="text-danger tx-20 delete-course" href="#" data-toggle="modal"
-                                                data-target="#deleteCourseModal{{ $course->id }}">
-                                                <i class="fa-regular fa-trash-can fa-lg" style="color: #ff0f0f;"></i>
-                                            </a>
-
-
-
-                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

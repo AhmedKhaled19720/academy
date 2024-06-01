@@ -6,6 +6,7 @@ use App\Model\assignment;
 use App\Model\course;
 use App\Model\instructor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AssignmentController extends Controller
 {
@@ -41,17 +42,17 @@ class AssignmentController extends Controller
         ]);
 
         if ($request->hasFile('ass_file')) {
-            $file = $request->file('ass_file');
-            $fileName = $request->ass_title . "_" . time() . "." . $file->extension();
-            $file->storeAs('assignments', $fileName, 'public');
+            $file = $request->ass_file;
+            $filename = rand(1, 1000) . time() . "." . $file->extension();
+            $file->move(public_path('assignments/files/'), $filename);
         } else {
-            $fileName = null;
+            $filename = null;
         }
 
         $assignment = new Assignment([
             'ass_title' => $request->input('ass_title'),
             'ass_description' => $request->input('ass_description'),
-            'ass_file' => $fileName,
+            'ass_file' => $filename,
             'deadline' => $request->input('deadline'),
             'notes' => $request->input('notes'),
             'degree' => $request->input('degree'),
@@ -67,7 +68,7 @@ class AssignmentController extends Controller
 
     public function show($course_id)
     {
-        $course = Course::findOrFail($course_id); 
+        $course = Course::findOrFail($course_id);
         $assignments = Assignment::where('course_id', $course_id)->get();
         return view('assignments.crud.show', compact('course', 'assignments'));
     }
@@ -107,27 +108,40 @@ class AssignmentController extends Controller
         if (!$course) {
             return redirect()->back()->with('error', 'Course not found.');
         }
+        if ($request->hasFile('ass_file')) {
+            if (File::exists(public_path('assignments/files/' . $assignment->ass_file))) {
+                File::delete(public_path('assignments/files/' . $assignment->ass_file));
+            }
+            if ($request->hasFile('ass_file')) {
+                $file = $request->ass_file;
+                $filename = rand(1, 1000) . time() . "." . $file->extension();
+                $file->move(public_path('assignments/files/'), $filename);
+            } else {
+                $filename = null;
+            }
 
-        $assignment->update([
-            'ass_title' => $request->input('ass_title'),
-            'ass_description' => $request->input('ass_description'),
-            'deadline' => $request->input('deadline'),
-            'degree' => $request->input('degree'),
-            'notes' => $request->input('notes'),
-            'course_id' => $course->id,
-        ]);
-        session()->flash('update', 'Assignment updated successfully!');
-        return redirect()->route('assignments.show', ['id' => $assignmentId]);
+            $assignment->update([
+                'ass_title' => $request->input('ass_title'),
+                'ass_description' => $request->input('ass_description'),
+                'deadline' => $request->input('deadline'),
+                'degree' => $request->input('degree'),
+                'notes' => $request->input('notes'),
+                'course_id' => $course->id,
+            ]);
+            session()->flash('update', 'Assignment updated successfully!');
+            return redirect()->route('assignments.show', ['id' => $assignmentId]);
+        }
     }
-
 
 
     public function destroy($id)
     {
         $assignment = assignment::findOrFail($id);
-
+        if (File::exists(public_path('assignments/files/' . $assignment->ass_file))) {
+            File::delete(public_path('assignments/files/' . $assignment->ass_file));
+        }
         $assignment->delete();
         session()->flash('delete_assignment');
-        return redirect()->route('assignments.show', ['id' => $assignment->id]);
+        route('assignments.show', ['id' => $assignment->id]);
     }
 }

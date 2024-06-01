@@ -119,7 +119,7 @@ class CourseController extends Controller
             ],
             'name' => 'required',
             'course_img' => 'image',
-        
+
         ]);
 
         if ($validateData->fails()) {
@@ -145,7 +145,7 @@ class CourseController extends Controller
             $courses->update([
                 'id' => $request->id,
                 'name' => $request->name,
-             
+
             ]);
 
             $data = [

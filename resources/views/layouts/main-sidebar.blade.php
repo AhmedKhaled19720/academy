@@ -99,28 +99,8 @@
                 <li><a class="slide-item" href={{ route('home-setting') }}>home setting </a>
                 </li>
             </ul>
-
-            </ul>
-        <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ route('assignments') }}">
-                <i class="side-menu__icon fa fa-users"></i>
-                <span class="side-menu__label">users</span>
-                <i class="angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item" href="{{ url('/' . ($page = 'allusers')) }}">all users </a></li>
-                <li><a class="slide-item" href={{ route('users.create') }}>create users</a></li>
             </ul>
 
-        <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
-                    class="side-menu__icon fa fa-cog"></i><span class="side-menu__label">setting</span><i
-                    class="angle fe fe-chevron-down"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item" href={{ route('assignments') }}>Assiengments </a>
-                </li>
-            </ul>
-
-            </ul>
     </div>
 </aside>
 <!-- main-sidebar -->

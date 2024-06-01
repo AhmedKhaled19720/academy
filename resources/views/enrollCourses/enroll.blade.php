@@ -110,13 +110,19 @@
                                 @endforeach
                             </select>
                         </div>
-                            <!-- Select for users -->
-                            <select name="user_id" id="user_id" class="form-control">
-                                <option value="">Select User</option>
+
+                        <!-- Select for users -->
+                        <div class="form-group">
+                            <label for="user_id">user:</label>
+                            <select name="user_id" id="user_id" class="form-control"
+                                onchange="updateUsersList(this.value)">
+                                <option value="">Select user</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->username }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
                         <div class="mt-3 ">
                             <button type="submit" class="btn btn-main-primary btn-block">Enroll User</button>
                         </div>
@@ -142,86 +148,82 @@
                             {{ $errors->first() }}
                         </div>
                     @endif
-
-                    <table class="table text-md-nowrap" id="example">
-                        <thead>
-                            <tr>
-                                <th class="text-primary">Id</th>
-                                <th class="text-primary">Username</th>
-                                <th class="text-primary">Course Title</th>
-                                <th class="text-primary">Status</th>
-                                <th class="text-primary">Registration Date</th>
-                                <th class="text-primary">Updated At</th>
-                                <th class="text-primary">Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($alldata as $item)
-                                <tr class="{{ $item->subscription_status == 'inactive' ? 'table-muted' : '' }}">
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->user->username }}</td>
-                                    <td>{{ $item->course->course_title }}</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input toggleSubscriptionSwitch" type="checkbox"
-                                                id="toggleSubscriptionSwitch_{{ $item->id }}"
-                                                {{ $item->subscription_status == 'active' ? 'checked' : '' }}
-                                                data-id="{{ $item->id }}"
-                                                data-status="{{ $item->subscription_status == 'active' ? 'inactive' : 'active' }}">
-                                            <label class="form-check-label"
-                                                for="toggleSubscriptionSwitch_{{ $item->id }}">{{ $item->subscription_status == 'active' ? 'Active' : 'Inactive' }}</label>
-                                        </div>
-                                    </td>
-
-
-                                    <td>{{ $item->registration_date }}</td>
-                                    <td>{{ $item->updated_at }}</td>
-                                    <td class="d-flex">
-                                        {{-- <a class="text-primary tx-16" href="#"><i class="fas fa-eye"></i></a> --}}
-                                        <a class="text-primary mx-4 tx-16" href="#"><i
-                                                class="fas fa-pen-to-square"></i></a>
-
-                                        <a class="text-danger tx-16" href="#" data-toggle="modal"
-                                            data-target="#deleteCourseModal{{ $item->id }}">
-                                            <i class="fa-regular fa-trash-can tx-16 text-danger"></i>
-                                        </a>
-                                    </td>
+                    <div class="table-responsive table-center">
+                        <table class="table text-md-nowrap" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="text-primary">Id</th>
+                                    <th class="text-primary">Username</th>
+                                    <th class="text-primary">Course Title</th>
+                                    <th class="text-primary">Status</th>
+                                    <th class="text-primary">Registration Date</th>
+                                    <th class="text-primary">Updated At</th>
+                                    <th class="text-primary">Operation</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($alldata as $item)
+                                    <tr class="{{ $item->subscription_status == 'inactive' ? 'table-muted' : '' }}">
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->user->username }}</td>
+                                        <td>{{ $item->course->course_title }}</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input toggleSubscriptionSwitch" type="checkbox"
+                                                    id="toggleSubscriptionSwitch_{{ $item->id }}"
+                                                    {{ $item->subscription_status == 'active' ? 'checked' : '' }}
+                                                    data-id="{{ $item->id }}"
+                                                    data-status="{{ $item->subscription_status == 'active' ? 'inactive' : 'active' }}">
+                                                <label class="form-check-label"
+                                                    for="toggleSubscriptionSwitch_{{ $item->id }}">{{ $item->subscription_status == 'active' ? 'Active' : 'Inactive' }}</label>
+                                            </div>
+                                        </td>
+                                        <td>{{ $item->registration_date }}</td>
+                                        <td>{{ $item->updated_at }}</td>
+                                        <td>
+                                            <a class="text-danger tx-16" href="#" data-toggle="modal"
+                                                data-target="#deleteCourseModal{{ $item->id }}">
+                                                <i class="fa-regular fa-trash-can tx-16 text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
 
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteCourseModal{{ $item->id }}" tabindex="-1"
-                                    role="dialog" aria-labelledby="deleteCourseModalLabel{{ $item->id }}"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteCourseModalLabel{{ $item->id }}">
-                                                    Confirm Deletion</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('enrollCourse.destroy', $item->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteCourseModal{{ $item->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="deleteCourseModalLabel{{ $item->id }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="deleteCourseModalLabel{{ $item->id }}">
+                                                        Confirm Deletion</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('enrollCourse.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
