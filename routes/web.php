@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\EnrollcourseController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\UserloginController;
 use App\Model\enrollcourse;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ Route::post('/users/save', 'UserloginController@save')->name('users.save');
 Route::get('/users/crud/create', 'UserloginController@create')->name('users.create');
 Route::delete('/user/delete/{id}', 'UserloginController@delete')->name('user.delete');
 Route::resource('users', 'userloginController');
+//view assignments of specific user and specific course 
+Route::get('/courses/{courseId}/students/{studentId}/assignments','UserloginController@showStudentAssignments')
+    ->name('student.assignments');
+
 
 // end user login
 
@@ -82,7 +87,9 @@ Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destro
 Route::get('courses/{id}/students', 'CourseController@showStudents')->name('courses.students');
 
 
+
 // end courses 
+
 
 //start assignments 
 
@@ -97,9 +104,22 @@ Route::get('/Assignments/create/{id}', 'AssignmentController@create')->name('ass
 Route::get('/Assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
 Route::get('/Assignments/crud/show_one{id}', 'AssignmentController@show_one')->name('assignments.show_one');
 Route::delete('/Assignments/{id}', 'AssignmentController@destroy')->name('assignments.destroy');
+Route::post('assignments/update/{course_id}/{assignment_id}', 'AssignmentController@update')->name('assignments.update');
 
 
 //end assignments
+Route::get('/assignments/{assignment}/students', [GradeController::class, 'showStudents'])->name('assignments.students');
+
+Route::post('/grades', [GradeController::class, 'store'])->name('grades.store');
+Route::get('/assignments/{assignment}/all-students', [GradeController::class, 'showAllStudentsWithGrades'])->name('assignments.all_students');
+Route::put('/grades/{grade}', [GradeController::class, 'update'])->name('grades.update');
+Route::get('/users/{userId}/grades', 'GradeController@showOneStudentGrades')->name('users.grades.show');
+
+
+
+
+
+
 
 
 //Start Enroll Course 
@@ -108,7 +128,6 @@ Route::delete('/Assignments/{id}', 'AssignmentController@destroy')->name('assign
 Route::get('enrollCourse', [EnrollcourseController::class, 'index'])->name('enroll.index');
 Route::post('enrollCourse/enroll', [EnrollCourseController::class, 'store'])->name('enrollCourse.store');
 Route::delete('/enrollCourse/{id}', 'EnrollCourseController@destroy')->name('enrollCourse.destroy');
-
 Route::post('/toggle-subscription/{id}', 'EnrollcourseController@toggleSubscription')->name('toggle-subscription');
 
 //End Enroll Course 

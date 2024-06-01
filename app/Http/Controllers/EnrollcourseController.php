@@ -12,10 +12,16 @@ class EnrollcourseController extends Controller
 
     public function index()
     {
-        $alldata = enrollcourse::with(['user', 'course'])->get();
-        $users = Userlogin::all();
+        $users = Userlogin::where('role', 'active')->get();
+        $alldata = enrollcourse::with(['user', 'course'])
+        ->whereHas('user', function ($query) {
+            $query->where('role', 'active');
+        })
+        ->get();
         $courses = course::all();
+        
         return view('enrollCourses.enroll', compact('alldata', 'users', 'courses'));
+        
     }
 
 
@@ -28,7 +34,7 @@ class EnrollcourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
+            'user_id' => 'required|unique:enrollcourses,user_id,NULL,id,course_id,' . $request->course_id,
             'course_id' => 'required'
         ]);
 
@@ -61,22 +67,22 @@ class EnrollcourseController extends Controller
         //
     }
 
-
-    public function destroy(enrollcourse $id)
+    public function destroy($id)
     {
         $item = enrollcourse::findOrFail($id);
         $item->delete();
-
+    
         return redirect()->route('enroll.index')->with('success', 'Item deleted successfully');
     }
+    
 
 
     public function toggleSubscription(Request $request, $id)
     {
         try {
-            $id = EnrollCourse::findOrFail($id);
-            $id->subscription_status = $request->input('subscription_status');
-            $id->save();
+            $course = EnrollCourse::findOrFail($id);
+            $course->subscription_status = $request->input('subscription_status');
+            $course->save();
 
             return response()->json(['status' => 'success', 'message' => 'Subscription status updated successfully!']);
         } catch (\Exception $e) {

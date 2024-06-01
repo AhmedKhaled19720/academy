@@ -59,15 +59,17 @@ class AssignmentController extends Controller
         ]);
 
         $assignment->save();
+        session()->flash('create');
 
-        return redirect()->route('courses', ['course_id' => $course->id])->with('success', 'Assignment created successfully.');
+        return redirect()->route('courses', ['course_id' => $course->id]);
     }
 
 
     public function show($course_id)
     {
+        $course = Course::findOrFail($course_id); 
         $assignments = Assignment::where('course_id', $course_id)->get();
-        return view('assignments.crud.show', compact('assignments'));
+        return view('assignments.crud.show', compact('course', 'assignments'));
     }
     public function show_one($id)
     {
@@ -84,10 +86,40 @@ class AssignmentController extends Controller
     }
 
 
-    public function update(Request $request, assignment $assignment)
+    public function update(Request $request, $courseId, $assignmentId)
     {
-        //
+        $request->validate([
+            'ass_title' => 'required|string',
+            'ass_description' => 'nullable|string',
+            'deadline' => 'required|date',
+            'degree' => 'nullable|numeric',
+            'notes' => 'nullable|string',
+        ]);
+
+        $assignment = Assignment::find($assignmentId);
+
+        if (!$assignment) {
+            return redirect()->back()->with('error', 'Assignment not found.');
+        }
+
+        $course = Course::find($courseId);
+
+        if (!$course) {
+            return redirect()->back()->with('error', 'Course not found.');
+        }
+
+        $assignment->update([
+            'ass_title' => $request->input('ass_title'),
+            'ass_description' => $request->input('ass_description'),
+            'deadline' => $request->input('deadline'),
+            'degree' => $request->input('degree'),
+            'notes' => $request->input('notes'),
+            'course_id' => $course->id,
+        ]);
+        session()->flash('update', 'Assignment updated successfully!');
+        return redirect()->route('assignments.show', ['id' => $assignmentId]);
     }
+
 
 
     public function destroy($id)
@@ -96,6 +128,6 @@ class AssignmentController extends Controller
 
         $assignment->delete();
         session()->flash('delete_assignment');
-        return redirect()->route('courses');
+        return redirect()->route('assignments.show', ['id' => $assignment->id]);
     }
 }
