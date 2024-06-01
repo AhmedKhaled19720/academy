@@ -138,7 +138,7 @@ class CourseController extends Controller
     {
         $course = Course::with('students')->findOrFail($id);
 
-        return view('courses.students', ['course' => $course]);
+        return view('student-assignment.students', ['course' => $course]);
     }
     
 }

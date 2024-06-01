@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserloginRequest;
 use App\Http\Requests\UserloginUpdateRequest;
+use App\Model\assignment;
+use App\Model\course;
 use App\Model\userlogin;
 use App\Notifications\sendemail;
 use Illuminate\Notifications\Notification;
@@ -91,8 +93,18 @@ class UserloginController extends Controller
         $user = userlogin::findOrFail($id);
         $user->role = $request->input('role');
         $user->save();
-
-        // قم بإرجاع الرول المحدث للعرض
         return response()->json(['status' => 'success', 'newRole' => $user->role]);
     }
+  
+
+    public function showStudentAssignments($courseId, $studentId)
+    {
+        $course = Course::find($courseId);
+        $student = Userlogin::find($studentId);
+    
+        $assignments = assignment::where('course_id', $courseId)->get();
+        return view('student-assignment.student_assignment', compact('course', 'student', 'assignments'));
+    }
+
+
 }

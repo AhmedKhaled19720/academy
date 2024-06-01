@@ -3,10 +3,10 @@
 
 namespace App\Model;
 
+use App\Model\Grade;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Userlogin extends Model implements Authenticatable, JWTSubject
@@ -22,7 +22,7 @@ class Userlogin extends Model implements Authenticatable, JWTSubject
         'role',
         'created_by',
     ];
-    
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -35,17 +35,22 @@ class Userlogin extends Model implements Authenticatable, JWTSubject
     public function enrolledCourses()
     {
         return $this->belongsToMany(Course::class, 'enrollcourses', 'user_id', 'course_id')
-                    ->withPivot('registration_date', 'subscription_status');
+            ->withPivot('registration_date', 'subscription_status');
     }
-    public function assignments(): HasManyThrough
+    public function grades()
     {
-        return $this->hasManyThrough(
-            Assignment::class, 
-            Enrollcourse::class,
-            'user_id', 
-            'course_id', 
-            'id',    
-            'course_id' 
-        );
+        return $this->hasMany(Grade::class, 'user_id');
+    }
+    public function assignments()
+    {
+        return $this->belongsToMany(Assignment::class, 'grades', 'user_id', 'assignment_id')
+            ->withPivot('grade')
+            ->withTimestamps();
+    }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollcourses', 'user_id', 'course_id')
+            ->withPivot('registration_date', 'subscription_status', 'rating')
+            ->withTimestamps();
     }
 }

@@ -39,7 +39,7 @@
 
 
     <!-- row -->
-                <form action="{{ route('courses.update', $course->id) }}" method="POST">
+                <form action="{{ route('assignments.update', $course->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-row">

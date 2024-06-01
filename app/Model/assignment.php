@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Grade;
 use Illuminate\Database\Eloquent\Model;
 
 class assignment extends Model
@@ -19,5 +20,15 @@ class assignment extends Model
     public function course()
     {
         return $this->belongsTo(course::class);
+    }
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'assignment_id');
+    }
+    public function users()
+    {
+        return $this->belongsToMany(Userlogin::class, 'grades')
+                    ->withPivot('grade')
+                    ->withTimestamps();
     }
 }

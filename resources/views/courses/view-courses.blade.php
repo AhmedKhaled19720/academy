@@ -75,7 +75,7 @@
                     @endif
 
                     @if ($errors->any())
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <div class="alert alert-outline-danger alert-dismissible fade show" role="alert">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -161,7 +161,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('assignments.create', ['id' => $course->id]) }}">
-                                                <i class="fas fa-notes-medical tx-20 text-info"></i>
+                                                <i class="fas fa-notes-medical tx-20 text-info mx-2"></i>
                                             </a>
                                             <a href="{{ route('assignments.show', ['id' => $course->id]) }}">
                                                 <i class="fa-solid fa-eye tx-16 text-info"></i>
