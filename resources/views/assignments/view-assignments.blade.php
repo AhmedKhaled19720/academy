@@ -42,51 +42,50 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    @if (session()->has('create'))
-                        <script>
-                            window.onload = function() {
-                                notif({
-                                    msg: "created successfully",
-                                    type: "success"
-                                })
-                            }
-                        </script>
-                    @endif
-                    @if (session()->has('update'))
-                        <script>
-                            window.onload = function() {
-                                notif({
-                                    msg: "updated successfully",
-                                    type: "success"
-                                })
-                            }
-                        </script>
-                    @endif
+                       @if (session()->has('create'))
+                <script>
+                    window.onload = function() {
+                        notif({
+                            msg: "created successfully",
+                            type: "success"
+                        })
+                    }
+                </script>
+            @endif
+            @if (session()->has('update'))
+                <script>
+                    window.onload = function() {
+                        notif({
+                            msg: "updated successfully",
+                            type: "success"
+                        })
+                    }
+                </script>
+            @endif
 
-                    @if (session()->has('delete_courses'))
-                        <script>
-                            window.onload = function() {
-                                notif({
-                                    msg: "deleted successfully",
-                                    type: "success"
-                                })
-                            }
-                        </script>
-                    @endif
+            @if (session()->has('delete_courses'))
+                <script>
+                    window.onload = function() {
+                        notif({
+                            msg: "deleted successfully",
+                            type: "success"
+                        })
+                    }
+                </script>
+            @endif
 
-                    @if ($errors->any())
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
+            @if ($errors->any())
+                <div class="alert alert-outline-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
                     <div class="table-responsive table-center">
                         <table class="table text-md-nowrap" id="example1">
                             <thead>

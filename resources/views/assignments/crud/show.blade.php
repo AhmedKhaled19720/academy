@@ -102,105 +102,120 @@
                 </h5>
             </div>
             <div class="row">
-                @foreach ($assignments as $assignment)
-                    @php
-                        $now = now();
-                        $deadline = \Carbon\Carbon::parse($assignment->deadline);
-                        $remainingDays = $now->diffInDays($deadline, false);
+                @if (count($assignments) > 0)
+                    @foreach ($assignments as $assignment)
+                        @php
+                            $now = now();
+                            $deadline = \Carbon\Carbon::parse($assignment->deadline);
+                            $remainingDays = $now->diffInDays($deadline, false);
 
-                        if ($remainingDays < 0) {
-                            $cardClass = ' bg-dark';
-                            $remainingText = 'Time is up';
-                        } elseif ($remainingDays === 0) {
-                            $cardClass = ' bg-dark';
-                            $remainingText = 'Time is up';
-                        } elseif ($remainingDays <= 3) {
-                            $cardClass = 'bg-warning';
-                            $remainingText = $remainingDays . ' Days';
-                        } elseif ($remainingDays <= 7) {
-                            $cardClass = 'bg-info';
-                            $remainingText = $remainingDays . ' Days';
-                        } else {
-                            $cardClass = 'bg-primary';
-                            $remainingText = $remainingDays . ' Days';
-                        }
-                    @endphp
-                    <div class="col-md-3 mb-4">
-                        <div class="card">
-                            <div class="card-header bg-danger pb-0 {{ $cardClass }} ">
-                                <h5 class="card-title mb-0 pb-0 text-white pb-3">{{ $assignment->ass_title }}</h5>
-                            </div>
-                            <div class="card-body text-primary">
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <strong>Deadline</strong>
-                                    </div>
-                                    <div class="col-md-6">{{ $assignment->deadline }}</div>
+                            if ($remainingDays < 0) {
+                                $cardClass = ' bg-dark';
+                                $remainingText = 'Time is up';
+                            } elseif ($remainingDays === 0) {
+                                $cardClass = ' bg-dark';
+                                $remainingText = 'Time is up';
+                            } elseif ($remainingDays <= 3) {
+                                $cardClass = 'bg-warning';
+                                $remainingText = $remainingDays . ' Days';
+                            } elseif ($remainingDays <= 7) {
+                                $cardClass = 'bg-info';
+                                $remainingText = $remainingDays . ' Days';
+                            } else {
+                                $cardClass = 'bg-primary';
+                                $remainingText = $remainingDays . ' Days';
+                            }
+                        @endphp
+                        <div class="col-md-3 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-danger pb-0 {{ $cardClass }} ">
+                                    <h5 class="card-title mb-0 pb-0 text-white pb-3">{{ $assignment->ass_title }}</h5>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <strong>Remaining</strong>
+                                <div class="card-body text-primary">
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <strong>Deadline</strong>
+                                        </div>
+                                        <div class="col-md-6">{{ $assignment->deadline }}</div>
                                     </div>
-                                    <div class="col-md-6">{{ $remainingText }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <strong>Degree</strong>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <strong>Remaining</strong>
+                                        </div>
+                                        <div class="col-md-6">{{ $remainingText }}</div>
                                     </div>
-                                    <div class="col-md-6">{{ $assignment->degree }}</div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <strong>Degree</strong>
+                                        </div>
+                                        <div class="col-md-6">{{ $assignment->degree }}</div>
+                                    </div>
+
+
                                 </div>
 
+                                <div class="card-footer d-flex m-auto">
+                                    <a href="#" class="btn btn-outline-primary" data-toggle="modal"
+                                        data-target="#showAssignment{{ $assignment->id }}">
+                                        <i class="fas fa-eye"></i></a>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-info mx-3" data-toggle="modal"
+                                        data-target="#editAssignment{{ $assignment->id }}">
+                                        <i class="fas fa-pen-to-square"></i></a>
+                                    </a>
 
-                            </div>
-
-                            <div class="card-footer d-flex m-auto">
-                                <a href="#" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#showAssignment{{ $assignment->id }}">
-                                    <i class="fas fa-eye"></i></a>
-                                </a>
-                                <a href="#" class="btn btn-outline-info mx-3" data-toggle="modal"
-                                    data-target="#editAssignment{{ $assignment->id }}">
-                                    <i class="fas fa-pen-to-square"></i></a>
-                                </a>
-
-                                <button type="button" class="btn btn-outline-danger delete-assignment-btn"
-                                    data-assignment-id="{{ $assignment->id }}" data-toggle="modal"
-                                    data-target="#deleteModal">
-                                    <i class="fas fa-trash-can"></i></a>
-                                </button>
+                                    <button type="button" class="btn btn-outline-danger delete-assignment-btn"
+                                        data-assignment-id="{{ $assignment->id }}" data-toggle="modal"
+                                        data-target="#deleteModal">
+                                        <i class="fas fa-trash-can"></i></a>
+                                    </button>
 
 
-                            </div>
-                            <div class="card-footer d-flex flex-column align-items-center">
+                                </div>
+                                <div class="card-footer d-flex flex-column align-items-center">
 
-                                <a href="{{ route('assignments.students', ['assignment' => $assignment->id]) }}"
-                                    class="btn btn-outline-info tx-12 mb-2">
-                                    add Students Degree
-                                </a>
-                                <a href="{{ route('assignments.all_students', ['assignment' => $assignment->id]) }}"
-                                    class="btn btn-outline-info tx-12">
-                                    Show All Students Grades
-                                </a>
+                                    <a href="{{ route('assignments.students', ['assignment' => $assignment->id]) }}"
+                                        class="btn btn-outline-info tx-12 mb-2">
+                                        add Students Degree
+                                    </a>
+                                    <a href="{{ route('assignments.all_students', ['assignment' => $assignment->id]) }}"
+                                        class="btn btn-outline-info tx-12">
+                                        Show All Students Grades
+                                    </a>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    @include('assignments.modals.edit_ass_modal')
-                    @include('assignments.modals.view_ass_modal')
-                    @include('assignments.modals.delete_ass_modal')
-                @endforeach
+                        @include('assignments.modals.edit_ass_modal')
+                        @include('assignments.modals.view_ass_modal')
+                        @include('assignments.modals.delete_ass_modal')
+                    @endforeach
+                @else
+                <div class="card-body">
+                    <h5 class="alert alert-warning text-center">
+                        No Assignments Available in this Course.
+                    </h5>
+                    <h5 class="text-center">To add New Assienment to This course click here  <a href="{{ route('assignments.create', ['id' => $course->id]) }}">
+                        <i class="fas fa-notes-medical tx-20 text-info mx-2"></i>
+                    </a></h5>
+                </div>
+                
+                
             </div>
-            <!-- row closed -->
-
-            <!-- row closed -->
-
-            <!-- Delete Confirmation Modal -->
         </div>
+        @endif
+    </div>
+    <!-- row closed -->
+
+    <!-- row closed -->
+
+    <!-- Delete Confirmation Modal -->
     </div>
     </div>
+
 @endsection
 
 @section('js')

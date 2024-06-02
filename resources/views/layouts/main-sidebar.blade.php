@@ -54,15 +54,27 @@
                     class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href="{{ route('courses') }}">all courses</a></li>
-                <li><a class="slide-item" href="{{ route('courses.create') }}">create new course</a>
-                <li><a class="slide-item" href="{{ route('enroll.index') }}">Enroll Course</a>
-                </li>
+                <li><a class="slide-item" href="{{ route('courses.create') }}">create new course</a></li>
+
 
             </ul>
+        </li>
 
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
-                    class="side-menu__icon fas fa-chalkboard-teacher"></i>
+                    class="side-menu__icon fa-solid fa-chalkboard-user fa-solid fa-chalkboard-user"></i></fa-solid><span class="side-menu__label">Enroll Course</span><i
+                    class="angle fe fe-chevron-down"></i></a>
+            <ul class="slide-menu">
+
+                <li><a class="slide-item" href="{{ route('enroll.index') }}">Enroll Course</a></li>
+
+            </ul>
+        </li>
+
+
+        <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><i
+                    class="side-menu__icon fas fa-user-tie"></i>
                 <span class="side-menu__label">instructors</span><i class="angle fe fe-chevron-down"></i></a>
             <ul class="slide-menu">
                 <li><a class="slide-item" href={{ route('instructors') }}>all instructors</a></li>

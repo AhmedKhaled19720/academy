@@ -41,28 +41,35 @@ class GradeController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'user_id.required' => 'You should select a student from the list.', 
+            'user_id.unique' => 'Student is already exist in this course.', 
+            'grade.required' => 'Please enter the grade.',
+            'grade.numeric' => 'Grade must be a number.',
+            'grade.min' => 'Grade must be at least 0.',
+        ];
+    
         $assignmentId = $request->input('assignment_id');
         $courseId = $request->input('course_id');
         $studentId = $request->input('user_id');
         $gradeValue = $request->input('grade');
-
-        $assignment = Assignment::findOrFail($assignmentId);
-        $course = Course::findOrFail($courseId);
-        $student = UserLogin::findOrFail($studentId);
-
-        $maxGrade = $assignment->degree;
-
+    
+        $maxGrade = Assignment::findOrFail($assignmentId)->degree;
+    
         $request->validate([
-            'grade' => "numeric|min:0|max:$maxGrade"
-        ]);
-
+            'user_id' => 'required|unique:grades,user_id,NULL,id,assignment_id,' . $assignmentId . ',course_id,' . $courseId,
+            'grade' => "required|numeric|min:0|max:$maxGrade"
+        ],$messages);
+    
         Grade::updateOrCreate(
             ['user_id' => $studentId, 'assignment_id' => $assignmentId, 'course_id' => $courseId],
             ['grade' => $gradeValue]
         );
+    
         session()->flash('create');
         return redirect()->route('assignments.students', ['assignment' => $assignmentId]);
     }
+    
     public function showAllStudentsWithGrades($assignmentId)
     {
         // Find the assignment
