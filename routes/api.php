@@ -3,6 +3,7 @@
 // use App\Http\Controllers\Api\AssignmentController;
 use App\Http\Controllers\API\UserloginController;
 use App\Http\Controllers\API\AssignmentController;
+use App\Http\Controllers\API\GradeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +84,13 @@ Route::post('/delete_assignment', 'Api\AssignmentController@delete_assignment');
 Route::get('/enrollcourses', 'Api\EnrollCourseController@index');
 
 // End Enrollcourses routes
+// start garde routes
+Route::get('showStudents/{assignmentId}', [GradeController::class, 'showStudents']);
+
+Route::post('store_grad', [GradeController::class, 'store_grad']);
+Route::put('update_grad/{grade}', [GradeController::class, 'update_grad']);
+Route::get('showAllStudentsWithGrades/{assignmentId}', [GradeController::class, 'showAllStudentsWithGrades']);
+Route::get('showOneStudentGrades/{userId}', [GradeController::class, 'showOneStudentGrades']);
+
+
+// End garde routes
