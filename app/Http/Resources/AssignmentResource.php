@@ -16,9 +16,9 @@ class AssignmentResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "ass_title" => $this->ass_title,
-            "ass_description" => $this->ass_description,
-            "ass_file" => $this->ass_file,
+            "assignments_title" => $this->ass_title,
+            "assignments_description" => $this->ass_description,
+            "assignments_file" => $this->ass_file,
             "deadline" => $this->deadline,
             "course_id" => $this->course_id,
             "notes" => $this->notes,
