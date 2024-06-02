@@ -76,3 +76,10 @@ Route::post('/create_assignment/{course_id}', [AssignmentController::class, 'cre
 Route::post('/update_assignments/{course_id}', [AssignmentController::class, 'update_assignments']);
 Route::post('/delete_assignment', 'Api\AssignmentController@delete_assignment');
 // End assignments routes
+
+
+
+// start Enrollcourses routes
+Route::get('/enrollcourses', 'Api\EnrollCourseController@index');
+
+// End Enrollcourses routes

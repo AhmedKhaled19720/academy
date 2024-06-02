@@ -13,6 +13,7 @@ class InstructorRequest extends Model
         "cv",
         'email',
         'phone',
+        'role',
     ];
     
 }
