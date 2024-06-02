@@ -33,10 +33,15 @@ class EnrollcourseController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'user_id.required' => 'You Should Select a Student From List',
+            'user_id.unique' => 'Student is already Exsist in this course',
+            'course_id.required' => 'You Should Select a Course From List'
+        ];
         $request->validate([
             'user_id' => 'required|unique:enrollcourses,user_id,NULL,id,course_id,' . $request->course_id,
             'course_id' => 'required'
-        ]);
+        ], $messages);
 
         EnrollCourse::create([
             'user_id' => $request->user_id,

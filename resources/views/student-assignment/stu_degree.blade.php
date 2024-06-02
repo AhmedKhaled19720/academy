@@ -132,24 +132,27 @@
                             </button>
                         </div>
                     @endif
-                    <p>Task Degree: {{ $taskDegree }}</p>
+                    <h5 class="text text-center">Task Degree: {{ $taskDegree }}</h5>
                     <form method="POST" action="{{ route('grades.store', ['assignment' => $assignmentId]) }}">
                         @csrf
-                        <!-- Select for users -->
-                        <div class="form-group">
-                            <label for="user_id">Select User</label>
-                            <select name="user_id" id="user_id" class="form-control">
-                                <option value="">Select User</option>
-                                @foreach ($students as $student)
-                                    @php
-                                        $studentHasGrade = $student->grades()->where('assignment_id', $assignmentId)->exists();
-                                    @endphp
-                                    @if (!$studentHasGrade)
-                                        <option value="{{ $student->id }}">{{ $student->username }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
+                      <!-- Select for users -->
+<div class="form-group">
+    <label for="user_id">Select User</label>
+    <select name="user_id" id="user_id" class="form-control">
+        <option value="">Select User</option>
+        @foreach ($students as $student)
+            @php
+                $studentHasGrade = $student->grades()->where('assignment_id', $assignmentId)->exists();
+            @endphp
+            @if (!$studentHasGrade)
+                <option value="{{ $student->id }}" {{ old('user_id') == $student->id ? 'selected' : '' }}>
+                    {{ $student->username }}
+                </option>
+            @endif
+        @endforeach
+    </select>
+</div>
+
 
                         <!-- Input for grade -->
                         <div class="form-group">
