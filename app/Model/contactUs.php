@@ -11,6 +11,7 @@ class contactUs extends Model
         'email',
         'phone',
         'message',
-       
+        'role',
+
     ];
 }

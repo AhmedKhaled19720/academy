@@ -34,6 +34,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">UnReaded Requested</h5>
+                </div>
                 <div class="card-body">
 
                     @if (@session('message'))
@@ -81,37 +84,39 @@
                                     <th class="text-primary">cv</th>
                                     <th class="text-primary">job title</th>
                                     <th class="text-primary">created at</th>
-                                    <th class="text-primary">Operation</th>
                                     <th class="text-primary">Status</th>
-                                    
+
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach ($instructor as $item)
-                                    <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->phone }}</td>
-                                        <td>
-                                            <a href="{{ asset('instructorsRequests/cv/' . $item->cv) }}" target="_blank">View PDF</a>
-                                        </td>
+                                    @if ($item->role == 0)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->phone }}</td>
+                                            <td>
+                                                <a href="{{ asset('instructorsRequests/cv/' . $item->cv) }}"
+                                                    target="_blank">View PDF</a>
+                                            </td>
 
-                                        <td>{{ $item->job }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>
-                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
-                                                data-request-id="{{ $item->id }}" href="#"><i
-                                                    class="fas fa-trash-can"></i></a>
-                                        </td>
-                                        <td>
-                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
-                                                data-request-id="{{ $item->id }}" href="#"><i
-                                                    class="fas fa-trash-can"></i></a>
-                                        </td>
-                                        
-                                    </tr>
+                                            <td>{{ $item->job }}</td>
+                                            <td>{{ $item->created_at }}</td>
+
+                                            <td>
+                                                <form id="form{{$item->id}}" action="{{ route('change.role.to1') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="userId" value="{{ $item->id }}">
+                                                </form>
+                                                <a href="#" onclick="event.preventDefault(); document.getElementById('form{{$item->id}}').submit();">
+                                                    <i class="fa-regular fa-envelope fa-shake tx-lg-26" style="color: #74C0FC;"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
 
@@ -123,6 +128,133 @@
                                     <div class="modal-header">
                                         <h6 class="modal-title">delete request</h6><button aria-label="Close" class="close"
                                             data-dismiss="modal" type="button"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Are you sure to delete?</h6>
+                                    </div>
+                                    <form id="deleteRequestForm" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        @method('DELETE')
+                                        <input type="hidden" name="request_id" id="request_id">
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-danger tx-18" type="submit">Delete</button>
+                                            <button class="btn btn-primary" data-dismiss="modal"
+                                                type="button">Close</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!-- End delete modal -->
+                        </div>
+                    </div>
+                </div><!-- bd -->
+            </div><!-- bd -->
+            <div class="card">
+                <div class="card-header bg-gray-400 text-white">
+                    <h5 class="mb-0">Readed Requested</h5>
+                </div>
+                <div class="card-body">
+
+                    @if (@session('message'))
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('delete_request'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "deleted successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                        <!-- div -->
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+                    <div class="table-responsive table-center">
+                        <table class="table text-md-nowrap" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="text-primary">Id</th>
+                                    <th class="text-primary">name</th>
+                                    <th class="text-primary">email</th>
+                                    <th class="text-primary">phone</th>
+                                    <th class="text-primary">cv</th>
+                                    <th class="text-primary">job title</th>
+                                    <th class="text-primary">Operation</th>
+                                    <th class="text-primary">Status</th>
+                                    <th class="text-primary">created at</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($instructor as $item)
+                                    @if ($item->role == 1)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->phone }}</td>
+                                            <td>
+                                                <a href="{{ asset('instructorsRequests/cv/' . $item->cv) }}"
+                                                    target="_blank">View PDF</a>
+                                            </td>
+
+                                            <td>{{ $item->job }}</td>
+                                            <td>
+                                                <a class="text-danger tx-16" data-target="#modaldemo1"
+                                                    data-toggle="modal" data-request-id="{{ $item->id }}"
+                                                    href="#"><i class="fas fa-trash-can"></i></a>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('change.role.to0') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="userId" value="{{ $item->id }}">
+                                                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        <i class="fa-regular fa-envelope-open tx-lg-26" style="color: #a0a3ab;"></i>
+                                                    </a>
+                                                </form>
+                                            </td>
+                                            
+                                            
+                                            
+                                            
+                                            <td>{{ $item->created_at }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+
+                        </table>
+                        <!-- delete modal -->
+                        <div class="modal" id="modaldemo1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content modal-content-demo">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">delete request</h6><button aria-label="Close"
+                                            class="close" data-dismiss="modal" type="button"><span
                                                 aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
@@ -185,4 +317,33 @@
             <!--Internal  Notify js -->
             <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
             <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+            {{-- change role  --}}
+
+            <script>
+                function changeRole(userId) {
+                    // الحصول على قيمة معرف الجلسة من الحقل المخفي في الصفحة
+                    var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    // إضافة معرف الجلسة إلى بيانات الطلب
+                    var data = {
+                        userId: userId,
+                        _token: token // إضافة معرف الجلسة هنا
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/change-role",
+                        data: data,
+                        success: function(response) {
+                            // تحديث الصفحة أو أي عملية أخرى بعد النجاح
+                            console.log(response);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            </script>
+
+
         @endsection
