@@ -83,6 +83,27 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-control">
+                            <option value="active">Active</option>
+                            <option value="disactive">Disactive</option>
+                        </select>
+                        @error('role')
+                            <div class="alert alert-primary mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscription_status">subscription status</label>
+                        <select name="subscription_status" id="subscription_status" class="form-control">
+                            <option value="active">Active</option>
+                            <option value="disactive">Disactive</option>
+                        </select>
+                        @error('subscription_status')
+                            <div class="alert alert-primary mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <input class="btn btn-primary btn-block" type="submit" value="Create New user">
                 </form>

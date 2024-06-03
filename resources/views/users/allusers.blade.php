@@ -151,6 +151,7 @@
                                     <th class="text-primary">phone</th>
                                     <th class="text-primary">city</th>
                                     <th class="text-primary">role</th>
+                                    <th class="text-primary">subscripion status</th>
                                     <th class="text-primary">Created_at</th>
                                     <th class="text-primary">Updated_at</th>
                                     <th class="text-primary">Operation</th>
@@ -167,8 +168,18 @@
                                         <td>{{ $item->city }}</td>
                                         <td>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input toggleStatusSwitch" type="checkbox" id="toggleStatusSwitch_{{ $item->id }}" {{ $item->role == 'active' ? 'checked' : '' }}>
-                                                
+                                                <input class="form-check-input toggleStatusSwitch" type="checkbox"
+                                                    id="toggleStatusSwitch_{{ $item->id }}"
+                                                    {{ $item->role == 'active' ? 'checked' : '' }}>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input toggleStatusSwitch" type="checkbox"
+                                                    id="toggleStatusSwitch_{{ $item->id }}"
+                                                    {{ $item->subscription_status == 'active' ? 'checked' : '' }}>
+
                                             </div>
                                         </td>
                                         <td>{{ $item->created_at }}</td>
@@ -183,8 +194,6 @@
                                             <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
                                                 data-user-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
-
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -270,7 +279,7 @@
                 var isChecked = $(this).prop('checked');
                 var userId = $(this).attr('id').split('_')[1];
                 var newRole = isChecked ? 'active' : 'disactive';
-                
+
                 $.ajax({
                     url: '/toggle-status/' + userId,
                     method: 'POST',
@@ -281,7 +290,8 @@
                     success: function(response) {
                         if (response.status == 'success') {
                             var switchLabel = isChecked ? 'On' : 'Off';
-                            $('#toggleStatusSwitch_' + userId).siblings('.form-check-label').text(switchLabel);
+                            $('#toggleStatusSwitch_' + userId).siblings('.form-check-label')
+                                .text(switchLabel);
                         }
                     },
                     error: function(xhr) {

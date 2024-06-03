@@ -74,6 +74,7 @@
                         <div class="alert alert-primary mt-2">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="role">Role</label>
                     <select name="role" id="role" class="form-control">
@@ -81,6 +82,17 @@
                         <option value="disactive" {{ old('role', $user->role) == 'disactive' ? 'selected' : '' }}>Disactive</option>
                     </select>
                     @error('role')
+                        <div class="alert alert-primary mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="subscription_status">subscription status</label>
+                    <select name="subscription_status" id="subscription_status" class="form-control">
+                        <option value="active" {{ old('subscription_status', $user->subscription_status) == 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="disactive" {{ old('subscription_status', $user->subscription_status) == 'disactive' ? 'selected' : '' }}>Disactive</option>
+                    </select>
+                    @error('subscription_status')
                         <div class="alert alert-primary mt-2">{{ $message }}</div>
                     @enderror
                 </div>

@@ -88,3 +88,5 @@ Route::get('showOneStudentGrades/{userId}', [GradeController::class, 'showOneStu
 //show full course users grades
 Route::get('courses/{courseId}/students/grades', [GradeController::class, 'showAllStudentsWithGrades']);
 // End garde routes
+
+

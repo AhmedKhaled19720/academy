@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EnrollCourseController extends Controller
 {
-  
+
     public function index()
     {
         $enrollments = EnrollCourse::with(['user:id,username,email', 'course:id,course_title'])->get();
@@ -27,36 +27,14 @@ class EnrollCourseController extends Controller
                 'subscription_status' => $enrollment->subscription_status,
             ];
         });
-    
+
         $response = [
             "msg" => "Return All Data",
             "status" => 200,
             "data" => $data,
         ];
-    
+
         return response()->json($response);
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }

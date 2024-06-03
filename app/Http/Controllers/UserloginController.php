@@ -38,6 +38,7 @@ class UserloginController extends Controller
             'phone' => $user->phone,
             'city' => $user->city,
             'role' => 'disactive',
+            'subscription_status' => 'disactive',
             'password' => Hash::make($user['password']),
             'created_by' => (Auth::user()->name),
         ]);
@@ -73,6 +74,7 @@ class UserloginController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'role' => $request->role,
+            'subscription_status' => $request->subscription_status,
             'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
         ]);
 
@@ -92,16 +94,17 @@ class UserloginController extends Controller
     {
         $user = userlogin::findOrFail($id);
         $user->role = $request->input('role');
+        $user->subscription_status = $request->input('subscription_status');
         $user->save();
-        return response()->json(['status' => 'success', 'newRole' => $user->role]);
+        return response()->json(['status' => 'success', 'newRole' => $user->role , 'newSubscription_status' => $user->subscription_status]);
     }
-  
+
 
     public function showStudentAssignments($courseId, $studentId)
     {
         $course = Course::find($courseId);
         $student = Userlogin::find($studentId);
-    
+
         $assignments = assignment::where('course_id', $courseId)->get();
         return view('student-assignment.student_assignment', compact('course', 'student', 'assignments'));
     }

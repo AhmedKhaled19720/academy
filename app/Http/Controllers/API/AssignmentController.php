@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssignmentResource;
 use App\Model\assignment;
+use App\Model\Userlogin;
 use Illuminate\Http\Request;
-use App\Model\Course;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -15,7 +15,7 @@ class AssignmentController extends Controller
 {
     public function index()
     {
-        $assignments = Assignment::with(['course.enrollcourse.user'])->get(); // تصحيح الفاصلة
+        $assignments = Assignment::with(['course.enrollments.user'])->get();
         $customData = $assignments->map(function ($assignment) {
             return [
                 'assignment_id' => $assignment->id,
@@ -26,7 +26,6 @@ class AssignmentController extends Controller
                 'assignment_file' => $assignment->ass_file,
                 'notes' => $assignment->notes,
                 'degree' => $assignment->degree,
-                'user_name' => $assignment->course->enrollcourse->first()->user->username ?? 'N/A', // التأكد من التعامل مع null
             ];
         });
 
@@ -38,7 +37,6 @@ class AssignmentController extends Controller
 
         return response()->json($data);
     }
-
 
     public function show_assignment($id)
     {
@@ -59,4 +57,7 @@ class AssignmentController extends Controller
             return response()->json($data);
         }
     }
+
 }
+
+

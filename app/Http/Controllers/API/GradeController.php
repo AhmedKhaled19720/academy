@@ -32,13 +32,13 @@ class GradeController extends Controller
         $customData = $students->map(function ($student) use ($assignment, $course) {
             $grade = $student->grades()->where('assignment_id', $assignment->id)->first();
             return [
-                
+
                 'user_name' => $student->username,
                 'email' => $student->email,
                 'user_grade' => $grade ? $grade->grade : 'N/A',
-                
+
             ];
-            
+
         });
 
         return response()->json([
@@ -84,9 +84,34 @@ class GradeController extends Controller
             'course' => $course->course_title,
             'course_instructor' => $course->instructor->name,
             'students_with_grades' => $studentsWithGrades,
-            
+
         ], 200);
     }
-}
 
-  
+    public function showOneStudentGrades($userId)
+    {
+        try {
+            // Fetch user with assignments
+            $user = Userlogin::with('assignments')->findOrFail($userId);
+
+            // Calculate total grade
+            $totalGrade = $user->assignments->sum(function ($assignment) {
+                return $assignment->pivot->grade;
+            });
+
+            // Prepare response data
+            $data = [
+                'totalGrade' => $totalGrade
+            ];
+
+            // Return as JSON response
+            return response()->json($data, 200);
+
+        } catch (\Exception $e) {
+            // Return error response if something goes wrong
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+}
