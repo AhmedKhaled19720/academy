@@ -52,7 +52,7 @@ class AssignmentController extends Controller
             'id' => 'unique:assignments|max:255',
             'ass_title' => 'required|string|max:255',
             'ass_description' => 'required|string',
-            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,image',
+            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,jpg,jpeg,png,gif',
             'deadline' => 'required|date',
             'notes' => 'nullable|string',
             'degree' => 'required|numeric|min:0',
@@ -143,7 +143,7 @@ class AssignmentController extends Controller
         $validateData = Validator::make($request->all(), [
             'ass_title' => 'required|string|max:255',
             'ass_description' => 'required|string',
-            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,image|max:2048',
+            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,image',
             'deadline' => 'required|date',
             'notes' => 'nullable|string',
             'degree' => 'required|numeric|min:0',

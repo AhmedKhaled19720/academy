@@ -14,7 +14,9 @@ class CreateInstructorRequestsTable extends Migration
             $table->string('job');
             $table->string('cv');
             $table->string('email');
+            $table->boolean('role')->default(0);
             $table->string('phone');
+            
             $table->timestamps();
         });
     }

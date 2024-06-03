@@ -82,6 +82,8 @@
                                     <th class="text-primary">job title</th>
                                     <th class="text-primary">created at</th>
                                     <th class="text-primary">Operation</th>
+                                    <th class="text-primary">Status</th>
+                                    
                                 </tr>
                             </thead>
 
@@ -103,6 +105,12 @@
                                                 data-request-id="{{ $item->id }}" href="#"><i
                                                     class="fas fa-trash-can"></i></a>
                                         </td>
+                                        <td>
+                                            <a class="text-danger tx-16" data-target="#modaldemo1" data-toggle="modal"
+                                                data-request-id="{{ $item->id }}" href="#"><i
+                                                    class="fas fa-trash-can"></i></a>
+                                        </td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
