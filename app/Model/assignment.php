@@ -24,10 +24,8 @@ class assignment extends Model
     {
         return $this->hasMany(Grade::class, 'assignment_id');
     }
-    public function users()
+    public function enrollcourse()
     {
-        return $this->belongsToMany(Userlogin::class, 'grades')
-                    ->withPivot('grade')
-                    ->withTimestamps();
+        return $this->belongsTo(EnrollCourse::class);
     }
 }

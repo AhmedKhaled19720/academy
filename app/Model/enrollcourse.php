@@ -19,4 +19,10 @@ class enrollcourse extends Model
     {
         return $this->belongsTo(course::class, 'course_id');
     }
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'course_id', 'course_id')
+                    ->where('assignment_id', '=', $this->assignment_id);
+    }
+    
 }

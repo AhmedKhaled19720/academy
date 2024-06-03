@@ -73,24 +73,34 @@ Route::post('/update_setting', 'API\SettingController@update_setting');
 // start assignments routes
 Route::get('/assignments', 'API\AssignmentController@index');
 Route::get('/show_assignment/{id}', 'Api\AssignmentController@show_assignment');
-Route::post('/create_assignment/{course_id}', [AssignmentController::class, 'create_assignment']);
-Route::post('/update_assignments/{course_id}', [AssignmentController::class, 'update_assignments']);
-Route::post('/delete_assignment', 'Api\AssignmentController@delete_assignment');
+
 // End assignments routes
 
 
 
-// start Enrollcourses routes
+// start Enrollcourse routes
 Route::get('/enrollcourses', 'Api\EnrollCourseController@index');
 
-// End Enrollcourses routes
+// End Enrollcourse routes
+
+
+
+
+
+
 // start garde routes
+
+
+
+//show all assignment grades for all students
 Route::get('showStudents/{assignmentId}', [GradeController::class, 'showStudents']);
 
-Route::post('store_grad', [GradeController::class, 'store_grad']);
-Route::put('update_grad/{grade}', [GradeController::class, 'update_grad']);
-Route::get('showAllStudentsWithGrades/{assignmentId}', [GradeController::class, 'showAllStudentsWithGrades']);
+// show specific grades of all assignments 
 Route::get('showOneStudentGrades/{userId}', [GradeController::class, 'showOneStudentGrades']);
+
+//show full course users grades
+Route::get('courses/{courseId}/students/grades', [GradeController::class, 'showAllStudentsWithGrades']);
+
 
 
 // End garde routes
