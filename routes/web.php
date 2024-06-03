@@ -48,6 +48,12 @@ Route::resource('categories', 'CategoryController');
 // start instructors requests
 Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
 Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
+
+Route::post('/change-role-to-0', 'InstructorRequestController@changeRoleTo0')->name('change.role.to0');
+Route::post('/change-role-to-1', 'InstructorRequestController@changeRoleTo1')->name('change.role.to1');
+
+
+
 // End instructors requests
 
 
@@ -151,6 +157,8 @@ Route::post('/toggle-subscription/{id}', 'EnrollcourseController@toggleSubscript
 // start contact us
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');
 Route::delete('/contactUs/delete/{id}', 'ContactUsController@delete')->name('contactUs.delete');
+Route::post('/change-role-to-0', 'ContactUsController@changeRoleTo0')->name('contactUs.change.role.to0');
+Route::post('/change-role-to-1', 'ContactUsController@changeRoleTo1')->name('contactUs.change.role.to1');
 // end contact us
 
 

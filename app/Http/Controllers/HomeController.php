@@ -33,8 +33,8 @@ class HomeController extends Controller
         $users = UserLogin::all();
         $instructors = instructor::all();
         $courses=course::all();
-        $contactUs=contactUs::all();
-     $instructorRequests=InstructorRequest::all();    
+        $contactUs=contactUs::where('role', 0)->get();
+     $instructorRequests=InstructorRequest::where('role', 0)->get();   
 
         return view('home', [
             'category' => $categories,

@@ -34,7 +34,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">UnReaded Requested</h5>
+                </div>
                 <div class="card-body">
+
 
                     @if (@session('message'))
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -58,7 +62,7 @@
                     @endif
 
                     <div class="table-responsive table-center">
-                        <table class="table text-md-nowrap" id="example">
+                        <table class="table text-md-nowrap" id="example1">
                             <thead>
                                 <tr>
                                     <th class="text-primary">id</th>
@@ -67,12 +71,13 @@
                                     <th class="text-primary">phone</th>
                                     <th class="text-primary">massage</th>
                                     <th class="text-primary">Created_at</th>
-                                    <th class="text-primary">Operation</th>
+                                    <th class="text-primary">Status</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach ($alldata as $item)
+                                @if ($item->role == 0)
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->full_name }}</td>
@@ -80,12 +85,18 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->message }}</td>
                                         <td>{{ $item->created_at }}</td>
+                                       
                                         <td>
-                                            <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
-                                                data-contact-id="{{ $item->id }}" href="#"><i
-                                                    class="fas fa-trash-can"></i></a>
+                                            <form id="form{{$item->id}}" action="{{ route('contactUs.change.role.to1') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="userId" value="{{ $item->id }}">
+                                            </form>
+                                            <a href="#" onclick="event.preventDefault(); document.getElementById('form{{$item->id}}').submit();">
+                                                <i class="fa-regular fa-envelope fa-shake tx-lg-26" style="color: #74C0FC;"></i>
+                                            </a>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -121,6 +132,111 @@
                     </div>
                 </div><!-- bd -->
             </div><!-- bd -->
+            <div class="card">
+                <div class="card-header bg-gray-400 text-white">
+                    <h5 class="mb-0">Readed Requested</h5>
+                </div>
+                <div class="card-body">
+
+
+                    @if (@session('message'))
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('delete_contact'))
+                        <script>
+                            window.onload = function() {
+                                notif({
+                                    msg: "deleted successfully",
+                                    type: "success"
+                                })
+                            }
+                        </script>
+                        <!-- div -->
+                    @endif
+
+                    <div class="table-responsive table-center">
+                        <table class="table text-md-nowrap" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="text-primary">id</th>
+                                    <th class="text-primary">name</th>
+                                    <th class="text-primary">E-mail</th>
+                                    <th class="text-primary">phone</th>
+                                    <th class="text-primary">massage</th>
+                                    <th class="text-primary">Operation</th>
+                                    <th class="text-primary">Status</th>
+                                    <th class="text-primary">Created_at</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($alldata as $item)
+                                @if ($item->role == 1)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->full_name }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->message }}</td>
+                                        <td>
+                                            <a class="text-danger tx-20" data-target="#modaldemo1" data-toggle="modal"
+                                            data-contact-id="{{ $item->id }}" href="#"><i
+                                            class="fas fa-trash-can"></i></a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('contactUs.change.role.to0') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="userId" value="{{ $item->id }}">
+                                                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    <i class="fa-regular fa-envelope-open tx-lg-26" style="color: #a0a3ab;"></i>
+                                                </a>
+                                            </form>
+                                        </td>
+                                        <td>{{ $item->created_at }}</td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <!-- delete modal -->
+                        <div class="modal" id="modaldemo1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content modal-content-demo">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Delete Massage</h6>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Are you sure you want to delete this Massage?</h6>
+                                    </div>
+                                    <form id="deleteContactForm" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        @method('DELETE')
+                                        <input type="hidden" name="contact_id" id="contact_id">
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-danger tx-18" type="submit">Delete</button>
+                                            <button class="btn btn-primary" data-dismiss="modal"
+                                                type="button">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- bd -->
+            </div><!-- bd -->
+           
             <!--/div-->
         @endsection
         @section('js')
