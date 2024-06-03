@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\contactUs;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
             InstructorSeeder::class,
             CourseSeeder::class,
             UserloginSeeder::class,
+            ContactUsSeeder::class,
+            InstructorRequestSeeder::class,
 
-        ]);    }
+        ]);
+    }
 }
