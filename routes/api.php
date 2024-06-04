@@ -77,6 +77,11 @@ Route::get('/show_assignment/{id}', 'Api\AssignmentController@show_assignment');
 
 // start Enrollcourse routes
 Route::get('/enrollcourses', 'Api\EnrollCourseController@index');
+Route::get('/enrollments/{userId}', 'Api\EnrollCourseController@getUserEnrollments');
+
+Route::get('/enrollments/{courseTitle}/assignments', 'Api\EnrollCourseController@getCourseAssignments');
+
+
 // End Enrollcourse routes
 
 
