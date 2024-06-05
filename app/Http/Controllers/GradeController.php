@@ -10,6 +10,32 @@ use Illuminate\Http\Request;
 
 class GradeController extends Controller
 {
+    // public function showStudents($assignmentId)
+    // {
+    //     // Find the assignment
+    //     $assignment = Assignment::findOrFail($assignmentId);
+    //     $courseId = $assignment->course_id;
+
+    //     // Fetch students enrolled in the course
+    //     $students = UserLogin::whereHas('courses', function ($query) use ($courseId) {
+    //         $query->where('course_id', $courseId);
+    //     })->get();
+
+    //     // Find the course
+    //     $course = Course::findOrFail($courseId);
+
+    //     // Get task degree from assignment table
+    //     $taskDegree = $assignment->degree;
+
+    //     // Get course name
+    //     $courseName = $course->course_title;
+
+    //     // Get assignment name
+    //     $assignmentName = $assignment->ass_title;
+
+    //     // Pass all variables to the view
+    //     return view('student-assignment.stu_degree', compact('students', 'assignmentId', 'courseId', 'course', 'assignment', 'taskDegree', 'courseName', 'assignmentName'));
+    // }
     public function showStudents($assignmentId)
     {
         // Find the assignment
@@ -19,7 +45,9 @@ class GradeController extends Controller
         // Fetch students enrolled in the course
         $students = UserLogin::whereHas('courses', function ($query) use ($courseId) {
             $query->where('course_id', $courseId);
-        })->get();
+        })->with(['grades' => function ($query) use ($assignmentId) {
+            $query->where('assignment_id', $assignmentId);
+        }])->get();
 
         // Find the course
         $course = Course::findOrFail($courseId);
@@ -33,7 +61,6 @@ class GradeController extends Controller
         // Get assignment name
         $assignmentName = $assignment->ass_title;
 
-        // Pass all variables to the view
         return view('student-assignment.stu_degree', compact('students', 'assignmentId', 'courseId', 'course', 'assignment', 'taskDegree', 'courseName', 'assignmentName'));
     }
 
@@ -57,7 +84,7 @@ class GradeController extends Controller
         $request->validate([
             'user_id' => 'required|unique:grades,user_id,NULL,id,assignment_id,' . $assignmentId . ',course_id,' . $courseId,
             'grade' => "required|numeric|min:0|max:$maxGrade"
-        ],$messages);
+        ], $messages);
 
         Grade::updateOrCreate(
             ['user_id' => $studentId, 'assignment_id' => $assignmentId, 'course_id' => $courseId],
@@ -86,7 +113,7 @@ class GradeController extends Controller
         // Find the course
         $course = Course::findOrFail($assignment->course_id);
 
-        return view('student-assignment.all_stu_degree', compact('studentsWithGrades', 'assignment', 'course', 'assignmentDegree'));
+        return view('student-assignment.allStudentsDegeeDetails', compact('studentsWithGrades', 'assignment', 'course', 'assignmentDegree'));
     }
 
     public function update(Request $request, Grade $grade)
@@ -123,5 +150,4 @@ class GradeController extends Controller
 
         return view('student-assignment.stu_full_course_degree', ['user' => $user, 'totalGrade' => $totalGrade, 'course_title' => $course_title]);
     }
-
 }

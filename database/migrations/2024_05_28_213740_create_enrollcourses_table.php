@@ -15,8 +15,8 @@ class CreateEnrollcoursesTable extends Migration
     {
         Schema::create('enrollcourses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained('courses', 'id')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('userlogins', 'id')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses', 'id')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('userlogins', 'id')->cascadeOnDelete();
             $table->dateTime('registration_date')->nullable();
             $table->enum('subscription_status', ['active', 'inactive'])->default('active');
             $table->unsignedTinyInteger('rating')->nullable();

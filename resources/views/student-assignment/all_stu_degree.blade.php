@@ -103,62 +103,7 @@
                     </button>
                 </div>
             @endif
-                <div class="table-responsive table-center">
-                    <table class="table text-md-nowrap" id="example1">
-                        <thead>
-                            <tr>
-                                <th>Student Name</th>
-                                <th>Grade</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($studentsWithGrades as $student)
-                                <tr>
-                                    <td>{{ $student->username }}</td>
-                                    <td>{{ $student->grades->first()->grade }}</td> <!-- Assuming one grade per student -->
-                                    <td>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editGradeModal{{ $student->id }}">Edit Grade</button>
-                                    </td>
-                                </tr>
-
-                                <!-- Edit Grade Modal for each student -->
-                                <div class="modal fade" id="editGradeModal{{ $student->id }}" tabindex="-1"
-                                    role="dialog" aria-labelledby="editGradeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editGradeModalLabel">Edit Grade for
-                                                    {{ $student->username }}</h5>
-                                                   
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Edit Grade Form -->
-                                                <form method="POST"
-                                                    action="{{ route('grades.update', ['grade' => $student->grades->first()->id]) }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="form-group">
-                                                        <h5>Assignment Degree: {{ $assignmentDegree }}</h5>
-                                                        <label for="grade">Grade:</label>
-                                                        <input type="number" class="form-control" id="grade"
-                                                            name="grade" value="{{ $student->grades->first()->grade }}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                {{-- @include('student-assignment.allStudentsDegeeDetails') --}}
             </div>
         </div>
     </div>
