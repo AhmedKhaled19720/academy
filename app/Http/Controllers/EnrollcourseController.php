@@ -14,22 +14,14 @@ class EnrollcourseController extends Controller
     {
         $users = Userlogin::where('role', 'active')->get();
         $alldata = enrollcourse::with(['user', 'course'])
-        ->whereHas('user', function ($query) {
-            $query->where('role', 'active');
-        })
-        ->get();
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'active');
+            })
+            ->get();
         $courses = course::all();
-        
+
         return view('enrollCourses.enroll', compact('alldata', 'users', 'courses'));
-        
     }
-
-
-    public function create()
-    {
-        //
-    }
-
 
     public function store(Request $request)
     {
@@ -50,48 +42,29 @@ class EnrollcourseController extends Controller
             'subscription_status' => 'active'
         ]);
 
-        return redirect()->route('enroll.index')
-            ->with('success', 'User enrolled successfully.');
-    }
-
-
-
-    public function show(enrollcourse $enrollcourse)
-    {
-        //
-    }
-
-
-    public function edit(enrollcourse $enrollcourse)
-    {
-        //
-    }
-
-    public function update(Request $request, enrollcourse $enrollcourse)
-    {
-        //
+        session()->flash('enrolled');
+        return redirect()->route('enroll.index');
     }
 
     public function destroy($id)
     {
         $item = enrollcourse::findOrFail($id);
         $item->delete();
-    
-        return redirect()->route('enroll.index')->with('success', 'Item deleted successfully');
+        session()->flash('deleted');
+        return redirect()->route('enroll.index');
     }
-    
-
 
     public function toggleSubscription(Request $request, $id)
     {
-        try {
-            $course = EnrollCourse::findOrFail($id);
-            $course->subscription_status = $request->input('subscription_status');
-            $course->save();
-
-            return response()->json(['status' => 'success', 'message' => 'Subscription status updated successfully!']);
-        } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => 'Failed to update subscription status.'], 500);
+        $enrollment = EnrollCourse::find($id);
+        if (!$enrollment) {
+            return response()->json(['message' => 'Enrollment not found'], 404);
         }
+
+        $newStatus = $request->input('subscription_status');
+        $enrollment->subscription_status = $newStatus;
+        $enrollment->save();
+
+        return response()->json(['message' => 'Subscription status updated successfully']);
     }
 }

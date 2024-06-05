@@ -44,8 +44,6 @@
                                     <th class="text-primary">phone</th>
                                     <th class="text-primary">city</th>
                                     <th class="text-primary">role</th>
-                                    <th class="text-primary">subscription status</th>
-                                    <th class="text-primary">Created by</th>
                                     <th class="text-primary">Created At</th>
                                     <th class="text-primary">Operation</th>
                                 </tr>
@@ -58,8 +56,6 @@
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->city }}</td>
                                     <td>{{ $user->role }}</td>
-                                    <td>{{ $user->subscription_status }}</td>
-                                    <td>{{ $user->created_by }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         <a class="text-primary tx-30" href={{ route('allusers') }}><i

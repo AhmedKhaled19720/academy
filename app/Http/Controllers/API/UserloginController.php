@@ -98,7 +98,6 @@ class UserloginController extends Controller
         'phone' => $request->phone,
         'city' => $request->city,
         'role' => 'disactive', // Set a default value for the role
-        'subscription_status' => 'disactive', // Set a default value for the subscription_status
     ]);
 
     // Generate a token for the newly created user
@@ -129,7 +128,6 @@ class UserloginController extends Controller
         'city' => 'required',
         'password' => 'required',
         'role' => 'required|in:active,disactive', // Ensure the role is either active or disactive
-        'subscription_status' => 'required|in:active,disactive', // Ensure the subscription_status is either active or disactive
     ]);
 
     if ($validateData->fails()) {
@@ -150,7 +148,6 @@ class UserloginController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'role' => $request->role, // Update the role based on request data
-            'subscription_status' => $request->subscription_status, // Update the role based on request data
         ]);
 
         $data = [

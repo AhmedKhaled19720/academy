@@ -67,16 +67,20 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="btn btn-info btn-icon ml-2" href=""><i class="fa-regular fa-pen-to-square fa-lg mx-2"></i></a>
+                <a class="btn btn-info btn-icon ml-2" href=""><i
+                        class="fa-regular fa-pen-to-square fa-lg mx-2"></i></a>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <a type="button" class="btn btn-info btn-icon ml-2" href="{{ route('courses') }}"><i class="mdi mdi-backburger"></i></a>
+                <a type="button" class="btn btn-info btn-icon ml-2" href="{{ route('courses') }}"><i
+                        class="mdi mdi-backburger"></i></a>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" id="refreshPage" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+                <button type="button" id="refreshPage" class="btn btn-danger btn-icon ml-2"><i
+                        class="mdi mdi-refresh"></i></button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <a type="button" class="btn btn-dark btn-icon ml-2" href="{{ route('home') }}"><i class="mdi mdi-home-outline"></i></a>
+                <a type="button" class="btn btn-dark btn-icon ml-2" href="{{ route('home') }}"><i
+                        class="mdi mdi-home-outline"></i></a>
             </div>
         </div>
     </div>
@@ -135,32 +139,37 @@
                     <h5 class="text text-center">Task Degree: {{ $taskDegree }}</h5>
                     <form method="POST" action="{{ route('grades.store', ['assignment' => $assignmentId]) }}">
                         @csrf
-                      <!-- Select for users -->
-<div class="form-group">
-    <label for="user_id">Select User</label>
-    <select name="user_id" id="user_id" class="form-control">
-        <option value="">Select User</option>
-        @foreach ($students as $student)
-            @php
-                $studentHasGrade = $student->grades()->where('assignment_id', $assignmentId)->exists();
-            @endphp
-            @if (!$studentHasGrade)
-                <option value="{{ $student->id }}" {{ old('user_id') == $student->id ? 'selected' : '' }}>
-                    {{ $student->username }}
-                </option>
-            @endif
-        @endforeach
-    </select>
-</div>
+                        <!-- Select for users -->
+                        <div class="form-group">
+                            <label for="user_id">Select User</label>
+                            <select name="user_id" id="user_id" class="form-control">
+                                <option value="">Select User</option>
+                                @foreach ($students as $student)
+                                    @php
+                                        $studentHasGrade = $student
+                                            ->grades()
+                                            ->where('assignment_id', $assignmentId)
+                                            ->exists();
+                                    @endphp
+                                    @if (!$studentHasGrade)
+                                        <option value="{{ $student->id }}"
+                                            {{ old('user_id') == $student->id ? 'selected' : '' }}>
+                                            {{ $student->username }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
 
 
                         <!-- Input for grade -->
                         <div class="form-group">
                             <label for="grade">Grade</label>
-                            <input type="number" class="form-control" name="grade" step="0.1" value="{{ old('grade') }}">
+                            <input type="number" class="form-control" name="grade" step="0.1"
+                                value="{{ old('grade') }}">
                         </div>
 
-                       
+
                         <input type="hidden" name="assignment_id" value="{{ $assignmentId }}">
                         <input type="hidden" name="course_id" value="{{ $courseId }}">
 

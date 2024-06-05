@@ -94,9 +94,8 @@ class UserloginController extends Controller
     {
         $user = userlogin::findOrFail($id);
         $user->role = $request->input('role');
-        $user->subscription_status = $request->input('subscription_status');
         $user->save();
-        return response()->json(['status' => 'success', 'newRole' => $user->role , 'newSubscription_status' => $user->subscription_status]);
+        return response()->json(['status' => 'success', 'newRole' => $user->role ]);
     }
 
 

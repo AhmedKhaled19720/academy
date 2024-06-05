@@ -16,7 +16,6 @@ class UserloginSeeder extends Seeder
                     'phone' => '123456789',
                     'city' => 'City_' . $i,
                     'role' => $i % 2 == 0 ? 'active' : 'disactive',
-                    'created_by' => 1,
                 ]);
             }
         }

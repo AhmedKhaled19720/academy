@@ -19,8 +19,6 @@ class Userlogin extends Model implements Authenticatable, JWTSubject
         'phone',
         'city',
         'role',
-        'subscription_status',
-        'created_by',
     ];
 
     public function getJWTIdentifier()
@@ -53,7 +51,7 @@ class Userlogin extends Model implements Authenticatable, JWTSubject
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'enrollcourses', 'user_id', 'course_id')
-            ->withPivot('registration_date', 'subscription_status', 'rating')
+            ->withPivot('registration_date', 'rating')
             ->withTimestamps();
     }
 }

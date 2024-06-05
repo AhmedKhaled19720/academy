@@ -151,7 +151,6 @@
                                     <th class="text-primary">phone</th>
                                     <th class="text-primary">city</th>
                                     <th class="text-primary">role</th>
-                                    <th class="text-primary">subscripion status</th>
                                     <th class="text-primary">Created_at</th>
                                     <th class="text-primary">Updated_at</th>
                                     <th class="text-primary">Operation</th>
@@ -171,15 +170,6 @@
                                                 <input class="form-check-input toggleStatusSwitch" type="checkbox"
                                                     id="toggleStatusSwitch_{{ $item->id }}"
                                                     {{ $item->role == 'active' ? 'checked' : '' }}>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input toggleStatusSwitch" type="checkbox"
-                                                    id="toggleStatusSwitch_{{ $item->id }}"
-                                                    {{ $item->subscription_status == 'active' ? 'checked' : '' }}>
-
                                             </div>
                                         </td>
                                         <td>{{ $item->created_at }}</td>

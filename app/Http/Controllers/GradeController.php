@@ -37,39 +37,37 @@ class GradeController extends Controller
         return view('student-assignment.stu_degree', compact('students', 'assignmentId', 'courseId', 'course', 'assignment', 'taskDegree', 'courseName', 'assignmentName'));
     }
 
-
-
     public function store(Request $request)
     {
         $messages = [
-            'user_id.required' => 'You should select a student from the list.', 
-            'user_id.unique' => 'Student is already exist in this course.', 
+            'user_id.required' => 'You should select a student from the list.',
+            'user_id.unique' => 'Student is already exist in this course.',
             'grade.required' => 'Please enter the grade.',
             'grade.numeric' => 'Grade must be a number.',
             'grade.min' => 'Grade must be at least 0.',
         ];
-    
+
         $assignmentId = $request->input('assignment_id');
         $courseId = $request->input('course_id');
         $studentId = $request->input('user_id');
         $gradeValue = $request->input('grade');
-    
+
         $maxGrade = Assignment::findOrFail($assignmentId)->degree;
-    
+
         $request->validate([
             'user_id' => 'required|unique:grades,user_id,NULL,id,assignment_id,' . $assignmentId . ',course_id,' . $courseId,
             'grade' => "required|numeric|min:0|max:$maxGrade"
         ],$messages);
-    
+
         Grade::updateOrCreate(
             ['user_id' => $studentId, 'assignment_id' => $assignmentId, 'course_id' => $courseId],
             ['grade' => $gradeValue]
         );
-    
+
         session()->flash('create');
         return redirect()->route('assignments.students', ['assignment' => $assignmentId]);
     }
-    
+
     public function showAllStudentsWithGrades($assignmentId)
     {
         // Find the assignment
@@ -112,18 +110,18 @@ class GradeController extends Controller
         session()->flash('update', 'Degree updated successfully!');
         return redirect()->back();
     }
-    
+
     public function showOneStudentGrades($userId)
     {
         $user = Userlogin::with('enrolledCourses', 'assignments')->findOrFail($userId);
-    
+
         $totalGrade = $user->assignments->sum(function ($assignment) {
             return $assignment->pivot->grade;
         });
-    
+
         $course_title = $user->enrolledCourses->pluck('course_title')->first();
-    
+
         return view('student-assignment.stu_full_course_degree', ['user' => $user, 'totalGrade' => $totalGrade, 'course_title' => $course_title]);
     }
-    
+
 }

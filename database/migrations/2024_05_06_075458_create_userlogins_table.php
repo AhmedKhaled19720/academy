@@ -21,8 +21,6 @@ class CreateUserloginsTable extends Migration
             $table->string('city');
             $table->string('password');
             $table->enum('role', ['active', 'disactive'])->default('disactive');
-            $table->enum('subscription_status', ['active', 'disactive'])->default('disactive');
-            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }

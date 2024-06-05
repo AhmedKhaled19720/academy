@@ -1,15 +1,20 @@
 @extends('layouts.master')
+
+@section('title')
+    kian-Enroll students
+@stop
+
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
- <!-- Internal Data table css -->
- <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
- <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
- <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
- <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
- <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
- <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
- <!--Internal   Notify -->
- <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <!-- Internal Data table css -->
+    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
     <style>
         @media only screen and (max-width: 599px) and (min-width: 0px) {
             .form-check-input[type="checkbox"] {
@@ -59,125 +64,116 @@
         }
     </style>
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
+    <div class="breadcrumb-header mb-5">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Empty</span>
-            </div>
-        </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-            <div class="mb-3 mb-xl-0">
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                        id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
-                        data-x-placement="bottom-end">
-                        <a class="dropdown-item" href="#">2015</a>
-                        <a class="dropdown-item" href="#">2016</a>
-                        <a class="dropdown-item" href="#">2017</a>
-                        <a class="dropdown-item" href="#">2018</a>
-                    </div>
-                </div>
+                <h4 class="content-title tx-16 mb-0 mr-1 my-auto">Enroll students</h4><span
+                    class="text-muted tx-13 mr-2 mt-1">/enroll</span>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
     <!-- row -->
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                
-                <div class="card-header">Enroll User in Course</div>
+
+                <div class="card-header">Enroll student in Course</div>
                 @if (session()->has('create'))
-                <script>
-                    window.onload = function() {
-                        notif({
-                            msg: "created successfully",
-                            type: "success"
-                        })
-                    }
-                </script>
-            @endif
-            @if (session()->has('update'))
-                <script>
-                    window.onload = function() {
-                        notif({
-                            msg: "updated successfully",
-                            type: "success"
-                        })
-                    }
-                </script>
-            @endif
+                    <script>
+                        window.onload = function() {
+                            notif({
+                                msg: "created successfully",
+                                type: "success"
+                            })
+                        }
+                    </script>
+                @endif
 
-            @if (session()->has('delete_courses'))
-                <script>
-                    window.onload = function() {
-                        notif({
-                            msg: "deleted successfully",
-                            type: "success"
-                        })
-                    }
-                </script>
-            @endif
+                @if (session()->has('update'))
+                    <script>
+                        window.onload = function() {
+                            notif({
+                                msg: "updated successfully",
+                                type: "success"
+                            })
+                        }
+                    </script>
+                @endif
 
-            @if ($errors->any())
-                <div class="alert alert-outline-danger alert-dismissible fade show" role="alert">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+                @if (session()->has('enrolled'))
+                    <script>
+                        window.onload = function() {
+                            notif({
+                                msg: "student enrolled successfully",
+                                type: "success"
+                            })
+                        }
+                    </script>
+                @endif
+
+                @if (session()->has('deleted'))
+                    <script>
+                        window.onload = function() {
+                            notif({
+                                msg: "deleted successfully",
+                                type: "success"
+                            })
+                        }
+                    </script>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-outline-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('enrollCourse.store') }}">
                         @csrf
                         <div class="form-group">
                             <label for="course_id">Course:</label>
-                            <select name="course_id" id="course_id" class="form-control" onchange="updateUsersList(this.value)">
+                            <select name="course_id" id="course_id" class="form-control"
+                                onchange="updateUsersList(this.value)">
                                 <option value="">Select Course</option>
                                 @foreach ($courses as $course)
-                                    <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
+                                    <option value="{{ $course->id }}"
+                                        {{ old('course_id') == $course->id ? 'selected' : '' }}>
                                         {{ $course->course_title }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <!-- Select for users -->
                         <div class="form-group">
                             <label for="user_id">Student:</label>
-                            <select name="user_id" id="user_id" class="form-control" onchange="updateUsersList(this.value)">
-                                <option value="">Select user</option>
+                            <select name="user_id" id="user_id" class="form-control"
+                                onchange="updateUsersList(this.value)">
+                                <option value="">Select student</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                        {{ $user->username }}
+                                    <option value="{{ $user->id }}"
+                                        {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                        {{ $user->email }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                           <div class="mt-3 ">
-                            <button type="submit" class="btn btn-main-primary btn-block">Enroll User</button>
+                        <div class="mt-3 ">
+                            <button type="submit" class="btn btn-main-primary btn-block">Enroll</button>
                         </div>
                     </form>
                 </div>
@@ -188,17 +184,19 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
             <div class="card">
-                <div class="card-header text-center"><h5>Enrollments List</h5></div>
+                <div class="card-header text-center">
+                    <h5>Enrollments List</h5>
+                </div>
                 <div class="card-body">
-                   
+
                     <div class="table-responsive table-center">
                         <table class="table text-md-nowrap" id="example1">
                             <thead>
                                 <tr>
                                     <th class="text-primary">Id</th>
-                                    <th class="text-primary">Username</th>
+                                    <th class="text-primary">student email</th>
                                     <th class="text-primary">Course Title</th>
-                                    <th class="text-primary">Status</th>
+                                    {{-- <th class="text-primary">Status</th> --}}
                                     <th class="text-primary">Registration Date</th>
                                     <th class="text-primary">Updated At</th>
                                     <th class="text-primary">Operation</th>
@@ -206,10 +204,11 @@
                             </thead>
                             <tbody>
                                 @foreach ($alldata as $item)
-                                    <tr class="{{ $item->subscription_status == 'inactive' ? 'table-muted' : '' }}">
+                                    <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->user->username }}</td>
+                                        <td>{{ $item->user->email }}</td>
                                         <td>{{ $item->course->course_title }}</td>
+                                        {{--
                                         <td>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input toggleSubscriptionSwitch" type="checkbox"
@@ -217,10 +216,9 @@
                                                     {{ $item->subscription_status == 'active' ? 'checked' : '' }}
                                                     data-id="{{ $item->id }}"
                                                     data-status="{{ $item->subscription_status == 'active' ? 'inactive' : 'active' }}">
-                                                {{-- <label class="form-check-label"
-                                                    for="toggleSubscriptionSwitch_{{ $item->id }}">{{ $item->subscription_status == 'active' ? 'Active' : 'Inactive' }}</label> --}}
                                             </div>
-                                        </td>
+                                        </td> --}}
+
                                         <td>{{ $item->registration_date }}</td>
                                         <td>{{ $item->updated_at }}</td>
                                         <td>
@@ -239,8 +237,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title"
-                                                        id="deleteCourseModalLabel{{ $item->id }}">
+                                                    <h5 class="modal-title" id="deleteCourseModalLabel{{ $item->id }}">
                                                         Confirm Deletion</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -271,14 +268,6 @@
             </div>
         </div>
     </div>
-    <!-- row closed -->
-
-
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-
-    <!-- main-content closed -->
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
@@ -308,45 +297,51 @@
 
     {{-- for status  --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
-            $('.toggleSubscriptionSwitch').on('change', function() {
-                var checkbox = $(this);
-                var userId = checkbox.data('id');
-                var newStatus = checkbox.is(':checked') ? 'active' : 'inactive';
+        $('.toggleSubscriptionSwitch').on('change', function() {
+            var checkbox = $(this);
+            var userId = checkbox.data('id');
+            var newStatus = checkbox.is(':checked') ? 'active' : 'inactive';
 
-                var url = '{{ route('toggle-subscription', ':id') }}';
-                url = url.replace(':id', userId);
+            var url = '{{ route('toggle-subscription', ':id') }}';
+            url = url.replace(':id', userId);
 
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        subscription_status: newStatus
-                    },
-                    success: function(response) {
-                        var statusText = newStatus === 'active' ? 'Active' : 'Inactive';
-                        checkbox.next('label').text(statusText);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    subscription_status: newStatus
+                },
+                success: function(response) {
+                    var statusText = newStatus === 'active' ? 'Active' : 'Inactive';
 
+                    // Update the label next to the checkbox
+                    checkbox.next('label').text(statusText);
 
-                        if (newStatus === 'inactive') {
-                            checkbox.closest('tr').addClass('table-muted');
-                        } else {
-                            checkbox.closest('tr').removeClass('table-muted');
-                        }
-
-                        alert('Subscription status updated successfully!');
-                    },
-                    error: function(response) {
-                        alert('Failed to update subscription status.');
-                        checkbox.prop('checked', !checkbox.is(
-                            ':checked')); // Revert checkbox state on error
+                    // Update the row class to indicate active/inactive status
+                    if (newStatus === 'inactive') {
+                        checkbox.closest('tr').addClass('table-muted');
+                    } else {
+                        checkbox.closest('tr').removeClass('table-muted');
                     }
-                });
+
+                    // Display success message
+                    alert('Subscription status updated successfully!');
+                },
+                error: function(response) {
+                    // Display error message
+                    alert('Failed to update subscription status.');
+                    // Revert checkbox state on error
+                    checkbox.prop('checked', !checkbox.is(':checked'));
+                }
             });
         });
-    </script>
+        });
+
+
+    </script> --}}
     {{-- for selections  --}}
 
     <script>
@@ -355,23 +350,26 @@
             $('#user_id').select2();
         });
     </script>
-       <!-- Internal Data tables -->
-       <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-       <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-       <!--Internal  Datatable js -->
-       <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+    <!-- Internal Data tables -->
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 @endsection

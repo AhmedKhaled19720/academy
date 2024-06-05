@@ -30,8 +30,6 @@ Route::resource('users', 'userloginController');
 //view assignments of specific user and specific course
 Route::get('/courses/{courseId}/students/{studentId}/assignments','UserloginController@showStudentAssignments')
     ->name('student.assignments');
-
-
 // end user login
 
 
@@ -48,12 +46,8 @@ Route::resource('categories', 'CategoryController');
 // start instructors requests
 Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
 Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
-
 Route::post('/change-role-to-0', 'InstructorRequestController@changeRoleTo0')->name('change.role.to0');
 Route::post('/change-role-to-1', 'InstructorRequestController@changeRoleTo1')->name('change.role.to1');
-
-
-
 // End instructors requests
 
 
@@ -90,11 +84,8 @@ Route::put('courses/{id}', 'CourseController@update')->name('courses.update');
 Route::get('/courses/crud/show{id}', 'CourseController@show')->name('courses.show');
 Route::post('/courses/store', 'CourseController@store')->name('courses.store');
 Route::delete('/courses/{id}', 'CourseController@destroy')->name('courses.destroy');
-
 //show all user enrolled a course
 Route::get('courses/{id}/students', 'CourseController@showStudents')->name('courses.students');
-
-
 // end courses
 
 
@@ -105,27 +96,20 @@ Route::group(['prefix' => 'courses/{course_id}'], function () {
     Route::get('assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
     Route::post('assignments', [AssignmentController::class, 'store'])->name('assignments.store');
 });
-
 Route::get('/view-Assignments', 'AssignmentController@index')->name('view-Assignments');
 Route::get('/Assignments/create/{id}', 'AssignmentController@create')->name('assignments.create');
 Route::get('/Assignments/crud/show{id}', 'AssignmentController@show')->name('assignments.show');
 Route::get('/Assignments/crud/show_one{id}', 'AssignmentController@show_one')->name('assignments.show_one');
 Route::delete('/Assignments/{id}', 'AssignmentController@destroy')->name('assignments.destroy');
 Route::post('assignments/update/{course_id}/{assignment_id}', 'AssignmentController@update')->name('assignments.update');
-
-
 //end assignments
 
 
-
 //Grades
-
-
  // Fetch students enrolled in the course and Find the course and Get task degree from assignment table and Get course name andGet assignment name
 Route::get('/assignments/{assignment}/students', 'GradeController@showStudents')->name('assignments.students');
-
 Route::post('/grades', 'GradeController@store')->name('grades.store');
-// to show all students with grades 
+// to show all students with grades
 Route::get('/assignments/{assignment}/all-students', 'GradeController@showAllStudentsWithGrades')->name('assignments.all_students');
 // to update grade for one student
 Route::put('/grades/{grade}','GradeController@update')->name('grades.update');
@@ -133,26 +117,14 @@ Route::put('/grades/{grade}','GradeController@update')->name('grades.update');
 Route::get('/users/{userId}/grades', 'GradeController@showOneStudentGrades')->name('users.grades.show');
 
 
-
-
-
-
-
-
 //Start Enroll Course
-
 //enroll home page
 Route::get('enrollCourse', 'EnrollCourseController@index')->name('enroll.index');
 Route::post('enrollCourse/enroll','EnrollCourseController@store')->name('enrollCourse.store');
 Route::delete('/enrollCourse/{id}', 'EnrollCourseController@destroy')->name('enrollCourse.destroy');
 //active and dis active switch button
 Route::post('/toggle-subscription/{id}', 'EnrollcourseController@toggleSubscription')->name('toggle-subscription');
-
 //End Enroll Course
-
-
-
-
 
 // start contact us
 Route::get('/contactUs', 'ContactUsController@index')->name('contactUs');

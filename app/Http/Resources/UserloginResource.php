@@ -22,8 +22,6 @@ class UserloginResource extends JsonResource
             "phone"=> $this->phone,
             "city"=> $this->city,
             "role"=> $this->role,
-            "subscription_status"=> $this->subscription_status,
-            "created_by"=> $this->created_by,
         ];
     }
 }

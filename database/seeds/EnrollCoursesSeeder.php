@@ -24,7 +24,7 @@ class EnrollCoursesSeeder extends Seeder
                     [
                         'course_id' => rand(1, 2),
                         'registration_date' => now(),
-                        'subscription_status' => 'active',
+                        // 'subscription_status' => 'active',
                     ]
                 );
             }
