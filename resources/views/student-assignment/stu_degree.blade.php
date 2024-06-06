@@ -90,7 +90,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center tx-lg-20">Add Grades To Students for task "{{ $assignmentName }}"</div>
+                <div class="card-header text-center tx-lg-20 bg-info"><h2>Add Grades To Students for task "{{ $assignmentName }}"</h2></div>
                 <div class="card-body">
                     @if (session()->has('create'))
                         <script>
@@ -136,7 +136,7 @@
                             </button>
                         </div>
                     @endif
-                    <h5 class="text text-center">Task Degree: {{ $taskDegree }}</h5>
+                    <h4 class="text text-center">Task Degree: {{ $taskDegree }}</h4>
                     <form method="POST" action="{{ route('grades.store', ['assignment' => $assignmentId]) }}">
                         @csrf
                         <!-- Select for users -->
@@ -181,6 +181,7 @@
                 </div>
             </div>
         </div>
+        @include('student-assignment.allStudentsDegeeDetails')
     </div>
 @endsection
 

@@ -146,12 +146,10 @@
                         @csrf
                         <div class="form-group">
                             <label for="course_id">Course:</label>
-                            <select name="course_id" id="course_id" class="form-control"
-                                onchange="updateUsersList(this.value)">
+                            <select name="course_id" id="course_id" class="form-control" onchange="filterUsers()">
                                 <option value="">Select Course</option>
                                 @foreach ($courses as $course)
-                                    <option value="{{ $course->id }}"
-                                        {{ old('course_id') == $course->id ? 'selected' : '' }}>
+                                    <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
                                         {{ $course->course_title }}
                                     </option>
                                 @endforeach
@@ -161,12 +159,10 @@
                         <!-- Select for users -->
                         <div class="form-group">
                             <label for="user_id">Student:</label>
-                            <select name="user_id" id="user_id" class="form-control"
-                                onchange="updateUsersList(this.value)">
+                            <select name="user_id" id="user_id" class="form-control">
                                 <option value="">Select student</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                    <option value="{{ $user->id }}" data-courses="{{ implode(',', $user->courses->pluck('id')->toArray()) }}">
                                         {{ $user->email }}
                                     </option>
                                 @endforeach
@@ -372,4 +368,26 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script>
+        function filterUsers() {
+            var courseId = document.getElementById('course_id').value;
+            var userSelect = document.getElementById('user_id');
+            var options = userSelect.options;
+
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var userCourses = option.getAttribute('data-courses').split(',');
+
+                if (courseId === "" || !userCourses.includes(courseId)) {
+                    option.style.display = "block";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+
+            userSelect.selectedIndex = 0;  // Reset the select box
+        }
+    </script>
+
+    
 @endsection

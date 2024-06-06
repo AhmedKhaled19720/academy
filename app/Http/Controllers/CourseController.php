@@ -44,17 +44,9 @@ class CourseController extends Controller
 
             $validatedData['course_img'] = $imageName;
         } else {
-            $imageName = "defult-img.jpg";
+            $imageName = "default-img.jpg";
             $validatedData['course_img'] = $imageName;
         }
-
-        // if ($request->hasFile('cate_image')) {
-        //     if (File::exists(public_path('categories/img/' . $categories->cate_image))) {
-        //         File::delete(public_path('categories/img/' . $categories->cate_image));
-        //     }
-
-
-
         $course = new Course();
         $course->fill($validatedData);
         $course->save();

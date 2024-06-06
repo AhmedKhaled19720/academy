@@ -173,16 +173,19 @@
 
 
                                 </div>
-                                <div class="card-footer d-flex flex-column align-items-center">
 
+
+                                <div class="card-footer d-flex flex-column align-items-center">
+                                         {{-- ADD degrees to users  --}}
                                     <a href="{{ route('assignments.students', ['assignment' => $assignment->id]) }}"
                                         class="btn btn-outline-info tx-12 mb-2">
                                         add Students Degree
                                     </a>
-                                    <a href="{{ route('assignments.all_students', ['assignment' => $assignment->id]) }}"
+
+                                    {{-- <a href="{{ route('assignments.all_students', ['assignment' => $assignment->id]) }}"
                                         class="btn btn-outline-info tx-12">
                                         Show All Students Grades
-                                    </a>
+                                    </a> --}}
 
                                 </div>
                             </div>

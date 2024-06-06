@@ -25,8 +25,8 @@ class CreateCoursesTable extends Migration
             $table->integer('duration');
             $table->enum('level', ['beginner', 'intermediate', 'advanced'])->default('beginner');
             $table->enum('status', ['active', 'disactive', 'archived'])->default('active');
-            $table->foreignId('category_id')->constrained('categories','id')->onDelete('cascade');
-            $table->foreignId('instructor_id')->constrained('instructors','id')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories','id')->cascadeOnDelete();
+            $table->foreignId('instructor_id')->constrained('instructors','id')->cascadeOnDelete();
             $table->timestamps();
         });
     }
