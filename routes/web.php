@@ -46,8 +46,8 @@ Route::resource('categories', 'CategoryController');
 // start instructors requests
 Route::get('/allinstructors', 'InstructorRequestController@index')->name('allinstructors');
 Route::delete('/request/delete/{id}', 'InstructorRequestController@delete')->name('request.delete');
-Route::post('/change-role-to-0', 'InstructorRequestController@changeRoleTo0')->name('change.role.to0');
-Route::post('/change-role-to-1', 'InstructorRequestController@changeRoleTo1')->name('change.role.to1');
+Route::post('/instrRole-to-0', 'InstructorRequestController@instrRoleTo0')->name('instrRole.to0');
+Route::post('/instrRole-to-1', 'InstructorRequestController@instrRoleTo1')->name('instrRole.to1');
 // End instructors requests
 
 

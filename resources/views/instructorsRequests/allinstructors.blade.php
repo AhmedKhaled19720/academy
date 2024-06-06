@@ -106,7 +106,7 @@
                                             <td>{{ $item->created_at }}</td>
 
                                             <td>
-                                                <form id="form{{$item->id}}" action="{{ route('change.role.to1') }}" method="POST">
+                                                <form id="form{{$item->id}}" action="{{ route('instrRole.to1') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="userId" value="{{ $item->id }}">
                                                 </form>
@@ -229,7 +229,7 @@
                                                     href="#"><i class="fas fa-trash-can"></i></a>
                                             </td>
                                             <td>
-                                                <form action="{{ route('change.role.to0') }}" method="POST">
+                                                <form action="{{ route('instrRole.to0') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="userId" value="{{ $item->id }}">
                                                     <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
