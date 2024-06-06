@@ -104,47 +104,59 @@ class AssignmentController extends Controller
 
     public function update(Request $request, $courseId, $assignmentId)
     {
-        $request->validate([
+        $rules = [
             'ass_title' => 'required|string',
             'ass_description' => 'nullable|string',
-            'ass_file' => 'nullable|file|mimes:pdf,doc,docx,txt,jpg,jpeg,png,gif',
             'deadline' => 'required|date',
             'degree' => 'nullable|numeric',
             'notes' => 'nullable|string',
-        ], [
+        ];
+
+        // Check if file exists before applying validation rule
+        if (!$request->hasFile('ass_file')) {
+            $rules['ass_file'] = 'nullable';
+        } else {
+            $rules['ass_file'] = 'file|mimes:pdf,doc,docx,txt,jpg,jpeg,png,gif';
+        }
+
+        $request->validate($rules, [
             'ass_title.required' => 'Please enter the assignment title.',
             'ass_title.string' => 'The assignment title must be a string.',
             'ass_description.string' => 'The assignment description must be a string.',
             'ass_file.file' => 'The assignment file must be a file.',
-            'ass_file.mimes' => 'The assignment file must be a file of type:pdf,doc,docx,txt,jpg,jpeg,png,gif.',
+            'ass_file.mimes' => 'The assignment file must be a file of type: pdf, doc, docx, txt, jpg, jpeg, png, gif.',
             'deadline.required' => 'Please enter the deadline for the assignment.',
             'deadline.date' => 'The deadline must be a valid date.',
             'degree.numeric' => 'The degree must be a number.',
         ]);
-    
+
         $assignment = Assignment::find($assignmentId);
-    
         if (!$assignment) {
             return redirect()->back()->with('error', 'Assignment not found.');
         }
-    
+
         $course = Course::find($courseId);
-    
         if (!$course) {
             return redirect()->back()->with('error', 'Course not found.');
         }
-    
+
         if ($request->hasFile('ass_file')) {
-            if (File::exists(public_path('assignments/files/' . $assignment->ass_file))) {
+            $file = $request->file('ass_file');
+        
+            if (!$file->isValid()) {
+                return redirect()->back()->with('error', 'Invalid file upload.');
+            }
+        
+            $filename =  rand(1, 1000) . time() . "." . $file->extension();
+            $file->move(public_path('assignments/files/'), $filename);
+        
+            if ($assignment->ass_file && File::exists(public_path('assignments/files/' . $assignment->ass_file))) {
                 File::delete(public_path('assignments/files/' . $assignment->ass_file));
             }
-            $file = $request->ass_file;
-            $filename = rand(1, 1000) . time() . "." . $file->extension();
-            $file->move(public_path('assignments/files/'), $filename);
         } else {
-            $filename = null;
+            $filename = $assignment->ass_file;
         }
-    
+
         $assignment->update([
             'ass_title' => $request->input('ass_title'),
             'ass_description' => $request->input('ass_description'),
@@ -154,10 +166,12 @@ class AssignmentController extends Controller
             'course_id' => $course->id,
             'ass_file' => $filename,
         ]);
-    
+
         session()->flash('update', 'Assignment updated successfully!');
         return redirect()->route('assignments.show', ['id' => $course->id]);
     }
+
+
     
 
 
