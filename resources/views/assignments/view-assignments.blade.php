@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    kian-Courses dashboard
+    kian-Courses assignments
 @stop
 
 @section('css')
@@ -23,8 +23,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all Courses dashboard</h4><span
-                    class="text-muted tx-13 mr-2 mt-1">/courses</span>
+                <h4 class="content-title tx-20 mb-0 mr-1 my-auto">all assignments</h4><span
+                    class="text-muted tx-13 mr-2 mt-1">/assignments</span>
             </div>
         </div>
 

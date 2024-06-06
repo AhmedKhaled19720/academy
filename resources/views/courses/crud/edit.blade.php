@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+    kian-Courses courses
+@stop
 @section('css')
 @endsection
 
@@ -7,21 +10,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Courses</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ create a
+                <h4 class="content-title mb-0 my-auto">Courses</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ edit a
                     new course</span>
             </div>
         </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-        </div>
+
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -144,7 +137,7 @@
                                     </div>
                                     <!-- Lectures Number, Hours Number, Duration & Price -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="lecture_no" class="font-weight-bold">Lectures Number</label>
                                             <input type="number" class="form-control" id="lecture_no" name="lecture_no"
                                                 value="{{ $course->lecture_no }}">
@@ -152,7 +145,7 @@
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="hours_no" class="font-weight-bold">Hours Number</label>
                                             <input type="number" class="form-control" id="hours_no" name="hours_no"
                                                 value="{{ $course->hours_no }}">
@@ -160,7 +153,7 @@
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="duration" class="font-weight-bold">Duration (months)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="duration"
@@ -173,7 +166,7 @@
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="price" class="font-weight-bold">Price (LE)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="price" name="price"

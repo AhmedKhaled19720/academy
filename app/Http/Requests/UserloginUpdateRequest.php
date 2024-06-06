@@ -31,7 +31,7 @@ class UserloginUpdateRequest extends FormRequest
                 ValidationRule::unique('userlogins')->ignore($this->old_id),
             ],
             'username' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string|max:30',
             'city' => 'required|string|max:255',
             'role' => 'required|in:active,disactive',
             'password' => 'nullable|string|min:8|confirmed',

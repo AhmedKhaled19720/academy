@@ -1,4 +1,8 @@
 @extends('layouts.master')
+@section('title')
+kian-Courses all student degree
+@stop
+
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -15,8 +19,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Empty</span>
+                <h4 class="content-title mb-0 my-auto">all student degree
+                </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    degree</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -133,7 +138,7 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-    
+
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 @endsection

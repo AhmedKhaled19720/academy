@@ -92,22 +92,22 @@
                                 </div>
                                 <!-- Lectures Number, Hours Number, Price & Level -->
                                 <div class="form-row">
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="lecture_no" class="font-weight-bold">Lectures Number</label>
                                         <input type="text" class="form-control" id="lecture_no"
                                             value="{{ $course->lecture_no }}" readonly>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="hours_no" class="font-weight-bold">Hours Number</label>
                                         <input type="text" class="form-control" id="hours_no"
                                             value="{{ $course->hours_no }}" readonly>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="price" class="font-weight-bold">Price (LE)</label>
                                         <input type="text" class="form-control" id="price"
                                             value="{{ $course->price }}" readonly>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-6">
                                         <label for="level" class="font-weight-bold">Level</label>
                                         <input type="text" class="form-control" id="level"
                                             value="{{ $course->level }}" readonly>

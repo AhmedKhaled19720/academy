@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+    kian-Courses courses
+@stop
 @section('css')
     <link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet" />
     <style>
@@ -161,7 +164,7 @@
 
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="lecture_no" class="font-weight-bold">Lectures Number</label>
                                             <input type="number" class="form-control" id="lecture_no"
                                                 name="lecture_no">
@@ -169,14 +172,14 @@
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="hours_no" class="font-weight-bold">Hours Number</label>
                                             <input type="number" class="form-control" id="hours_no" name="hours_no">
                                             @error('hours_no')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="duration" class="font-weight-bold">Duration (months)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="duration"
@@ -189,7 +192,7 @@
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="price" class="font-weight-bold">Price (LE)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="price"

@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+    kian-Courses all student 
+@stop
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -65,37 +68,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Empty</span>
+                <h4 class="content-title mb-0 my-auto">all students</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    students</span>
             </div>
         </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-            <div class="mb-3 mb-xl-0">
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                        id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
-                        data-x-placement="bottom-end">
-                        <a class="dropdown-item" href="#">2015</a>
-                        <a class="dropdown-item" href="#">2016</a>
-                        <a class="dropdown-item" href="#">2017</a>
-                        <a class="dropdown-item" href="#">2018</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -160,7 +137,6 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Registration Date</th>
-                                <th>Status</th>
                                 <th>Assienments</th>
                             </tr>
                         </thead>
@@ -173,17 +149,7 @@
                                     <td>{{ $student->email }}</td>
                                     <td>{{ $student->pivot->registration_date }}</td>
 
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input toggleSubscriptionSwitch" type="checkbox"
-                                                id="toggleSubscriptionSwitch_{{ $student->id }}"
-                                                {{ $student->pivot->subscription_status == 'active' ? 'checked' : '' }}
-                                                data-id="{{ $student->id }}"
-                                                data-status="{{ $student->pivot->subscription_status == 'active' ? 'inactive' : 'active' }}">
-                                            <label class="form-check-label"
-                                                for="toggleSubscriptionSwitch_{{ $student->id }}">{{ $student->pivot->subscription_status == 'active' ? 'Active' : 'Inactive' }}</label>
-                                        </div>
-                                    </td>
+
                                     <td>
 
                                         <a href="{{ route('users.grades.show', ['userId' => $student->id, 'course_title' => $course->course_title]) }}"
@@ -224,12 +190,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-    </div>
-    <!-- main-content closed -->
+
 @endsection
 @section('js')
     <!-- Internal Data tables -->
@@ -291,7 +252,7 @@
                         var statusText = newStatus === 'active' ? 'Active' : 'Inactive';
                         checkbox.next('label').text(statusText);
 
-                    
+
                         if (newStatus === 'inactive') {
                             checkbox.closest('tr').addClass('table-muted');
                         } else {

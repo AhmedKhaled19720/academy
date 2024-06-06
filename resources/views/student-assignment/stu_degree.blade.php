@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('title')
+    kian-Courses add degree
+@stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -61,8 +64,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Courses</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Show course Details</span>
+                <h4 class="content-title mb-0 my-auto">all degree</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ add student degree</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">

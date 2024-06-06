@@ -76,7 +76,7 @@
                                     </td>
                                     <td>{{ $instructor->created_at }}</td>
                                     <td>
-                                        <a class="text-primary tx-30" href={{ route('view_instructors') }}><i
+                                        <a class="text-primary tx-30" href={{ route('instructors') }}><i
                                                 class="fas fa-house-user"></i></a>
                                     </td>
                                 </tr>

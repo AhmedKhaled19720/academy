@@ -91,7 +91,8 @@
                         <table class="table text-md-nowrap" id="example1">
                             <thead>
                                 <tr>
-                                    <th>#id</th>
+                                    <th>id</th>
+                                    <th>image</th>
                                     <th>Course Title</th>
                                     <th>Start Date</th>
                                     <th>Category</th>
@@ -108,6 +109,10 @@
                                 @foreach ($alldata as $course)
                                     <tr>
                                         <td>{{ $course->id }}</td>
+                                        <td>
+                                            <img style="width: 50px; height: 50px;"
+                                                src={{ asset('courses/img/' . $course->course_img) }} alt="courses">
+                                        </td>
                                         <td>{{ $course->course_title }}</td>
                                         <td>{{ $course->start_date }}</td>
                                         <td>{{ $course->category->name }}</td>
@@ -214,17 +219,17 @@
 
             <script>
                 $(document).ready(function() {
-                $('.delete-course-btn').on('click', function(event) {
-                var courseId = $(this).data('course-id');
-                var deleteUrl = "{{ route('courses.destroy', ':id') }}";
-                deleteUrl = deleteUrl.replace(':id', courseId);
-                window.location.href = deleteUrl;
+                    $('.delete-course-btn').on('click', function(event) {
+                        var courseId = $(this).data('course-id');
+                        var deleteUrl = "{{ route('courses.destroy', ':id') }}";
+                        deleteUrl = deleteUrl.replace(':id', courseId);
+                        window.location.href = deleteUrl;
+                    });
                 });
-                });
-             </script>
+            </script>
 
 
 
-                <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
-                <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-            @endsection
+            <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+            <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+        @endsection

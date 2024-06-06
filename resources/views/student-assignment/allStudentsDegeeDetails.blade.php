@@ -1,18 +1,15 @@
 <div class="col-md-10">
     <div class="card">
-        <div class="card-header text-center tx-lg-20 bg-success">
+        <div class="card-header text-center tx-lg-20 bg-info">
             <h3 class="">Students for Assignment: {{ $assignment->ass_title }}</h3>
         </div>
-        
-        
-        
-        
+
         <div class="card-body">
             <div class="text-center">
                 <h4>Course: {{ $course->course_title }}</h4>
             <h4>Assignment Degree: {{ $taskDegree }}</h4>
             </div>
-            
+
         <div class="table-responsive table-center">
             <table class="table text-md-nowrap" id="example1">
                 <thead>
