@@ -89,9 +89,9 @@ Route::get('/enrollments/{courseTitle}/assignments', 'Api\EnrollCourseController
 //show all assignment grades for all students
 Route::get('showStudents/{assignmentId}', [GradeController::class, 'showStudents']);
 // show specific grades of all assignments
-Route::get('showOneStudentGrades/{userId}', [GradeController::class, 'showOneStudentGrades']);
 //show full course users grades
 Route::get('courses/{courseId}/students/grades', [GradeController::class, 'showAllStudentsWithGrades']);
 // End garde routes
 
 
+Route::get('showOneStudentGrades/{userId}/{courseId}', [GradeController::class, 'showOneStudentGrades']);
