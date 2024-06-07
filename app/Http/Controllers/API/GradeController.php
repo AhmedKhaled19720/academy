@@ -108,8 +108,11 @@ class GradeController extends Controller
                 'data' => $data
             ], 200);
         } catch (\Exception $e) {
-            // Return error response if something goes wrong
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json([
+                'msg' => 'No Degree For This Id ',
+                'status' => 203,
+                'data' => null
+            ], 203);
         }
     }
 }

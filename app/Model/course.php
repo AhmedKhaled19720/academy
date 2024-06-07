@@ -23,7 +23,7 @@ class Course extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function instructor()
@@ -52,3 +52,4 @@ class Course extends Model
         return $this->hasMany(EnrollCourse::class, 'course_id');
     }
 }
+

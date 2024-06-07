@@ -3,6 +3,7 @@
 // use App\Http\Controllers\Api\AssignmentController;
 use App\Http\Controllers\API\UserloginController;
 use App\Http\Controllers\API\AssignmentController;
+use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\API\GradeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,9 @@ Route::get('/show_course/{id}', 'API\CourseController@show_course');
 Route::post('/create_course', 'API\CourseController@create_course');
 Route::post('/update_course', 'API\CourseController@update_course');
 Route::post('/delete_course', 'API\CourseController@delete_course');
+
+Route::get('/courses/{categoryId}', [CourseController::class, 'getCoursesByCategory']);
+Route::get('/course/{courseId}/{courseTitle}', [CourseController::class, 'getCourseDetails']);
 // End categories routes
 
 
@@ -78,7 +82,6 @@ Route::get('/show_assignment/{id}', 'Api\AssignmentController@show_assignment');
 // start Enrollcourse routes
 Route::get('/enrollcourses', 'Api\EnrollCourseController@index');
 Route::get('/enrollments/{userId}', 'Api\EnrollCourseController@getUserEnrollments');
-
 Route::get('/enrollments/{courseTitle}/assignments', 'Api\EnrollCourseController@getCourseAssignments');
 
 
@@ -86,12 +89,6 @@ Route::get('/enrollments/{courseTitle}/assignments', 'Api\EnrollCourseController
 
 
 // start garde routes
-//show all assignment grades for all students
-Route::get('showStudents/{assignmentId}', [GradeController::class, 'showStudents']);
-// show specific grades of all assignments
-//show full course users grades
-Route::get('courses/{courseId}/students/grades', [GradeController::class, 'showAllStudentsWithGrades']);
-// End garde routes
-
-
+// show degree for one specific student and specific course
 Route::get('showOneStudentGrades/{userId}/{courseId}', [GradeController::class, 'showOneStudentGrades']);
+// End garde routes

@@ -6,12 +6,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CourseResource extends JsonResource
 {
-    
+
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
-            "course_title" => $this->course_title,
+            "courses_id" => $this->id,
+            "courses_title" => $this->course_title,
             "course_description" => $this->course_description,
             "course_img" => $this->course_img,
             "hours_no" => $this->hours_no,

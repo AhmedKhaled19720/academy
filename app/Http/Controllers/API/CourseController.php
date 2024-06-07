@@ -8,6 +8,7 @@ use App\Model\course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -87,7 +88,7 @@ class CourseController extends Controller
         if ($request->hasFile('course_img')) {
             $img = $request->course_img;
             $imgname = rand(1, 1000) . time() . "." . $img->extension();
-            $img->move(public_path('courses$courses/img/'), $imgname);
+            $img->move(public_path('courses/img/'), $imgname);
         }
 
 
@@ -95,8 +96,17 @@ class CourseController extends Controller
             'id' => $request->id,
             'name' => $request->name,
             'course_img' => $imgname,
-            'title' => $request->title,
-            'description' => $request->description,
+            'course_title' => $request->course_title,
+            'course_description' => $request->course_description,
+            'category_id' => $request->category_id,
+            'instructor_id' => $request->instructor_id,
+            'lecture_no' => $request->lecture_no,
+            'hours_no' => $request->hours_no,
+            'start_date' => $request->start_date,
+            'duration' => $request->duration,
+            'level' => $request->level,
+            'status' => $request->status,
+            'price' => $request->price,
         ]);
         $data = [
             'msg' => 'Create Successfully',
@@ -106,7 +116,7 @@ class CourseController extends Controller
         return response($data);
     }
 
-    public function update_category(Request $request)
+    public function update_course(Request $request)
     {
 
         $old_id = $request->old_id;
@@ -118,7 +128,17 @@ class CourseController extends Controller
                 Rule::unique('courses')->ignore($old_id),
             ],
             'name' => 'required',
+            'course_title' => 'required',
             'course_img' => 'image',
+            'instructor_id' => 'required',
+            'course_description' => 'required',
+            'lecture_no' => 'required',
+            'hours_no' => 'required',
+            'start_date' => 'required',
+            'duration' => 'required',
+            'level' => 'required',
+            'status' => 'required',
+            'price' => 'required',
 
         ]);
 
@@ -145,6 +165,17 @@ class CourseController extends Controller
             $courses->update([
                 'id' => $request->id,
                 'name' => $request->name,
+                'course_title' => $request->course_title,
+                'course_img' => $imgname,
+                'instructor_id' => $request->instructor_id,
+                'course_description' => $request->course_description,
+                'lecture_no' => $request->lecture_no,
+                'hours_no' => $request->hours_no,
+                'start_date' => $request->start_date,
+                'duration' => $request->duration,
+                'level' => $request->level,
+                'status' => $request->status,
+                'price' => $request->price,
 
             ]);
 
@@ -164,14 +195,90 @@ class CourseController extends Controller
         }
     }
 
+    public function getCoursesByCategory($categoryId)
+    {
+        // Fetch courses by category ID
+        $courses = Course::where('category_id', $categoryId)
+            ->select('id as course_id', 'course_title', 'course_img', 'course_description', 'category_id')
+            ->get();
+
+        // Prepare response data
+        $data = $courses->map(function ($course) {
+            return [
+                'c_id' => $course->course_id,
+                'c_title' => $course->course_title,
+                'course_img' => $course->course_img,
+                'course_description' => $course->course_description,
+                'category_id' => $course->category_id,
+            ];
+        });
+
+        // Prepare response
+        $response = [
+            "msg" => "Return User courses",
+            "status" => 200,
+            "data" => $data,
+        ];
+
+        return response()->json($response);
+    }
 
 
+    public function getCourseDetails($coursesId, $coursesTitle)
+    {
+        // Log a message to indicate that the function is being called
+        Log::info('Fetching course details for coursesId: ' . $coursesId . ' and coursesTitle: ' . $coursesTitle);
 
+        // Fetch course by ID and Title with join on categories and instructors tables
+        $course = Course::where('courses.id', $coursesId)
+            ->where('courses.course_title', $coursesTitle)
+            ->join('categories', 'courses.category_id', '=', 'categories.id')
+            ->join('instructors', 'courses.instructor_id', '=', 'instructors.id')
+            ->select('courses.id as course_id', 'courses.course_title', 'courses.course_description', 'courses.course_img', 'courses.lecture_no', 'courses.hours_no', 'courses.price', 'courses.start_date', 'courses.duration', 'courses.level', 'courses.status', 'courses.category_id', 'categories.name as category_name', 'instructors.name as instructor_name', 'instructors.instructor_img', 'instructors.job', 'courses.instructor_id')
+            ->first();
 
+        if (!$course) {
+            // Log a message to indicate that the course was not found
+            Log::warning('Course not found for coursesId: ' . $coursesId . ' and coursesTitle: ' . $coursesTitle);
 
+            return response()->json([
+                "msg" => "Course not found",
+                "status" => 404,
+                "data" => null,
+            ]);
+        }
 
+        // Log a message to indicate that the course details were successfully retrieved
+        Log::info('Course details retrieved successfully for coursesId: ' . $coursesId . ' and coursesTitle: ' . $coursesTitle);
 
+        // Prepare response data
+        $data = [
+            'courses_id' => $course->course_id,
+            'courses_title' => $course->course_title,
+            'course_description' => $course->course_description,
+            'course_img' => $course->course_img,
+            'lecture_no' => $course->lecture_no,
+            'hours_no' => $course->hours_no,
+            'price' => $course->price,
+            'start_date' => $course->start_date,
+            'duration' => $course->duration,
+            'level' => $course->level,
+            'status' => $course->status,
+            'category_id' => $course->category_id,
+            'category_name' => $course->category_name,
+            'instructor_id' => $course->instructor_id,
+            'instructor_name' => $course->instructor_name,
+            'instructor_img' => $course->instructor_img,
+            'job' => $course->job,
+        ];
 
+        // Prepare response
+        $response = [
+            "msg" => "Course details retrieved successfully",
+            "status" => 200,
+            "data" => $data,
+        ];
 
-
+        return response()->json($response);
+    }
 }

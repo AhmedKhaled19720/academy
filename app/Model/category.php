@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     protected $fillable = [
         'id',
@@ -13,8 +13,10 @@ class category extends Model
         'title',
         'description',
     ];
+
     public function courses()
     {
         return $this->hasMany(Course::class);
     }
 }
+
