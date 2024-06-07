@@ -106,12 +106,15 @@
                                             <td>{{ $item->created_at }}</td>
 
                                             <td>
-                                                <form id="form{{$item->id}}" action="{{ route('instrRole.to1') }}" method="POST">
+                                                <form id="form{{ $item->id }}" action="{{ route('instrRole.to1') }}"
+                                                    method="POST">
                                                     @csrf
                                                     <input type="hidden" name="userId" value="{{ $item->id }}">
                                                 </form>
-                                                <a href="#" onclick="event.preventDefault(); document.getElementById('form{{$item->id}}').submit();">
-                                                    <i class="fa-regular fa-envelope fa-shake tx-lg-26" style="color: #74C0FC;"></i>
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); document.getElementById('form{{ $item->id }}').submit();">
+                                                    <i class="fa-regular fa-envelope fa-shake tx-lg-26"
+                                                        style="color: #74C0FC;"></i>
                                                 </a>
                                             </td>
 
@@ -232,15 +235,17 @@
                                                 <form action="{{ route('instrRole.to0') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="userId" value="{{ $item->id }}">
-                                                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
-                                                        <i class="fa-regular fa-envelope-open tx-lg-26" style="color: #a0a3ab;"></i>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        <i class="fa-regular fa-envelope-open tx-lg-26"
+                                                            style="color: #a0a3ab;"></i>
                                                     </a>
                                                 </form>
                                             </td>
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             <td>{{ $item->created_at }}</td>
                                         </tr>
                                     @endif
@@ -277,73 +282,74 @@
                             <!-- End delete modal -->
                         </div>
                     </div>
-                </div><!-- bd -->
-            </div><!-- bd -->
-            <!--/div-->
-        @endsection
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
-        @section('js')
-            <!-- Internal Data tables -->
-            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-            <!--Internal  Datatable js -->
-            <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-            <!-- Internal Modal js-->
-            <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+@section('js')
+    <!-- Internal Data tables -->
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+    <!-- Internal Modal js-->
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
-            <script>
-                $('#modaldemo1').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget);
-                    var requestId = button.data('request-id');
-                    var modal = $(this);
-                    modal.find('.modal-body #request_id').val(requestId);
-                    modal.find('#deleteRequestForm').attr('action', '/request/delete/' + requestId);
-                });
-            </script>
-            <!--Internal  Notify js -->
-            <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
-            <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-            {{-- change role  --}}
+    <script>
+        $('#modaldemo1').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var requestId = button.data('request-id');
+            var modal = $(this);
+            modal.find('.modal-body #request_id').val(requestId);
+            modal.find('#deleteRequestForm').attr('action', '/request/delete/' + requestId);
+        });
+    </script>
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    {{-- change role  --}}
 
-            <script>
-                function changeRole(userId) {
-                    // الحصول على قيمة معرف الجلسة من الحقل المخفي في الصفحة
-                    var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    <script>
+        function changeRole(userId) {
+            // الحصول على قيمة معرف الجلسة من الحقل المخفي في الصفحة
+            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                    // إضافة معرف الجلسة إلى بيانات الطلب
-                    var data = {
-                        userId: userId,
-                        _token: token // إضافة معرف الجلسة هنا
-                    };
+            // إضافة معرف الجلسة إلى بيانات الطلب
+            var data = {
+                userId: userId,
+                _token: token // إضافة معرف الجلسة هنا
+            };
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/change-role",
-                        data: data,
-                        success: function(response) {
-                            // تحديث الصفحة أو أي عملية أخرى بعد النجاح
-                            console.log(response);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
+            $.ajax({
+                type: "POST",
+                url: "/change-role",
+                data: data,
+                success: function(response) {
+                    // تحديث الصفحة أو أي عملية أخرى بعد النجاح
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
-            </script>
+            });
+        }
+    </script>
 
 
-        @endsection
+@endsection
